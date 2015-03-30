@@ -1,0 +1,1 @@
+$('table.tablesorter').tablesorter();

@@ -18,9 +18,12 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Single Sign-On 
 gem 'omniauth'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-identity'
 gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-twitter'
 
 # Heroku to serve assets
 gem 'rails_12factor', group: :production

@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :page_title do %>
+Users - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+        &nbsp;
+      </div>
+
+      <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New User".html_safe, [:new, :user], class: "btn btn-success" %>
+      </div>
+      Listing Users
+    </h1>
+  </div>
+
+  <table class="table table-striped table-hover tablesorter" id="Users-table">
+
+
+    <thead>
+      <tr>
+    
+        <th><span>Email</span></th>
+        <th><span>Username</span></th>
+        <th><span>First name</span></th>
+        <th><span>Middle name</span></th>
+        <th><span>Last name</span></th>
+        <th><span>Phone</span></th>
+        <th><span>Zipcode</span></th>
+        <th><span>Facebookid</span></th>
+        <th><span>Githubid</span></th>
+        <th><span>Googleid</span></th>
+        <th><span>Linkedinid</span></th>
+        <th><span>Twitterid</span></th>
+        <th><span>Picurl</span></th>
+        <th><span>Superuser</span></th>
+      
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @users.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="14">No users created yet.</td>
+      </tr>
+      <% end %>
+      <% @users.each do |user| %>
+      <tr class="linked-row" data-href="<%= user_path(user) %>">
+      
+        <td><%= link_to user.email, user %></td>
+        <td><%= link_to user.username, user %></td>
+        <td><%= link_to user.first_name, user %></td>
+        <td><%= link_to user.middle_name, user %></td>
+        <td><%= link_to user.last_name, user %></td>
+        <td><%= link_to user.phone, user %></td>
+        <td><%= link_to user.zipcode, user %></td>
+        <td><%= link_to user.facebookid, user %></td>
+        <td><%= link_to user.githubid, user %></td>
+        <td><%= link_to user.googleid, user %></td>
+        <td><%= link_to user.linkedinid, user %></td>
+        <td><%= link_to user.twitterid, user %></td>
+        <td><%= link_to user.picurl, user %></td>
+        <td><%= link_to user.superuser, user %></td>
+        
+        
+        
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+

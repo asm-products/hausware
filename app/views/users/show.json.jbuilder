@@ -1,0 +1,1 @@
+json.extract! @user, :id, :email, :username, :first_name, :middle_name, :last_name, :phone, :zipcode, :facebookid, :githubid, :googleid, :linkedinid, :twitterid, :picurl, :superuser, :created_at, :updated_at
