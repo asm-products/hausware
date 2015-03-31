@@ -1,7 +1,12 @@
 class SessionsController < ApplicationController
   def create
-    session[:current_user] = request.env['omniauth.auth']
-    User.create_or_update_user_from_omniauth(request.env['omniauth.auth'])
+    if authed_user.blank?
+      User.create_or_update_user_from_omniauth(request.env['omniauth.auth'])
+    else 
+      authed_user.update_and_connect_omniauth(request.env['omniauth.auth'])
+    end
+
+    session[:current_user] = User.find_from_omniauth(request.env['omniauth.auth']).id.to_s
     redirect_to session[:after_auth_url] || root_url
   end
   

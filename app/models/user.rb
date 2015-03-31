@@ -2,13 +2,20 @@ class User < ActiveRecord::Base
   
   before_validation :autofill_username_if_blank
   
-  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9-_]+\Z/ }
-  
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9\-_]+\Z/ }
+
+  # Only allow one account per Provider ID
+  validates :facebookid, uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :githubid,   uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :googleid,   uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :linkedinid, uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :twitterid,  uniqueness: { case_sensitive: false, allow_nil: true }
+
   def to_param
     self.username
   end
   
-  def self.create_or_update_user_from_omniauth(omniauth_auth)
+  def self.find_from_omniauth(omniauth_auth)
     # Look up the id of the user according to the provider name
     provider_name = omniauth_auth['provider']
     existing_user = User.where("#{provider_name}id" => omniauth_auth['uid']).first
@@ -17,8 +24,14 @@ class User < ActiveRecord::Base
       existing_user = User.where(email: omniauth_auth['info']['email']).first
     end
     
+    return existing_user
+  end
+  
+  def self.create_or_update_user_from_omniauth(omniauth_auth)
+    existing_user = find_from_omniauth(omniauth_auth)
+
     if existing_user
-      unless omniauth_auth['info']['email'].blank?
+      unless omniauth_auth['info']['email'].blank? && omniauth_auth['info']['image'].blank?
         # Always get a new image, and perhaps an email
         new_values = { picurl: omniauth_auth['info']['image'] }
         new_values[:email] = omniauth_auth['info']['email'] unless !existing_user.email.blank? || omniauth_auth['info']['email'].blank?
@@ -33,7 +46,7 @@ class User < ActiveRecord::Base
         picurl:          omniauth_auth['info']['image']
       }
 
-      values["#{provider_name}id".to_sym] = omniauth_auth['uid']
+      values["#{omniauth_auth['provider']}id".to_sym] = omniauth_auth['uid']
       values[:email] = omniauth_auth['info']['email'] unless omniauth_auth['info']['email'].blank?
       # Twitter gives us a nickname
       values[:username] = AutoPermalink::cleaned_deduped_permalink(self, omniauth_auth['info']['nickname'], 'username') unless omniauth_auth['info']['nickname'].blank?
@@ -42,6 +55,20 @@ class User < ActiveRecord::Base
     end
     
     existing_user
+  end
+  
+  # Allow users to connect multiple omni auth
+  def update_and_connect_omniauth(omniauth_auth)
+    existing_id_for_provider = self.send("#{omniauth_auth['provider']}id")
+    
+    if existing_id_for_provider.blank?
+      new_values = { picurl: omniauth_auth['info']['image'] }
+      new_values["#{omniauth_auth['provider']}id".to_sym] = omniauth_auth['uid']
+      new_values[:email] = omniauth_auth['info']['email'] unless !self.email.blank? || omniauth_auth['info']['email'].blank?
+    
+      return update_attributes(new_values)
+    end
+    true
   end
   
   def full_name

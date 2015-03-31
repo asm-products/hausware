@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     if auth_hash.blank?
       session[:after_auth_url] = request.url
       session[:current_user] = nil
-      redirect_to '/auth/select'
+      redirect_to '/sessions/new'
       return false
     end
     return true
@@ -38,15 +38,17 @@ class ApplicationController < ActionController::Base
   end
   
   def auth_hash
-    return session[:current_user] ? session[:current_user] : (session[:current_user] = request.env['omniauth.auth'])
+    request.env['omniauth.auth']
   end
   
   def authed_user
     @authed_user ||= begin
-      if auth_hash.blank?
+      if !session[:current_user].blank?
+        User.find(session[:current_user])
+      elsif auth_hash.blank?
         nil
       else
-        existing_user = User.find_by_githubid(auth_hash['uid'])
+        existing_user = User.find_from_omniauth(auth_hash)
         unless existing_user
           existing_user = User.create_or_update_user_from_omniauth(auth_hash)
         end
