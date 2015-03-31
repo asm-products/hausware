@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # OmniAuth for all providers, see `config/initializers/omniauth.rb` for more
   get '/auth/:provider/callback', to: 'sessions#create'
   get 'sessions/new'
+  get 'sessions/destroy'
   
   resources :users
   

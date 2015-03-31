@@ -23,9 +23,28 @@
       <ul class="nav navbar-nav">
         <li<%= request.path == "/" ? " class=\"active\"".html_safe : "" %>><a href="/">Home</a></li>
       </ul> 
+      <% if !authed_user %><%# ---- logged out ---- %>
       <ul class="nav navbar-nav navbar-right">
-        <li class="bar"><a href="/">Bar</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Partners</a></li>
+        <li><a href="#">Find Us</a></li>
+        <li><a href="/sessions/new">Login</a></li>
       </ul>
+      <% else %><%# ---- logged in ---- %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Menu</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
+        <li class="profile dropdown">
+          <a class="dropdown-toggle" type="button" id="profile-dropdown" data-toggle="dropdown" aria-expanded="false"><img src='<%= authed_user.picurl %>'> <%= authed_user.full_name %> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="profile-dropdown">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="/sessions/destroy">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      <% end %>
     </div>
   </div>
 </nav>

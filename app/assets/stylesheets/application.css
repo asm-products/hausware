@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+.nav li.profile img {
+  max-height: 1.3em;
+}

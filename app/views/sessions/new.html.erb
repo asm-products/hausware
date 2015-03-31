@@ -1,12 +1,38 @@
-<h1>Select a Provider to Sign In With</h1>
-<p>
+<div class="container">
+  <h1 class="page-header">Sign In with a Provider</h1>
   
-  <ul>
-    <li><a href='/auth/facebook'>Facebook</a></li>
-    <li><a href='/auth/github'>GitHub</a></li>
-    <li><a href='/auth/google'>Google</a></li>
-    <li><a href='/auth/linkedin'>LinkedIn</a></li>
-    <li><a href='/auth/twitter'>Twitter</a></li>
-  </ul>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <a href="/auth/facebook" class="thumbnail" title="Sign in with Facebook">
+        <%= image_tag 'facebook-484w.png', alt: 'Facebook', width: '242' %>
+      </a>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <a href="/auth/github" class="thumbnail" title="Sign in with GitHub">
+        <%= image_tag 'github-484w.png', alt: 'GitHub', width: '242' %>
+      </a>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <a href="/auth/google" class="thumbnail" title="Sign in with Google">
+        <%= image_tag 'google-484w.png', alt: 'Google', width: '242' %>
+      </a>
+    </div>
+  </div>
   
-</p>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <a href="/auth/linkedin" class="thumbnail" title="Sign in with LinkedIn">
+        <%= image_tag 'linkedin-484w.png', alt: 'LinkedIn', width: '242' %>
+      </a>
+    </div>
+
+    <div class="col-sm-6 col-md-4">
+      <a href="/auth/twitter" class="thumbnail" title="Sign in with Twitter">
+        <%= image_tag 'twitter-484w.png', alt: 'Twitter', width: '242' %>
+      </a>
+    </div>
+  </div>
+  
+</div>

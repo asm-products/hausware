@@ -1,2 +1,11 @@
-<h1>Welcome to HausWare</h1>
-<p>This is a beta product!  For now, try <a href="/sessions/new">logging in</a>.</p>
+<div class="container">
+  <h1>Welcome to HausWare</h1>
+  <p>This is a beta product, still in progress!</p>
+  
+
+  <% if !authed_user %><%# ---- logged out ---- %>
+  <p>For now, try <a href="/sessions/new">logging in</a>.</p>
+  <% else %><%# ---- logged in ---- %>
+  <p>Hi, <img src='<%= authed_user.picurl %>'></p>
+  <% end %>
+</div>
