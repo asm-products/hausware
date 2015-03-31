@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
   
-  get 'sessions/create'
-
-  # OmniAuth for provider
+  # OmniAuth for all providers, see `config/initializers/omniauth.rb` for more
   get '/auth/:provider/callback', to: 'sessions#create'
+  get 'sessions/new'
   
   resources :users
   
+  # You can have the root of your site routed with "root"
+  root 'welcome#index'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
