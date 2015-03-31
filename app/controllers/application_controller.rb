@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   def authed_user
     @authed_user ||= begin
       if !session[:current_user].blank?
-        User.find_by_id(session[:current_user])
+        User.find_by_id(session[:current_user].to_i)
       elsif auth_hash.blank?
         nil
       else
