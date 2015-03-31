@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
     # Look up the id of the user according to the provider name
     provider_name = omniauth_auth['provider']
     existing_user = User.where("#{provider_name}id" => omniauth_auth['uid']).first
+    
+    if !existing_user && !omniauth_auth['info']['email'].blank? # Try to find with email instead of id
+      existing_user = User.where(email: omniauth_auth['info']['email']).first
+    end
+    
     if existing_user
       unless omniauth_auth['info']['email'].blank?
         # Always get a new image, and perhaps an email
@@ -31,7 +36,7 @@ class User < ActiveRecord::Base
       values["#{provider_name}id".to_sym] = omniauth_auth['uid']
       values[:email] = omniauth_auth['info']['email'] unless omniauth_auth['info']['email'].blank?
       # Twitter gives us a nickname
-      values[:username] = AutoPermalink::cleaned_deduped_permalink(self.class, omniauth_auth['info']['nickname'], 'username') unless omniauth_auth['info']['nickname'].blank?
+      values[:username] = AutoPermalink::cleaned_deduped_permalink(self, omniauth_auth['info']['nickname'], 'username') unless omniauth_auth['info']['nickname'].blank?
       
       existing_user = User.create(values)
     end

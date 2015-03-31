@@ -17,3 +17,6 @@
 .nav li.profile img {
   max-height: 1.3em;
 }
+a {
+  cursor: pointer;
+}

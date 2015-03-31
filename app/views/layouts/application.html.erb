@@ -40,6 +40,7 @@
         <li class="profile dropdown">
           <a class="dropdown-toggle" type="button" id="profile-dropdown" data-toggle="dropdown" aria-expanded="false"><img src='<%= authed_user.picurl %>'> <%= authed_user.full_name %> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="profile-dropdown">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= user_path(authed_user) %>">Profile</a></li>
             <li role="presentation"><a role="menuitem" tabindex="-1" href="/sessions/destroy">Logout</a></li>
           </ul>
         </li>

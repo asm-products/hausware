@@ -6,6 +6,6 @@
   <% if !authed_user %><%# ---- logged out ---- %>
   <p>For now, try <a href="/sessions/new">logging in</a>.</p>
   <% else %><%# ---- logged in ---- %>
-  <p>Hi, <img src='<%= authed_user.picurl %>'></p>
+  <p>Hi, <img src='<%= authed_user.picurl %>'>.  See <%= link_to 'your profile', user_path(authed_user) %>.</p>
   <% end %>
 </div>
