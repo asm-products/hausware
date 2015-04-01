@@ -18,7 +18,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { email: @user.email, facebookid: @user.facebookid, first_name: @user.first_name, githubid: @user.githubid, googleid: @user.googleid, last_name: @user.last_name, linkedinid: @user.linkedinid, middle_name: @user.middle_name, password_digest: @user.password_digest, phone: @user.phone, picurl: @user.picurl, superuser: @user.superuser, twitterid: @user.twitterid, username: @user.username, zipcode: @user.zipcode }
+      post :create, user: { email: @user.email, angellistid: @user.angellistid, facebookid: @user.facebookid, first_name: @user.first_name, githubid: @user.githubid, googleid: @user.googleid, last_name: @user.last_name, linkedinid: @user.linkedinid, middle_name: @user.middle_name, password_digest: @user.password_digest, phone: @user.phone, picurl: @user.picurl, superuser: @user.superuser, twitterid: @user.twitterid, username: @user.username, zipcode: @user.zipcode }
     end
 
     assert_redirected_to user_path(assigns(:user))
@@ -35,7 +35,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    patch :update, id: @user, user: { email: @user.email, facebookid: @user.facebookid, first_name: @user.first_name, githubid: @user.githubid, googleid: @user.googleid, last_name: @user.last_name, linkedinid: @user.linkedinid, middle_name: @user.middle_name, password_digest: @user.password_digest, phone: @user.phone, picurl: @user.picurl, superuser: @user.superuser, twitterid: @user.twitterid, username: @user.username, zipcode: @user.zipcode }
+    patch :update, id: @user, user: { email: @user.email, angellistid: @user.angellistid, facebookid: @user.facebookid, first_name: @user.first_name, githubid: @user.githubid, googleid: @user.googleid, last_name: @user.last_name, linkedinid: @user.linkedinid, middle_name: @user.middle_name, password_digest: @user.password_digest, phone: @user.phone, picurl: @user.picurl, superuser: @user.superuser, twitterid: @user.twitterid, username: @user.username, zipcode: @user.zipcode }
     assert_redirected_to user_path(assigns(:user))
   end
 

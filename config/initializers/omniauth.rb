@@ -1,4 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :angellist, ENV['ANGELLIST_KEY'], ENV['ANGELLIST_SECRET']
   provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: 'user:email'
   provider :linkedin, ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET'], scope: 'r_emailaddress r_contactinfo r_fullprofile'
   provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], scope: 'email'

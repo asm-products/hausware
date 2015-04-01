@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Single Sign-On 
 gem 'omniauth'
+gem 'omniauth-angellist'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'

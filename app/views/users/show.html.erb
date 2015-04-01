@@ -55,6 +55,11 @@
   </div>
 
   <div class="row">
+    <label class="col-sm-3 text-right text-muted">AngelList</label>
+    <div class="col-sm-9"><%= @user.angellistid.blank? ? link_to('Connect AngelList', '/auth/angellist') : '<span class="glyphicon glyphicon-check" aria-hidden="true"></span>'.html_safe %></div>
+  </div>
+  
+  <div class="row">
     <label class="col-sm-3 text-right text-muted">Facebook</label>
     <div class="col-sm-9"><%= @user.facebookid.blank? ? link_to('Connect Facebook', '/auth/facebook') : '<span class="glyphicon glyphicon-check" aria-hidden="true"></span>'.html_safe %></div>
   </div>

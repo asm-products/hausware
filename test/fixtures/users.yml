@@ -9,6 +9,7 @@ one:
   last_name: MyString
   phone: MyString
   zipcode: MyString
+  angellistid: MyString
   facebookid: MyString
   githubid: MyString
   googleid: MyString
@@ -26,6 +27,7 @@ two:
   last_name: MyString
   phone: MyString
   zipcode: MyString
+  angellistid: MyString
   facebookid: MyString
   githubid: MyString
   googleid: MyString

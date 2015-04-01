@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :phone
       t.string :zipcode
+      t.string :angellistid, index: true
       t.string :facebookid, index: true
       t.string :githubid, index: true
       t.string :googleid, index: true

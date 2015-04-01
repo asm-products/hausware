@@ -5,11 +5,12 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9\-_]+\Z/ }
 
   # Only allow one account per Provider ID
-  validates :facebookid, uniqueness: { case_sensitive: false, allow_nil: true }
-  validates :githubid,   uniqueness: { case_sensitive: false, allow_nil: true }
-  validates :googleid,   uniqueness: { case_sensitive: false, allow_nil: true }
-  validates :linkedinid, uniqueness: { case_sensitive: false, allow_nil: true }
-  validates :twitterid,  uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :angellistid,  uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :facebookid,   uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :githubid,     uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :googleid,     uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :linkedinid,   uniqueness: { case_sensitive: false, allow_nil: true }
+  validates :twitterid,    uniqueness: { case_sensitive: false, allow_nil: true }
 
   def to_param
     self.username
@@ -85,6 +86,6 @@ class User < ActiveRecord::Base
   
   def autofill_username_if_blank
     return true unless self.username.blank? # Bypass if username is already set
-    self.username = AutoPermalink::cleaned_deduped_permalink(self.class, self.name, 'username')
+    self.username = AutoPermalink::cleaned_deduped_permalink(self.class, self.full_name, 'username')
   end
 end
