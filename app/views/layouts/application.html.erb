@@ -57,6 +57,14 @@
 </div>
 <% end %>
 
+<% unless flash[:error].blank? %>
+<div id="flash-error" class="alert alert-danger" role="alert">
+  <div class="container">
+    <%= flash[:error] %>
+  </div>
+</div>
+<% end %>
+
 <%= yield %>
 <footer id="content-footer" role="contentinfo">
   <div class="container">

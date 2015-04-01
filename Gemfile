@@ -25,6 +25,9 @@ gem 'omniauth-identity'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-twitter'
 
+# Charge money
+gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
+
 # Heroku to serve assets
 gem 'rails_12factor', group: :production
 

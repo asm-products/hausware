@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
   
   resources :users
+  # Temporary charges URL
+  resources :charges
   
   # You can have the root of your site routed with "root"
   root 'welcome#index'
