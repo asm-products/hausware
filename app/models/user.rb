@@ -15,10 +15,18 @@ class User < ActiveRecord::Base
     self.username
   end
   
+  def self.oauth_provider_to_id_attr(provider_name)
+    if provider_name == 'google_oauth2'
+      return "googleid"
+    else
+      return "#{provider_name}id"
+    end
+  end
+  
   def self.find_from_omniauth(omniauth_auth)
     # Look up the id of the user according to the provider name
-    provider_name = omniauth_auth['provider']
-    existing_user = User.where("#{provider_name}id" => omniauth_auth['uid']).first
+    provider_name = oauth_provider_to_id_attr(omniauth_auth['provider'])
+    existing_user = User.where(provider_name => omniauth_auth['uid']).first
     
     if !existing_user && !omniauth_auth['info']['email'].blank? # Try to find with email instead of id
       existing_user = User.where(email: omniauth_auth['info']['email']).first
@@ -46,7 +54,7 @@ class User < ActiveRecord::Base
         picurl:          omniauth_auth['info']['image']
       }
 
-      values["#{omniauth_auth['provider']}id".to_sym] = omniauth_auth['uid']
+      values[oauth_provider_to_id_attr(omniauth_auth['provider']).to_sym] = omniauth_auth['uid']
       values[:email] = omniauth_auth['info']['email'] unless omniauth_auth['info']['email'].blank?
       # Twitter gives us a nickname
       values[:username] = AutoPermalink::cleaned_deduped_permalink(self, omniauth_auth['info']['nickname'], 'username') unless omniauth_auth['info']['nickname'].blank?
@@ -59,11 +67,11 @@ class User < ActiveRecord::Base
   
   # Allow users to connect multiple omni auth
   def update_and_connect_omniauth(omniauth_auth)
-    existing_id_for_provider = self.send("#{omniauth_auth['provider']}id")
+    existing_id_for_provider = self.send(User.oauth_provider_to_id_attr(omniauth_auth['provider']))
     
     if existing_id_for_provider.blank?
       new_values = { picurl: omniauth_auth['info']['image'] }
-      new_values["#{omniauth_auth['provider']}id".to_sym] = omniauth_auth['uid']
+      new_values[User.oauth_provider_to_id_attr(omniauth_auth['provider']).to_sym] = omniauth_auth['uid']
       new_values[:email] = omniauth_auth['info']['email'] unless !self.email.blank? || omniauth_auth['info']['email'].blank?
     
       return update_attributes(new_values)
