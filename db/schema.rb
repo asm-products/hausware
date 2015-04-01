@@ -11,7 +11,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330220457) do
+ActiveRecord::Schema.define(version: 20150401220030) do
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "permalink"
+    t.string   "phone"
+    t.string   "email"
+    t.decimal  "latitude",              precision: 9, scale: 6
+    t.decimal  "longitude",             precision: 9, scale: 6
+    t.string   "street_address1"
+    t.string   "street_address2"
+    t.string   "city"
+    t.string   "state_province_region"
+    t.string   "zip_postal_code"
+    t.string   "country_code"
+    t.integer  "sunday_opening"
+    t.integer  "sunday_closing"
+    t.integer  "monday_opening"
+    t.integer  "monday_closing"
+    t.integer  "tuesday_opening"
+    t.integer  "tuesday_closing"
+    t.integer  "wednesday_opening"
+    t.integer  "wednesday_closing"
+    t.integer  "thursday_opening"
+    t.integer  "thursday_closing"
+    t.integer  "friday_opening"
+    t.integer  "friday_closing"
+    t.integer  "saturday_opening"
+    t.integer  "saturday_closing"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  add_index "locations", ["city"], name: "index_locations_on_city"
+  add_index "locations", ["country_code"], name: "index_locations_on_country_code"
+  add_index "locations", ["friday_closing"], name: "index_locations_on_friday_closing"
+  add_index "locations", ["friday_opening"], name: "index_locations_on_friday_opening"
+  add_index "locations", ["latitude"], name: "index_locations_on_latitude"
+  add_index "locations", ["longitude"], name: "index_locations_on_longitude"
+  add_index "locations", ["monday_closing"], name: "index_locations_on_monday_closing"
+  add_index "locations", ["monday_opening"], name: "index_locations_on_monday_opening"
+  add_index "locations", ["permalink"], name: "index_locations_on_permalink"
+  add_index "locations", ["saturday_closing"], name: "index_locations_on_saturday_closing"
+  add_index "locations", ["saturday_opening"], name: "index_locations_on_saturday_opening"
+  add_index "locations", ["state_province_region"], name: "index_locations_on_state_province_region"
+  add_index "locations", ["sunday_closing"], name: "index_locations_on_sunday_closing"
+  add_index "locations", ["sunday_opening"], name: "index_locations_on_sunday_opening"
+  add_index "locations", ["thursday_closing"], name: "index_locations_on_thursday_closing"
+  add_index "locations", ["thursday_opening"], name: "index_locations_on_thursday_opening"
+  add_index "locations", ["tuesday_closing"], name: "index_locations_on_tuesday_closing"
+  add_index "locations", ["tuesday_opening"], name: "index_locations_on_tuesday_opening"
+  add_index "locations", ["wednesday_closing"], name: "index_locations_on_wednesday_closing"
+  add_index "locations", ["wednesday_opening"], name: "index_locations_on_wednesday_opening"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

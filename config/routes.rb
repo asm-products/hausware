@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :locations
   # OmniAuth for all providers, see `config/initializers/omniauth.rb` for more
   get '/auth/:provider/callback', to: 'sessions#create'
   get 'sessions/new'

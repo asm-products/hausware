@@ -1,0 +1,15 @@
+<% content_for :page_title do %>
+Create Location - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+New Location
+</h1>
+</div>
+
+<%= render 'form' %>
+
+<div class="clearfix"></div>
+<%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, locations_path, class: "btn btn-default" %>
+</div>

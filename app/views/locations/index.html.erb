@@ -1,0 +1,100 @@
+<% content_for :page_title do %>
+Locations - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+        &nbsp;
+      </div>
+
+      <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Location".html_safe, [:new, :location], class: "btn btn-success" %>
+      </div>
+      Listing Locations
+    </h1>
+  </div>
+
+  <table class="table table-striped table-hover tablesorter" id="Locations-table">
+
+
+    <thead>
+      <tr>
+    
+        <th><span>Name</span></th>
+        <th><span>Permalink</span></th>
+        <th><span>Phone</span></th>
+        <th><span>Email</span></th>
+        <th><span>Latitude</span></th>
+        <th><span>Longitude</span></th>
+        <th><span>Street address1</span></th>
+        <th><span>Street address2</span></th>
+        <th><span>City</span></th>
+        <th><span>State province region</span></th>
+        <th><span>Zip postal code</span></th>
+        <th><span>Country code</span></th>
+        <th><span>Sunday opening</span></th>
+        <th><span>Sunday closing</span></th>
+        <th><span>Monday opening</span></th>
+        <th><span>Monday closing</span></th>
+        <th><span>Tuesday opening</span></th>
+        <th><span>Tuesday closing</span></th>
+        <th><span>Wednesday opening</span></th>
+        <th><span>Wednesday closing</span></th>
+        <th><span>Thursday opening</span></th>
+        <th><span>Thursday closing</span></th>
+        <th><span>Friday opening</span></th>
+        <th><span>Friday closing</span></th>
+        <th><span>Saturday opening</span></th>
+        <th><span>Saturday closing</span></th>
+      
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @locations.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="25">No locations created yet.</td>
+      </tr>
+      <% end %>
+      <% @locations.each do |location| %>
+      <tr class="linked-row" data-href="<%= location_path(location) %>">
+      
+        <td><%= link_to location.name, location %></td>
+        <td><%= link_to location.permalink, location %></td>
+        <td><%= link_to location.phone, location %></td>
+        <td><%= link_to location.email, location %></td>
+        <td><%= link_to location.latitude, location %></td>
+        <td><%= link_to location.longitude, location %></td>
+        <td><%= link_to location.street_address1, location %></td>
+        <td><%= link_to location.street_address2, location %></td>
+        <td><%= link_to location.city, location %></td>
+        <td><%= link_to location.state_province_region, location %></td>
+        <td><%= link_to location.zip_postal_code, location %></td>
+        <td><%= link_to location.country_code, location %></td>
+        <td><%= link_to location.sunday_opening, location %></td>
+        <td><%= link_to location.sunday_closing, location %></td>
+        <td><%= link_to location.monday_opening, location %></td>
+        <td><%= link_to location.monday_closing, location %></td>
+        <td><%= link_to location.tuesday_opening, location %></td>
+        <td><%= link_to location.tuesday_closing, location %></td>
+        <td><%= link_to location.wednesday_opening, location %></td>
+        <td><%= link_to location.wednesday_closing, location %></td>
+        <td><%= link_to location.thursday_opening, location %></td>
+        <td><%= link_to location.thursday_closing, location %></td>
+        <td><%= link_to location.friday_opening, location %></td>
+        <td><%= link_to location.friday_closing, location %></td>
+        <td><%= link_to location.saturday_opening, location %></td>
+        <td><%= link_to location.saturday_closing, location %></td>
+        
+        
+        
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
