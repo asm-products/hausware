@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slideshowable_id: 
+  picture: 
+  order: 1
+  caption: MyString
+
+two:
+  slideshowable_id: 
+  picture: 
+  order: 1
+  caption: MyString

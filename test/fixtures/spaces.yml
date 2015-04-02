@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location_id: 
+  name: MyString
+  permalink: MyString
+  standard_hourly_price_in_cents: 1
+  picurl: MyString
+  reservable_quantity: 1
+  description: MyText
+
+two:
+  location_id: 
+  name: MyString
+  permalink: MyString
+  standard_hourly_price_in_cents: 1
+  picurl: MyString
+  reservable_quantity: 1
+  description: MyText

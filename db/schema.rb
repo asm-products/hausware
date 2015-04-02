@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401220030) do
+ActiveRecord::Schema.define(version: 20150402154159) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
@@ -64,6 +64,42 @@ ActiveRecord::Schema.define(version: 20150401220030) do
   add_index "locations", ["tuesday_opening"], name: "index_locations_on_tuesday_opening"
   add_index "locations", ["wednesday_closing"], name: "index_locations_on_wednesday_closing"
   add_index "locations", ["wednesday_opening"], name: "index_locations_on_wednesday_opening"
+
+  create_table "slides", force: :cascade do |t|
+    t.integer  "slideshowable_id"
+    t.string   "slideshowable_type"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.integer  "order"
+    t.string   "caption"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "slides", ["order"], name: "index_slides_on_order"
+  add_index "slides", ["slideshowable_id", "slideshowable_type", "order"], name: "index_slides_on_slideshowable_and_order"
+  add_index "slides", ["slideshowable_id", "slideshowable_type"], name: "index_slides_on_slideshowable"
+  add_index "slides", ["slideshowable_id"], name: "index_slides_on_slideshowable_id"
+
+  create_table "spaces", force: :cascade do |t|
+    t.integer  "location_id"
+    t.string   "name"
+    t.string   "permalink"
+    t.integer  "standard_hourly_price_in_cents"
+    t.string   "picurl"
+    t.integer  "reservable_quantity"
+    t.text     "description"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "spaces", ["location_id", "permalink"], name: "index_spaces_on_location_id_and_permalink"
+  add_index "spaces", ["location_id"], name: "index_spaces_on_location_id"
+  add_index "spaces", ["permalink"], name: "index_spaces_on_permalink"
+  add_index "spaces", ["reservable_quantity"], name: "index_spaces_on_reservable_quantity"
+  add_index "spaces", ["standard_hourly_price_in_cents"], name: "index_spaces_on_standard_hourly_price_in_cents"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

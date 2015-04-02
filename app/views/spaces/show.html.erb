@@ -1,0 +1,54 @@
+<% content_for :page_title do %>
+space Details - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, spaces_path, class: "btn btn-default", title: "Back to spaces" %>
+&nbsp;
+</div>
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Edit".html_safe, edit_space_path(@space), class: "btn btn-warning" %>
+</div>
+space Details
+</h1>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Location</label>
+  <div class="col-sm-9"><%= @space.location %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Name</label>
+  <div class="col-sm-9"><%= @space.name %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Permalink</label>
+  <div class="col-sm-9"><%= @space.permalink %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Standard hourly price in cents</label>
+  <div class="col-sm-9"><%= @space.standard_hourly_price_in_cents %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Picurl</label>
+  <div class="col-sm-9"><%= @space.picurl %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Reservable quantity</label>
+  <div class="col-sm-9"><%= @space.reservable_quantity %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Description</label>
+  <div class="col-sm-9"><%= @space.description %></div>
+</div>
+
+</div>
+
