@@ -30,6 +30,7 @@ gem 'omniauth-twitter'
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 
 # Upload files / photos
+gem 'aws-sdk'
 gem 'paperclip'
 
 # Heroku to serve assets
