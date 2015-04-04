@@ -1,0 +1,77 @@
+<%= form_for(@reservation) do |f| %>
+  <% if @reservation.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</strong>
+
+      <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:space_id].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :space_id, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :space_id, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:user_id].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :user_id, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :user_id, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:name].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :name, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :name, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:phone].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :phone, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :phone, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:zipcode].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :zipcode, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :zipcode, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:starts_at].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :starts_at, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.datetime_select :starts_at %>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:ends_at].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :ends_at, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.datetime_select :ends_at %>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:chargeid].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :chargeid, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :chargeid, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="actions text-center">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>

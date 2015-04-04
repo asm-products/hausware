@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402154159) do
+ActiveRecord::Schema.define(version: 20150404171001) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
@@ -64,6 +64,26 @@ ActiveRecord::Schema.define(version: 20150402154159) do
   add_index "locations", ["tuesday_opening"], name: "index_locations_on_tuesday_opening"
   add_index "locations", ["wednesday_closing"], name: "index_locations_on_wednesday_closing"
   add_index "locations", ["wednesday_opening"], name: "index_locations_on_wednesday_opening"
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "space_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "zipcode"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.string   "chargeid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reservations", ["chargeid"], name: "index_reservations_on_chargeid"
+  add_index "reservations", ["ends_at"], name: "index_reservations_on_ends_at"
+  add_index "reservations", ["space_id", "starts_at", "ends_at"], name: "index_reservations_on_space_id_and_starts_at_and_ends_at"
+  add_index "reservations", ["space_id"], name: "index_reservations_on_space_id"
+  add_index "reservations", ["starts_at"], name: "index_reservations_on_starts_at"
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
 
   create_table "slides", force: :cascade do |t|
     t.integer  "slideshowable_id"
