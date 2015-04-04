@@ -14,6 +14,7 @@ if palo_alto_location.blank?
       permalink: 'palo-alto',
       phone: '650.326.1263',
       email: 'info@hanahaus.com',
+      timezone: 'Pacific Time (US & Canada)',
       street_address1: 'New Varsity Theatre',
       street_address2: '456 University Ave.',
       city: 'Palo Alto',

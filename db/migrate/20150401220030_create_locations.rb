@@ -5,6 +5,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string :permalink, index: true
       t.string :phone
       t.string :email
+      t.string :timezone
       t.decimal :latitude, precision: 9, scale: 6, index: true
       t.decimal :longitude, precision: 9, scale: 6, index: true
       t.string :street_address1

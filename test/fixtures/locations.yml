@@ -5,6 +5,7 @@ one:
   permalink: MyString
   phone: MyString
   email: MyString
+  timezone: MyString
   latitude: 9.99
   longitude: 9.99
   street_address1: MyString
@@ -33,6 +34,7 @@ two:
   permalink: MyString
   phone: MyString
   email: MyString
+  timezone: MyString
   latitude: 9.99
   longitude: 9.99
   street_address1: MyString
