@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   
+  namespace :admin do
+    resources :locations do
+      resources :spaces do
+        resources :slides
+      end
+    end
+  end
+  
   resources :locations do
     resources :spaces do
       resources :slides

@@ -36,4 +36,76 @@ if palo_alto_location.blank?
       saturday_closing: 2200
     }
   )
+  puts "Creating location: #{palo_alto_location.permalink}: #{palo_alto_location.id.to_s}"
+end
+
+PALO_ALTO_SPACES = [
+  {
+    location:                        palo_alto_location,
+    name:                            'Open Seating',
+    permalink:                       'open-seating',
+    standard_hourly_price_in_cents:  300,
+    picurl:                          nil,
+    reservable_quantity:             65,
+    description:                     'Single seats available either on tables or lounge-style furniture in a variety of configurations. Ample power outlets, whiteboards, wifi, and a printer. Sit anywhere and move around as you please to collaborate, work, and to learn. Since there is limited Open seating, please be considerate and book no more than a couple of hours at a time.'
+  },
+  {
+    location:                        palo_alto_location,
+    name:                            '2-Seat Quiet Room – Right',
+    permalink:                       'quiet-room-right',
+    standard_hourly_price_in_cents:  1500,
+    picurl:                          nil,
+    reservable_quantity:             1,
+    description:                     'A small, private meeting room perfect for a one-on-one meeting or phone call.'
+  },
+  {
+    location:                        palo_alto_location,
+    name:                            '2-Seat Quiet Room – Left',
+    permalink:                       'quiet-room-left',
+    standard_hourly_price_in_cents:  1500,
+    picurl:                          nil,
+    reservable_quantity:             1,
+    description:                     'A small, private meeting room perfect for a one-on-one meeting or phone call.'
+  },
+  {
+    location:                        palo_alto_location,
+    name:                            '8-Person Conference Room – West',
+    permalink:                       'conference-room-west',
+    standard_hourly_price_in_cents:  7500,
+    picurl:                          nil,
+    reservable_quantity:             1,
+    description:                     'A private meeting room with 65" LED Screen and A/V hook-ups. Seats up to 10 very snuggly.'
+  },
+  {
+    location:                        palo_alto_location,
+    name:                            '8-Person Conference Room – East',
+    permalink:                       'conference-room-east',
+    standard_hourly_price_in_cents:  7500,
+    picurl:                          nil,
+    reservable_quantity:             1,
+    description:                     'A private meeting room with 65" LED Screen and A/V hook-ups. Seats up to 10 very snuggly.'
+  },
+  {
+    location:                        palo_alto_location,
+    name:                            '8-Person Group Tabletop Seating',
+    permalink:                       'group-tabletop',
+    standard_hourly_price_in_cents:  2000,
+    picurl:                          nil,
+    reservable_quantity:             2,
+    description:                     'Large communal table for group work and collaboration in an open workspace.'
+  },
+  {
+    location:                        palo_alto_location,
+    name:                            '4-Person Lounge Seating with TV',
+    permalink:                       'lounge-seating',
+    standard_hourly_price_in_cents:  3500,
+    picurl:                          nil,
+    reservable_quantity:             2,
+    description:                     'Comfortable work enabled lounge furniture arranged around a coffee table in the open workspace with one 65" screen and A/V hookups for presentations.'
+  },
+]
+
+PALO_ALTO_SPACES.each do |space_attributes|
+  result = Space.create(space_attributes)
+  puts "Creating space: #{result.permalink}: #{result.id.to_s}"
 end
