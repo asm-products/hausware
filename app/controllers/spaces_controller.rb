@@ -1,10 +1,11 @@
 class SpacesController < ApplicationController
+  before_action :set_location
   before_action :set_space, only: [:show, :edit, :update, :destroy]
 
   # GET /spaces
   # GET /spaces.json
   def index
-    @spaces = Space.all
+    @spaces = @location.spaces.all
   end
 
   # GET /spaces/1
@@ -14,7 +15,7 @@ class SpacesController < ApplicationController
 
   # GET /spaces/new
   def new
-    @space = Space.new
+    @space = @location.spaces.build
   end
 
   # GET /spaces/1/edit
@@ -24,12 +25,12 @@ class SpacesController < ApplicationController
   # POST /spaces
   # POST /spaces.json
   def create
-    @space = Space.new(space_params)
+    @space = @location.spaces.build(space_params)
 
     respond_to do |format|
       if @space.save
         format.html { redirect_to @space, notice: 'Space was successfully created.' }
-        format.json { render :show, status: :created, location: @space }
+        format.json { render :show, status: :created, location: [@space.location, @space] }
       else
         format.html { render :new }
         format.json { render json: @space.errors, status: :unprocessable_entity }
@@ -42,8 +43,8 @@ class SpacesController < ApplicationController
   def update
     respond_to do |format|
       if @space.update(space_params)
-        format.html { redirect_to @space, notice: 'Space was successfully updated.' }
-        format.json { render :show, status: :ok, location: @space }
+        format.html { redirect_to [@space.location, @space], notice: 'Space was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@space.location, @space] }
       else
         format.html { render :edit }
         format.json { render json: @space.errors, status: :unprocessable_entity }
@@ -56,19 +57,27 @@ class SpacesController < ApplicationController
   def destroy
     @space.destroy
     respond_to do |format|
-      format.html { redirect_to spaces_url, notice: 'Space was successfully destroyed.' }
+      format.html { redirect_to location_spaces_url(@location), notice: 'Space was successfully deleted.' }
       format.json { head :no_content }
     end
   end
 
   private
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_location
+      @location = Location.find_by_permalink(params[:location_id])
+      raise ActiveRecord::RecordNotFound unless @location
+    end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_space
-      @space = Space.find(params[:id])
+      @space = @location.spaces.find_by_permalink(params[:id])
+      raise ActiveRecord::RecordNotFound unless @space
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def space_params
-      params.require(:space).permit(:location_id, :name, :permalink, :standard_hourly_price_in_cents, :picurl, :reservable_quantity, :description)
+      params.require(:space).permit(:name, :permalink, :standard_hourly_price_in_cents, :picurl, :reservable_quantity, :description)
     end
 end

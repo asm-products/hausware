@@ -4,60 +4,60 @@
 Spaces - 
 <% end %>
 <div class="container">
-<div class="page-header">
-<h1>
-<div class="pull-left">
-<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
-&nbsp;
-</div>
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+        &nbsp;
+      </div>
 
-<div class="pull-right">
-<%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Space".html_safe, [:new, :space], class: "btn btn-success" %>
-</div>
-Listing Spaces
-</h1>
-</div>
+      <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Space".html_safe, [:new, @location, :space], class: "btn btn-success" %>
+      </div>
+      Listing Spaces
+      <small>
+        at
+        <%= @location.name %>
+      </small>
+    </h1>
+  </div>
 
-<table class="table table-striped table-hover tablesorter" id="Spaces-table">
+  <table class="table table-striped table-hover tablesorter" id="Spaces-table">
 
 
-  <thead>
-<tr>
-    
-      <th><span>Location</span></th>
-      <th><span>Name</span></th>
-      <th><span>Permalink</span></th>
-      <th><span>Standard hourly price in cents</span></th>
-      <th><span>Picurl</span></th>
-      <th><span>Reservable quantity</span></th>
-      <th><span>Description</span></th>
-      
-    </tr>
-  </thead>
-
-  <tbody>
-    <% unless @spaces.any? %>
-<tr id="empty-table">
-<td class="bg-warning" colspan="2">No spaces created yet.</td>
-</tr>
-<% end %>
-<% @spaces.each do |space| %>
-<tr class="linked-row" data-href="<%= space_path(space) %>">
-      
-        <td><%= link_to space.location, space %></td>
-        <td><%= link_to space.name, space %></td>
-        <td><%= link_to space.permalink, space %></td>
-        <td><%= link_to space.standard_hourly_price_in_cents, space %></td>
-        <td><%= link_to space.picurl, space %></td>
-        <td><%= link_to space.reservable_quantity, space %></td>
-        <td><%= link_to space.description, space %></td>
+    <thead>
+      <tr>
         
-        
+        <th><span>Name</span></th>
+        <th><span>Permalink</span></th>
+        <th><span>Standard Hourly Price</span></th>
+        <th><span>Picurl</span></th>
+        <th><span>Reservable quantity</span></th>
+        <th><span>Description</span></th>
+      
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @spaces.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="2">No spaces created yet.</td>
+      </tr>
+      <% end %>
+      <% @spaces.each do |space| %>
+      <tr class="linked-row" data-href="<%= location_space_path(space.location, space) %>">
+      
+        <td><%= link_to space.name, [space.location, space] %></td>
+        <td><%= link_to space.permalink, [space.location, space] %></td>
+        <td><%= link_to number_to_currency(space.standard_hourly_price_in_cents / 100.00), [space.location, space] %></td>
+        <td><%= link_to space.picurl, [space.location, space] %></td>
+        <td><%= link_to space.reservable_quantity, [space.location, space] %></td>
+        <td><%= link_to space.description, [space.location, space] %></td>
         
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 

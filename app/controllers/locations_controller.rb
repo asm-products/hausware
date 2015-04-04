@@ -64,7 +64,8 @@ class LocationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
-      @location = Location.find(params[:id])
+      @location = Location.find_by_permalink(params[:id])
+      raise ActiveRecord::RecordNotFound unless @location
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

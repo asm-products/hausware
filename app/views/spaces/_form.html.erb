@@ -1,71 +1,73 @@
-<%= form_for(@space) do |f| %>
-  <% if @space.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger" role="alert">
-      <strong><%= pluralize(@space.errors.count, "error") %> prohibited this space from being saved:</strong>
+<%= form_for([@space.location, @space]) do |f| %>
+<% if @space.errors.any? %>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+  <strong><%= pluralize(@space.errors.count, "error") %> prohibited this space from being saved:</strong>
 
-      <ul>
-      <% @space.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <ul>
+    <% @space.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="row">
+  <div class="form-group<%= f.object.errors[:location_id].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :location_id, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :location_id, { class: "form-control" } %>
     </div>
-  <% end %>
-
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:location_id].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :location_id, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_field :location_id, { class: "form-control" } %>
-</div>
-</div>
   </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:name].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :name, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_field :name, { class: "form-control" } %>
 </div>
-</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:name].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :name, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, { class: "form-control" } %>
+    </div>
   </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:permalink].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :permalink, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_field :permalink, { class: "form-control" } %>
 </div>
-</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:permalink].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :permalink, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :permalink, { class: "form-control" } %>
+    </div>
   </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:standard_hourly_price_in_cents].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :standard_hourly_price_in_cents, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.number_field :standard_hourly_price_in_cents, { class: "form-control" } %>
 </div>
-</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:standard_hourly_price_in_cents].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :standard_hourly_price_in_cents, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.number_field :standard_hourly_price_in_cents, { class: "form-control" } %>
+    </div>
   </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:picurl].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :picurl, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_field :picurl, { class: "form-control" } %>
 </div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:picurl].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :picurl, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :picurl, { class: "form-control" } %>
+    </div>
+  </div>
 </div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:reservable_quantity].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :reservable_quantity, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.number_field :reservable_quantity, { class: "form-control" } %>
+    </div>
   </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:reservable_quantity].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :reservable_quantity, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.number_field :reservable_quantity, { class: "form-control" } %>
 </div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:description].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :description, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :description, { class: "form-control" } %>
+    </div>
+  </div>
 </div>
-  </div>
-  <div class="row">
-    <div class="form-group<%= f.object.errors[:description].empty? ? "" : " has-error has-feedback" %>">
-<%= f.label :description, { class: "control-label col-sm-2" } %>
-<div class="col-sm-10">
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions text-center">
-    <%= f.submit class: "btn btn-success" %>
-  </div>
+<div class="actions text-center">
+  <%= f.submit class: "btn btn-success" %>
+</div>
 <% end %>

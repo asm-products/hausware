@@ -11,4 +11,8 @@ class Space < ActiveRecord::Base
     return true unless self.permalink.blank? # Bypass if permalink is already set
     self.permalink = AutoPermalink::cleaned_deduped_permalink(self.class, self.name)
   end
+
+  def to_param
+    self.permalink
+  end
 end
