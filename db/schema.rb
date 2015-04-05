@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20150404171001) do
     t.string   "permalink"
     t.string   "phone"
     t.string   "email"
+    t.string   "timezone"
     t.decimal  "latitude",              precision: 9, scale: 6
     t.decimal  "longitude",             precision: 9, scale: 6
     t.string   "street_address1"
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 20150404171001) do
     t.integer  "space_id"
     t.integer  "user_id"
     t.string   "name"
+    t.string   "email"
     t.string   "phone"
     t.string   "zipcode"
     t.datetime "starts_at"
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150404171001) do
   end
 
   add_index "reservations", ["chargeid"], name: "index_reservations_on_chargeid"
+  add_index "reservations", ["email"], name: "index_reservations_on_email"
   add_index "reservations", ["ends_at"], name: "index_reservations_on_ends_at"
   add_index "reservations", ["space_id", "starts_at", "ends_at"], name: "index_reservations_on_space_id_and_starts_at_and_ends_at"
   add_index "reservations", ["space_id"], name: "index_reservations_on_space_id"

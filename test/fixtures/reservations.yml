@@ -4,6 +4,7 @@ one:
   space_id: 
   user_id: 
   name: MyString
+  email: MyString
   phone: MyString
   zipcode: MyString
   starts_at: 2015-04-04 10:10:01
@@ -14,6 +15,7 @@ two:
   space_id: 
   user_id: 
   name: MyString
+  email: MyString
   phone: MyString
   zipcode: MyString
   starts_at: 2015-04-04 10:10:01

@@ -4,6 +4,7 @@ class CreateReservations < ActiveRecord::Migration
       t.references :space, index: true, foreign_key: true
       t.references :user, index: true, foreign_key: true
       t.string :name
+      t.string :email, index: true
       t.string :phone
       t.string :zipcode
       t.datetime :starts_at, index: true

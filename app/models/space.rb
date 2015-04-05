@@ -1,6 +1,7 @@
 class Space < ActiveRecord::Base
   belongs_to :location
   has_many :slides, as: :slideshowable
+  has_many :reservations
   
   before_validation :autofill_permalink_if_blank
   

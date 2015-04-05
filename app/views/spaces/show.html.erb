@@ -9,6 +9,8 @@ Space Details -
         &nbsp;
       </div>
       <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> New Reservation".html_safe, [:new, @space.location, @space, :reservation], class: "btn btn-primary" %>
+        
         <%= link_to "<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Edit".html_safe, edit_location_space_path(@space.location, @space), class: "btn btn-warning" %>
       </div>
       Space Details

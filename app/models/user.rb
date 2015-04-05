@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :reservations
   
   before_validation :autofill_username_if_blank
   
