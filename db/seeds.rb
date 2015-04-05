@@ -70,7 +70,7 @@ PALO_ALTO_SPACES = [
   },
   {
     location:                        palo_alto_location,
-    name:                            '8-Person Conference Room – West',
+    name:                            '8-Person Conference – West',
     permalink:                       'conference-room-west',
     standard_hourly_price_in_cents:  7500,
     picurl:                          nil,
@@ -79,7 +79,7 @@ PALO_ALTO_SPACES = [
   },
   {
     location:                        palo_alto_location,
-    name:                            '8-Person Conference Room – East',
+    name:                            '8-Person Conference – East',
     permalink:                       'conference-room-east',
     standard_hourly_price_in_cents:  7500,
     picurl:                          nil,

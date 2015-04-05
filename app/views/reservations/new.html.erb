@@ -2,14 +2,13 @@
 Create Reservation - 
 <% end %>
 <div class="container">
-  <div class="page-header">
-    <h1>
-      New Reservation
-    </h1>
-  </div>
 
   <%= render 'form' %>
 
   <div class="clearfix"></div>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
   <%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, [@space.location, @space, :reservations], class: "btn btn-default" %>
 </div>

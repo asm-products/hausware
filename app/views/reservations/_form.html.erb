@@ -11,57 +11,149 @@
 </div>
 <% end %>
 
+
+<h2>
+  1. Account: 
+  <small>
+    <% if authed_user %>
+    <img src='<%= authed_user.picurl %>' class="inline-profile-pic"> <%= authed_user.full_name %>
+    <% else %>
+    (optional)
+    <% end %>
+  </small>
+</h2>
+
+<% if authed_user %>
+<p>
+  Logged in as <img src='<%= authed_user.picurl %>' class="inline-profile-pic"> <%= authed_user.full_name %>.
+  <a href="/sessions/new?next=<%= url_encode request.path %>">Login as a different user</a>.
+</p>
+<% else %>
+<p>
+  Not logged in. Optionally
+  <a href="/sessions/new?next=<%= url_encode request.path %>">login for a quicker reservation</a>.
+</p>
+<% end %>
+
+<hr/>
+
+<h2>
+  2. Space to Reserve:
+  <small>
+    <%= @reservation.space.name %> 
+    at <%= @reservation.space.location.name %> 
+    for <%= number_to_currency(@reservation.space.standard_hourly_price_in_cents / 100.00) %> / hour
+  </small>
+</h2>
+
+<% @reservation.space.location.spaces.order('name desc').all.in_groups_of(4) do |group| %>
 <div class="row">
-  <div class="form-group<%= f.object.errors[:starts_at].empty? ? "" : " has-error has-feedback" %>">
-    <%= f.label :starts_at, { class: "control-label col-sm-2" } %>
-    <div class="col-sm-10">
-      <%= f.datetime_select :starts_at %>
+  <% group.each do |space| %>
+  <div class="col-xs-6 col-md-3">
+    <% unless space.nil? %>
+    <div class="thumbnail<%= @reservation.space.id == space.id ? ' success' : '' %>">
+      <a title="Click for more details about this space..." data-toggle="modal" data-target="#space-<%= space.id %>-modal"><img src="<%= space.picurl %>" alt="<%= space.name %>"></a>
+      <div class="caption">
+        <h3><a title="Click for more details about this space..." data-toggle="modal" data-target="#space-<%= space.id %>-modal"><%= space.name %></a></h3>
+        <p><a title="Click for more details about this space..." data-toggle="modal" data-target="#space-<%= space.id %>-modal"><%= number_to_currency(space.standard_hourly_price_in_cents / 100.00) %> / hour</a></p>
+        <p><a title="Click for more details about this space..." data-toggle="modal" data-target="#space-<%= space.id %>-modal"><%= truncate space.description, separator: ' ', length: 80 %></a></p>
+        <% if @reservation.space.id == space.id %>
+        <p class="text-center"><a href="#" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Selected</a></p>
+        <% else %>
+        <p class="text-center"><a href="<%= new_location_space_reservation_path(@reservation.space.location, space) %>" class="btn btn-primary" role="button">Select</a></p>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="space-<%= space.id %>-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             <h4 class="modal-title"><%= space.name %> &mdash; <%= number_to_currency(space.standard_hourly_price_in_cents / 100.00) %> / hour</h4>
+           </div>
+          <div class="modal-body">
+            <img src="<%= space.picurl %>" alt="<%= space.name %>">
+            <br/>
+            <p><%= space.description %></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+<% end %>
+
+<hr/>
+
+<h2>3. Day &amp; Time</h2>
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-5 form-group<%= f.object.errors[:starts_at].empty? ? "" : " has-error has-feedback" %>">
+    <div>
+      <%= f.label :starts_at, { class: "control-label" } %>
+    </div>
+    <div>
+      <%= f.datetime_select :starts_at, { class: "form-control" } %>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="form-group<%= f.object.errors[:ends_at].empty? ? "" : " has-error has-feedback" %>">
-    <%= f.label :ends_at, { class: "control-label col-sm-2" } %>
-    <div class="col-sm-10">
-      <%= f.datetime_select :ends_at %>
+  
+  <div class="col-md-5 form-group<%= f.object.errors[:ends_at].empty? ? "" : " has-error has-feedback" %>">
+    <div>
+      <%= f.label :ends_at, { class: "control-label" } %>
+    </div>
+    <div>
+      <%= f.datetime_select :ends_at, { class: "form-control" } %>
     </div>
   </div>
+  <div class="col-md-1"></div>
 </div>
+
+<hr/>
+
+<h2>4. Your Details</h2>
+
 <div class="row">
-  <div class="form-group<%= f.object.errors[:name].empty? ? "" : " has-error has-feedback" %>">
-    <%= f.label :name, { class: "control-label col-sm-2" } %>
-    <div class="col-sm-10">
-      <%= f.text_field :name, { class: "form-control" } %>
-    </div>
+  <div class="col-md-6 form-group<%= f.object.errors[:name].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.text_field :name, { class: "form-control", placeholder: 'Full Name, e.g. Johnny Appleseed', required: 'required' } %>
   </div>
-</div>
-<div class="row">
-  <div class="form-group<%= f.object.errors[:phone].empty? ? "" : " has-error has-feedback" %>">
-    <%= f.label :email, { class: "control-label col-sm-2" } %>
-    <div class="col-sm-10">
-      <%= f.text_field :email, { class: "form-control", type: 'email' } %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="form-group<%= f.object.errors[:phone].empty? ? "" : " has-error has-feedback" %>">
-    <%= f.label :phone, { class: "control-label col-sm-2" } %>
-    <div class="col-sm-10">
-      <%= f.text_field :phone, { class: "form-control", type: "tel" } %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="form-group<%= f.object.errors[:zipcode].empty? ? "" : " has-error has-feedback" %>">
-    <%= f.label :zipcode, { class: "control-label col-sm-2" } %>
-    <div class="col-sm-10">
-      <%= f.text_field :zipcode, { class: "form-control" } %>
-    </div>
+
+  <div class="col-md-6 form-group<%= f.object.errors[:phone].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.text_field :email, { class: "form-control", type: 'email', placeholder: 'Email, e.g. me@example.com', required: 'required' } %>
   </div>
 </div>
 
-
-<div class="actions text-center">
-  <%= f.submit class: "btn btn-success" %>
+<div class="row">
+  <div class="col-md-6 form-group<%= f.object.errors[:phone].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.text_field :phone, { class: "form-control", type: "tel", placeholder: 'Phone, e.g. 123-456-7890' } %>
+  </div>
+    
+  <div class="col-md-6 form-group<%= f.object.errors[:zipcode].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.text_field :zipcode, { class: "form-control", placeholder: 'Zipcode, e.g. 94301' } %>
+  </div>
 </div>
+
+<% if authed_user %>
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-11">
+    <%= f.check_box :save_details_for_next_time %>
+    <%= f.label :save_details_for_next_time %>
+  </div>
+</div>
+<% end %>
+
+<hr/>
+
+<h2>
+  5. Review:
+  <%= f.submit 'Review & Pay...', class: "btn btn-success" %>
+</h2>
+
 <% end %>

@@ -17,6 +17,13 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = @space.reservations.build(user: authed_user)
+    if authed_user
+      @reservation.name = authed_user.full_name
+      @reservation.email = authed_user.email
+      @reservation.phone = authed_user.phone
+      @reservation.zipcode = authed_user.zipcode
+      @reservation.save_details_for_next_time = true
+    end
   end
 
   # GET /reservations/1/edit
@@ -84,6 +91,6 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:space_id, :name, :email, :phone, :zipcode, :starts_at, :ends_at, :chargeid)
+      params.require(:reservation).permit(:space_id, :name, :email, :phone, :zipcode, :starts_at, :ends_at, :chargeid, :save_details_for_next_time)
     end
 end

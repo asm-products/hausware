@@ -11,6 +11,9 @@ class SessionsController < ApplicationController
   end
   
   def new
+    unless params[:next].blank?
+      session[:after_auth_url] = params[:next]
+    end
   end
   
   def destroy

@@ -25,7 +25,7 @@
       </ul> 
       <% if !authed_user %><%# ---- logged out ---- %>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
+        <li<%= request.path.ends_with?("/reservations/new") ? " class=\"active\"".html_safe : "" %>><a href="/locations/palo-alto/spaces/open-seating/reservations/new"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Menu</a></li>
         <li><a href="#">FAQ</a></li>
@@ -36,7 +36,7 @@
       <% else %><%# ---- logged in ---- %>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Menu</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
+        <li<%= request.path.ends_with?("/reservations/new") ? " class=\"active\"".html_safe : "" %>><a href="/locations/palo-alto/spaces/open-seating/reservations/new"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
         <li class="profile dropdown">
           <a class="dropdown-toggle" type="button" id="profile-dropdown" data-toggle="dropdown" aria-expanded="false"><img src='<%= authed_user.picurl %>'> <%= authed_user.full_name %> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="profile-dropdown">
