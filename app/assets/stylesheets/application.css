@@ -25,3 +25,9 @@ a {
   max-height: 1.3em;
   border-radius: 0.3em;
 }
+
+.page-wide-padding { width:100%; }
+.page-wide-padding-inside {
+  padding-left:10px;
+  padding-right:10px;
+}

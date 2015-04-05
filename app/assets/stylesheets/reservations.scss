@@ -7,6 +7,47 @@ body.controller-reservations .thumbnail a[data-toggle=modal] {
   cursor: zoom-in;
 }
 
+body.controller-reservations h3 {
+  font-weight:normal;
+  text-align:center;
+}
 body.controller-reservations .thumbnail a:hover {
   text-decoration:none;
+}
+
+table.week-scheduler {
+  width:100%;
+}
+table.week-scheduler thead th {
+  border-bottom: 1px solid #e6e5e6;
+  text-align:center;
+  font-weight:normal;
+}
+table.week-scheduler thead th:first-child {
+ border: 0; 
+}
+table.week-scheduler td {
+  width: 13.5%;
+  text-align:center;
+  border-left: 1px solid #e6e5e6;
+  height: 1.2em;
+}
+table.week-scheduler tr td:last-child {
+
+  border-right: 1px solid #e6e5e6;
+}
+table.week-scheduler tbody th {
+  text-align:right;
+  color:#adadad;
+  font-weight:normal;
+  position:relative;
+  font-size:83%;
+}
+table.week-scheduler tbody th span {
+  right:5px;
+  position:absolute;
+  top:-0.7em;
+}
+tr.half-hour td {
+  border-bottom: 1px solid #e6e5e6;
 }

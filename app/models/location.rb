@@ -14,4 +14,13 @@ class Location < ActiveRecord::Base
   def to_param
     self.permalink
   end
+  
+  def earliest_opening
+    [self.sunday_opening, self.monday_opening, self.tuesday_opening, self.wednesday_opening, self.thursday_opening, self.friday_opening, self.saturday_opening].min
+  end
+  
+  def latest_closing
+    [self.sunday_closing, self.monday_closing, self.tuesday_closing, self.wednesday_closing, self.thursday_closing, self.friday_closing, self.saturday_closing].max
+  end
+  
 end
