@@ -15,6 +15,31 @@ class Location < ActiveRecord::Base
     self.permalink
   end
   
+  def opening_time_on(date_and_time)
+    opening_value = begin
+      case date_and_time.wday
+      when 0
+        sunday_opening
+      when 1
+        monday_opening
+      when 2
+        tuesday_opening
+      when 3
+        wednesday_opening
+      when 4
+        thursday_opening
+      when 5
+        friday_opening
+      when 6
+        saturday_opening
+      else
+        monday_opening
+      end
+    end
+    hour = (opening_value / 100.00).floor
+    return date_and_time.change({ hour: (opening_value / 100.00).floor, minute: opening_value - (hour*100) })
+  end
+  
   def earliest_opening
     [self.sunday_opening, self.monday_opening, self.tuesday_opening, self.wednesday_opening, self.thursday_opening, self.friday_opening, self.saturday_opening].min
   end

@@ -106,13 +106,22 @@
 
 <hr/>
 
+<% sunday_start = Time.now.beginning_of_week(start_day = :sunday) %>
+<% selected_time = @location.opening_time_on(Time.now.advance(days: 1)) %>
+
 <div class="container">
-  <h2>3. Day &amp; Time</h2>
+  <h2>
+    3. Day &amp; Time:
+    <small>
+      <%= selected_time.strftime("%A, %B %-d, ") %> <%= selected_time.year %>
+      at <%= selected_time.strftime("%k:%M%P") %> 
+      for 1 hour
+    </small>
+  </h2>
 </div>
 
 <div class="page-wide-padding">
   <div class="page-wide-padding-inside">
-    <% sunday_start = Time.now.beginning_of_week(start_day = :sunday) %>
     <h3><strong><%= sunday_start.strftime("%B") %></strong> <%= sunday_start.year %></h3>
     <table class="week-scheduler">
       <thead>
