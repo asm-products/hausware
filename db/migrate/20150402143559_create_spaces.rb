@@ -8,6 +8,7 @@ class CreateSpaces < ActiveRecord::Migration
       t.string :picurl
       t.integer :reservable_quantity, index: true
       t.text :description
+      t.integer :max_days_in_advance_reservable
 
       t.timestamps null: false
     end

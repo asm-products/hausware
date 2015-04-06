@@ -43,9 +43,14 @@ Space Details -
   </div>
 
   <div class="row">
+    <label class="col-sm-3 text-right text-muted">Maximum days in advance reservable</label>
+    <div class="col-sm-9"><%= @space.max_days_in_advance_reservable %></div>
+  </div>
+
+  <div class="row">
     <label class="col-sm-3 text-right text-muted">Reservable quantity</label>
     <div class="col-sm-9"><%= @space.reservable_quantity %></div>
-  </div>
+  </div>max_days_in_advance_reservable
 
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Description</label>

@@ -48,6 +48,7 @@ PALO_ALTO_SPACES = [
     standard_hourly_price_in_cents:  300,
     picurl:                          nil,
     reservable_quantity:             65,
+    max_days_in_advance_reservable:  2,
     description:                     'Single seats available either on tables or lounge-style furniture in a variety of configurations. Ample power outlets, whiteboards, wifi, and a printer. Sit anywhere and move around as you please to collaborate, work, and to learn. Since there is limited Open seating, please be considerate and book no more than a couple of hours at a time.'
   },
   {
@@ -57,6 +58,7 @@ PALO_ALTO_SPACES = [
     standard_hourly_price_in_cents:  1500,
     picurl:                          nil,
     reservable_quantity:             1,
+    max_days_in_advance_reservable:  2,
     description:                     'A small, private meeting room perfect for a one-on-one meeting or phone call.'
   },
   {
@@ -66,6 +68,7 @@ PALO_ALTO_SPACES = [
     standard_hourly_price_in_cents:  1500,
     picurl:                          nil,
     reservable_quantity:             1,
+    max_days_in_advance_reservable:  2,
     description:                     'A small, private meeting room perfect for a one-on-one meeting or phone call.'
   },
   {
@@ -75,6 +78,7 @@ PALO_ALTO_SPACES = [
     standard_hourly_price_in_cents:  7500,
     picurl:                          nil,
     reservable_quantity:             1,
+    max_days_in_advance_reservable:  2,
     description:                     'A private meeting room with 65" LED Screen and A/V hook-ups. Seats up to 10 very snuggly.'
   },
   {
@@ -84,6 +88,7 @@ PALO_ALTO_SPACES = [
     standard_hourly_price_in_cents:  7500,
     picurl:                          nil,
     reservable_quantity:             1,
+    max_days_in_advance_reservable:  2,
     description:                     'A private meeting room with 65" LED Screen and A/V hook-ups. Seats up to 10 very snuggly.'
   },
   {
@@ -93,6 +98,7 @@ PALO_ALTO_SPACES = [
     standard_hourly_price_in_cents:  2000,
     picurl:                          nil,
     reservable_quantity:             2,
+    max_days_in_advance_reservable:  2,
     description:                     'Large communal table for group work and collaboration in an open workspace.'
   },
   {
@@ -102,6 +108,7 @@ PALO_ALTO_SPACES = [
     standard_hourly_price_in_cents:  3500,
     picurl:                          nil,
     reservable_quantity:             2,
+    max_days_in_advance_reservable:  2,
     description:                     'Comfortable work enabled lounge furniture arranged around a coffee table in the open workspace with one 65" screen and A/V hookups for presentations.'
   },
 ]

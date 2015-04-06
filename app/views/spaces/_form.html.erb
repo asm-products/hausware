@@ -53,6 +53,14 @@
   </div>
 </div>
 <div class="row">
+  <div class="form-group<%= f.object.errors[:max_days_in_advance_reservable].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :max_days_in_advance_reservable, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.number_field :max_days_in_advance_reservable, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="form-group<%= f.object.errors[:description].empty? ? "" : " has-error has-feedback" %>">
     <%= f.label :description, { class: "control-label col-sm-2" } %>
     <div class="col-sm-10">

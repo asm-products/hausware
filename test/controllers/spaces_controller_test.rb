@@ -18,7 +18,7 @@ class SpacesControllerTest < ActionController::TestCase
 
   test "should create space" do
     assert_difference('Space.count') do
-      post :create, space: { description: @space.description, location_id: @space.location_id, name: @space.name, permalink: @space.permalink, picurl: @space.picurl, reservable_quantity: @space.reservable_quantity, standard_hourly_price_in_cents: @space.standard_hourly_price_in_cents }
+      post :create, space: { description: @space.description, location_id: @space.location_id, name: @space.name, permalink: @space.permalink, picurl: @space.picurl, reservable_quantity: @space.reservable_quantity, reservable_quantity: @space.reservable_quantity, standard_hourly_price_in_cents: @space.standard_hourly_price_in_cents }
     end
 
     assert_redirected_to space_path(assigns(:space))
@@ -35,7 +35,7 @@ class SpacesControllerTest < ActionController::TestCase
   end
 
   test "should update space" do
-    patch :update, id: @space, space: { description: @space.description, location_id: @space.location_id, name: @space.name, permalink: @space.permalink, picurl: @space.picurl, reservable_quantity: @space.reservable_quantity, standard_hourly_price_in_cents: @space.standard_hourly_price_in_cents }
+    patch :update, id: @space, space: { description: @space.description, location_id: @space.location_id, name: @space.name, permalink: @space.permalink, picurl: @space.picurl, reservable_quantity: @space.reservable_quantity, reservable_quantity: @space.reservable_quantity, standard_hourly_price_in_cents: @space.standard_hourly_price_in_cents }
     assert_redirected_to space_path(assigns(:space))
   end
 

@@ -7,6 +7,7 @@ one:
   standard_hourly_price_in_cents: 1
   picurl: MyString
   reservable_quantity: 1
+  max_days_in_advance_reservable: 2
   description: MyText
 
 two:
@@ -16,4 +17,5 @@ two:
   standard_hourly_price_in_cents: 1
   picurl: MyString
   reservable_quantity: 1
+  max_days_in_advance_reservable: 2
   description: MyText

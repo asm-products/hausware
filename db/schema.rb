@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20150404171001) do
     t.string   "picurl"
     t.integer  "reservable_quantity"
     t.text     "description"
+    t.integer  "max_days_in_advance_reservable"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end

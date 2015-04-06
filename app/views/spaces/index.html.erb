@@ -33,6 +33,7 @@ Spaces -
         <th><span>Standard Hourly Price</span></th>
         <th><span>Picurl</span></th>
         <th><span>Reservable quantity</span></th>
+        <th><span>Max days in advance reservable</span></th>
         <th><span>Description</span></th>
       
       </tr>
@@ -52,6 +53,7 @@ Spaces -
         <td><%= link_to number_to_currency(space.standard_hourly_price_in_cents / 100.00), [space.location, space] %></td>
         <td><%= link_to space.picurl, [space.location, space] %></td>
         <td><%= link_to space.reservable_quantity, [space.location, space] %></td>
+        <td><%= link_to space.max_days_in_advance_reservable, [space.location, space] %></td>
         <td><%= link_to space.description, [space.location, space] %></td>
         
       </tr>
