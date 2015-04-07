@@ -185,10 +185,10 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <% ((@reservation.space.location.earliest_opening / 100.00).floor .. (@reservation.space.location.latest_closing / 100.00).floor).each do |hour| %>
-          <li><a><%= @reservation.starts_at.change(hour: hour, min: 0).strftime("%l:%M%P") %></a></li>
-          <li><a><%= @reservation.starts_at.change(hour: hour, min: 15).strftime("%l:%M%P") %></a></li>
-          <li><a><%= @reservation.starts_at.change(hour: hour, min: 30).strftime("%l:%M%P") %></a></li>
-          <li><a><%= @reservation.starts_at.change(hour: hour, min: 45).strftime("%l:%M%P") %></a></li>
+          <li<%= @reservation.starts_at.hour == hour && @reservation.starts_at.min == 0 ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= @reservation.starts_at.change(hour: hour, min: 0).strftime("%l:%M%P") %></a></li>
+          <li<%= @reservation.starts_at.hour == hour && @reservation.starts_at.min == 15 ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= @reservation.starts_at.change(hour: hour, min: 15).strftime("%l:%M%P") %></a></li>
+          <li<%= @reservation.starts_at.hour == hour && @reservation.starts_at.min == 30 ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= @reservation.starts_at.change(hour: hour, min: 30).strftime("%l:%M%P") %></a></li>
+          <li<%= @reservation.starts_at.hour == hour && @reservation.starts_at.min == 45 ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= @reservation.starts_at.change(hour: hour, min: 45).strftime("%l:%M%P") %></a></li>
           <% end %>
         </ul>
       </div>

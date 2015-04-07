@@ -25,6 +25,14 @@ class Reservation < ActiveRecord::Base
     true # Keep filter chain going even if it couldn't save details
   end
   
+  def starts_at_in_zone
+    starts_at.in_time_zone(self.location.timezone)
+  end
+  
+  def ends_at_in_zone
+    ends_at.in_time_zone(self.location.timezone)
+  end
+  
   def duration_in_hours
     ((ends_at - starts_at) / 1.hour).round
   end
