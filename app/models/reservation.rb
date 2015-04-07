@@ -24,4 +24,8 @@ class Reservation < ActiveRecord::Base
     self.user.update_attributes(details)
     true # Keep filter chain going even if it couldn't save details
   end
+  
+  def duration_in_hours
+    ((ends_at - starts_at) / 1.hour).round
+  end
 end

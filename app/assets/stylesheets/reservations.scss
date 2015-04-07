@@ -33,7 +33,6 @@ table.week-scheduler td {
   height: 1.2em;
 }
 table.week-scheduler tr td:last-child {
-
   border-right: 1px solid #e6e5e6;
 }
 table.week-scheduler tbody th {
@@ -51,3 +50,6 @@ table.week-scheduler tbody th span {
 tr.half-hour td {
   border-bottom: 1px solid #e6e5e6;
 }
+
+#day-and-time-selector li span.glyphicon { visibility:hidden; }
+#day-and-time-selector li.doms-selected span.glyphicon { visibility:visible; }

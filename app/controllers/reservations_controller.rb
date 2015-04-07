@@ -16,7 +16,8 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/new
   def new
-    @reservation = @space.reservations.build(user: authed_user)
+    starts = @location.opening_time_on(Time.now.advance(days: 1)) # first thing tomorrow
+    @reservation = @space.reservations.build(user: authed_user, starts_at: starts, ends_at: starts.advance(hours: 1))
     if authed_user
       @reservation.name = authed_user.full_name
       @reservation.email = authed_user.email

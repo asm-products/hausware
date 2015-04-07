@@ -93,7 +93,7 @@ PALO_ALTO_SPACES = [
   },
   {
     location:                        palo_alto_location,
-    name:                            '8-Person Group Tabletop Seating',
+    name:                            '8-Person Group Table',
     permalink:                       'group-tabletop',
     standard_hourly_price_in_cents:  2000,
     picurl:                          nil,
@@ -103,7 +103,7 @@ PALO_ALTO_SPACES = [
   },
   {
     location:                        palo_alto_location,
-    name:                            '4-Person Lounge Seating with TV',
+    name:                            '4-Person Lounge with TV',
     permalink:                       'lounge-seating',
     standard_hourly_price_in_cents:  3500,
     picurl:                          nil,

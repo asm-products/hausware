@@ -48,4 +48,18 @@ class Location < ActiveRecord::Base
     [self.sunday_closing, self.monday_closing, self.tuesday_closing, self.wednesday_closing, self.thursday_closing, self.friday_closing, self.saturday_closing].max
   end
   
+  def max_hours_open
+    max_difference = [
+      self.sunday_closing - self.sunday_opening, 
+      self.monday_closing - self.monday_opening,
+      self.tuesday_closing - self.tuesday_opening,
+      self.wednesday_closing - self.wednesday_opening,
+      self.thursday_closing - self.thursday_opening,
+      self.friday_closing - self.friday_opening,
+      self.saturday_closing - self.saturday_opening
+    ].max
+    
+    (max_difference / 100.00).floor
+  end
+  
 end
