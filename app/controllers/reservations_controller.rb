@@ -17,7 +17,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     starts = @location.opening_time_on(Time.now.advance(days: 1)).in_time_zone(@location.timezone) # first thing tomorrow
-    @reservation = @space.reservations.build(user: authed_user, starts_at: starts, ends_at: starts.advance(hours: 1))
+    @reservation = @space.reservations.build(user: authed_user, starts_at: starts, ends_at: starts.advance(hours: 1), timezone: @location.timezone)
     if authed_user
       @reservation.name = authed_user.full_name
       @reservation.email = authed_user.email
@@ -92,6 +92,6 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:space_id, :name, :email, :phone, :zipcode, :starts_at, :ends_at, :chargeid, :save_details_for_next_time)
+      params.require(:reservation).permit(:space_id, :name, :email, :phone, :zipcode, :starts_at, :ends_at, :chargeid, :save_details_for_next_time, :timezone)
     end
 end

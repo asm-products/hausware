@@ -53,3 +53,7 @@ tr.half-hour td {
 
 #day-and-time-selector li span.glyphicon { visibility:hidden; }
 #day-and-time-selector li.doms-selected span.glyphicon { visibility:visible; }
+
+td.today-cell {
+  background-color: #effaff;
+}
