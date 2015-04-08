@@ -73,23 +73,23 @@ PALO_ALTO_SPACES = [
   },
   {
     location:                        palo_alto_location,
-    name:                            '8-Person Conference – West',
+    name:                            'Conference – West',
     permalink:                       'conference-room-west',
     standard_hourly_price_in_cents:  7500,
     picurl:                          nil,
     reservable_quantity:             1,
     max_days_in_advance_reservable:  2,
-    description:                     'A private meeting room with 65" LED Screen and A/V hook-ups. Seats up to 10 very snuggly.'
+    description:                     'An 8-person private meeting room with 65" LED Screen and A/V hook-ups. Seats up to 10 very snuggly.'
   },
   {
     location:                        palo_alto_location,
-    name:                            '8-Person Conference – East',
+    name:                            'Conference – East',
     permalink:                       'conference-room-east',
     standard_hourly_price_in_cents:  7500,
     picurl:                          nil,
     reservable_quantity:             1,
     max_days_in_advance_reservable:  2,
-    description:                     'A private meeting room with 65" LED Screen and A/V hook-ups. Seats up to 10 very snuggly.'
+    description:                     'An 8-person private meeting room with 65" LED Screen and A/V hook-ups. Seats up to 10 very snuggly.'
   },
   {
     location:                        palo_alto_location,
