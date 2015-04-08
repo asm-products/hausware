@@ -254,25 +254,25 @@ var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
           end_hour = ((@reservation.space.location.latest_closing / 100) + 0.5).floor
   
           (start_hour..end_hour).each do |hour| %>
-            <tr class="on-the-hour">
+            <tr class="on-the-hour" data-timeline="<%= hour %>00">
               <th scope="row"><span><%= hour < 12 ? "#{hour} AM" : (hour == 12 ? "Noon" : "#{hour-12} PM") %></span></th>
-              <td<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 4).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="0-<%= hour %>00"<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="1-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="2-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="3-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="4-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 4).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="5-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="6-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
             </tr>
-            <tr class="half-hour">
+            <tr class="half-hour" data-timeline="<%= hour %>30">
               <th scope="row"></th>
-              <td<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 4).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
-              <td<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="0-<%= hour %>00"<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="1-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="2-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="3-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="4-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 4).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="5-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td data-datetimeline="6-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
             </tr>
             <% end %>
           </tbody>

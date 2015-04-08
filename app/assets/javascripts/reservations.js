@@ -17,7 +17,12 @@ var NewReservation = {
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   },
   redrawIndicator: function() {
+    var startsAt = NewReservation.dateTimeSelectValue('starts_at_in_zone');
+    var startMinutesRounded = startsAt.getMinutes() < 16 ? "00" : "30";
+    var timelineValue = startsAt.getDay().toString()+"-"+startsAt.getHours().toString()+startMinutesRounded;
+    var startCell = $("td[data-datetimeline='"+timelineValue+"']");
     $('#reservation-indicator').css({visibility: 'visible', right: (13.5*2)+'%', bottom: '10em'});
+    return startCell;
   },
   // Usage example: NewReservation.dateTimeSelectValue('starts_at_in_zone')
   dateTimeSelectValue: function(railsAttributeName) {
