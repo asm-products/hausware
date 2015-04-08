@@ -182,9 +182,9 @@
       
       <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <%= @reservation.starts_at_in_zone.strftime("%l:%M%P") %>  <span class="caret"></span>
+          <span id="time-of-day-label"><%= @reservation.starts_at_in_zone.strftime("%l:%M%P") %></span>  <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" role="menu">
+        <ul id="time-of-day-selector" class="dropdown-menu" role="menu">
           <% ((@reservation.space.location.earliest_opening / 100.00).floor .. (@reservation.space.location.latest_closing / 100.00).floor).each do |hour| %>
           <li<%= @reservation.starts_at_in_zone.hour == hour && @reservation.starts_at_in_zone.min == 0 ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= @reservation.starts_at_in_zone.change(hour: hour, min: 0).strftime("%l:%M%P") %></a></li>
           <li<%= @reservation.starts_at_in_zone.hour == hour && @reservation.starts_at_in_zone.min == 15 ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= @reservation.starts_at_in_zone.change(hour: hour, min: 15).strftime("%l:%M%P") %></a></li>
@@ -198,9 +198,9 @@
 
       <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          1 hour <span class="caret"></span>
+          <span id="duration-in-hours-label">1 hour</span> <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" role="menu">
+        <ul id="duration-in-hours-selector" class="dropdown-menu" role="menu">
           <li<%= @reservation.duration_in_hours == 1 ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 1 hour</a></li>
           <% (2..@reservation.space.location.max_hours_open).each do |hours| %>
             <li<%= @reservation.duration_in_hours == hours ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= hours %> hours</a></li>
@@ -213,8 +213,7 @@
 </div>
 
 
-  <div style="">
-   
+  <div style="display:none;">
     <%= f.hidden_field :timezone %>
     <%= f.datetime_select :starts_at_in_zone, { minute_step: 15 } %>
     <%= f.datetime_select :ends_at_in_zone, { minute_step: 15 } %>
