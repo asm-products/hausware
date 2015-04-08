@@ -1,5 +1,9 @@
 <%= form_for([@reservation.space.location, @reservation.space, @reservation]) do |f| %>
 
+<script type="text/javascript">
+var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
+</script>
+
 <div class="container">
 
   <% if @reservation.errors.any? %>
@@ -203,7 +207,7 @@
         <ul id="duration-in-hours-selector" class="dropdown-menu" role="menu">
           <li<%= @reservation.duration_in_hours == 1 ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 1 hour</a></li>
           <% (2..@reservation.space.location.max_hours_open).each do |hours| %>
-            <li<%= @reservation.duration_in_hours == hours ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= hours %> hours</a></li>
+          <li<%= @reservation.duration_in_hours == hours ? ' class="doms-selected"'.html_safe : '' %>><a><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <%= hours %> hours</a></li>
           <% end %>
         </ul>
       </div>
@@ -213,11 +217,11 @@
 </div>
 
 
-  <div style="display:none;">
-    <%= f.hidden_field :timezone %>
-    <%= f.datetime_select :starts_at_in_zone, { minute_step: 15 } %>
-    <%= f.datetime_select :ends_at_in_zone, { minute_step: 15 } %>
-  </div>
+<div style="display:none;">
+  <%= f.hidden_field :timezone %>
+  <%= f.datetime_select :starts_at_in_zone, { minute_step: 15 } %>
+  <%= f.datetime_select :ends_at_in_zone, { minute_step: 15 } %>
+</div>
 
 
 <div class="page-wide-padding">
@@ -229,48 +233,51 @@
       &nbsp; 
       <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
     </h3>
-    <table class="week-scheduler">
-      <thead>
-        <tr class="on-the-hour">
-          <th></th>
-          <th>Sun <strong><%= sunday_start.day %></strong></th>
-          <th>Mon <strong><%= sunday_start.advance(days: 1).in_time_zone(@reservation.timezone).day %></strong></th>
-          <th>Tue <strong><%= sunday_start.advance(days: 2).in_time_zone(@reservation.timezone).day %></strong></th>
-          <th>Wed <strong><%= sunday_start.advance(days: 3).in_time_zone(@reservation.timezone).day %></strong></th>
-          <th>Thu <strong><%= sunday_start.advance(days: 4).in_time_zone(@reservation.timezone).day %></strong></th>
-          <th>Fri <strong><%= sunday_start.advance(days: 5).in_time_zone(@reservation.timezone).day %></strong></th>
-          <th>Sat <strong><%= sunday_start.advance(days: 6).in_time_zone(@reservation.timezone).day %></strong></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% 
-        start_hour = (@reservation.space.location.earliest_opening / 100).floor
-        end_hour = ((@reservation.space.location.latest_closing / 100) + 0.5).floor
-  
-        (start_hour..end_hour).each do |hour| %>
+    <div class="week-scheduler-container">
+      <div id="reservation-indicator"></div>
+      <table class="week-scheduler">
+        <thead>
           <tr class="on-the-hour">
-            <th scope="row"><span><%= hour < 12 ? "#{hour} AM" : (hour == 12 ? "Noon" : "#{hour-12} PM") %></span></th>
-            <td<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 4).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
+            <th></th>
+            <th>Sun <strong><%= sunday_start.day %></strong></th>
+            <th>Mon <strong><%= sunday_start.advance(days: 1).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Tue <strong><%= sunday_start.advance(days: 2).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Wed <strong><%= sunday_start.advance(days: 3).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Thu <strong><%= sunday_start.advance(days: 4).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Fri <strong><%= sunday_start.advance(days: 5).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Sat <strong><%= sunday_start.advance(days: 6).in_time_zone(@reservation.timezone).day %></strong></th>
           </tr>
-          <tr class="half-hour">
-            <th scope="row"></th>
-            <td<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 4).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
-            <td<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+        </thead>
+        <tbody>
+          <% 
+          start_hour = (@reservation.space.location.earliest_opening / 100).floor
+          end_hour = ((@reservation.space.location.latest_closing / 100) + 0.5).floor
+  
+          (start_hour..end_hour).each do |hour| %>
+            <tr class="on-the-hour">
+              <th scope="row"><span><%= hour < 12 ? "#{hour} AM" : (hour == 12 ? "Noon" : "#{hour-12} PM") %></span></th>
+              <td<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 4).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
+            </tr>
+            <tr class="half-hour">
+              <th scope="row"></th>
+              <td<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 4).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
+              <td<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -315,7 +322,8 @@
 
   <div class="container">
     <h2>
-      5. Review: Cost &mdash; $3.00 
+      5. Review: Cost &mdash; $<span id="total-price">3.00</span> 
+      &nbsp;
       <%= f.submit 'Review & Pay...', class: "btn btn-lg btn-success" %>
     </h2>
   </div>

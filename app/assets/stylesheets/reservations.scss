@@ -14,7 +14,23 @@ body.controller-reservations h3 {
 body.controller-reservations .thumbnail a:hover {
   text-decoration:none;
 }
-
+.week-scheduler-container {
+  position:relative;
+}
+#reservation-indicator {
+  position:absolute;
+  width: 13.5%;
+  height:1.2em; 
+  background-color:green;
+  border-radius:5px;
+  opacity:0.5;
+  
+  visibility:hidden;
+//  right:0; bottom: 0; // (placed by javascript)
+}
+#reservation-indicator.error {
+  background-color:red;
+}
 table.week-scheduler {
   width:100%;
 }

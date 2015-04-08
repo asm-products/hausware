@@ -8,11 +8,16 @@ var NewReservation = {
     $('#day-of-month-selector a').click(function(ev) { NewReservation.dayChanged($(this)); });
     $('#time-of-day-selector a').click(function(ev) { NewReservation.timeChanged($(this)); });
     $('#duration-in-hours-selector a').click(function(ev) { NewReservation.durationChanged($(this)); });
+    
+    this.redrawIndicator();
   },
   _leadingPadding: function(n, width, z) {
     z = z || '0';
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  },
+  redrawIndicator: function() {
+    $('#reservation-indicator').css({visibility: 'visible', right: (13.5*2)+'%', bottom: '10em'});
   },
   // Usage example: NewReservation.dateTimeSelectValue('starts_at_in_zone')
   dateTimeSelectValue: function(railsAttributeName) {
@@ -46,6 +51,9 @@ var NewReservation = {
   },
   setRecalculatedEndsAtDate: function() {
     NewReservation.setDateTimeSelectValue('ends_at_in_zone', NewReservation.recalculatedEndsAtDate());
+  },
+  setRecalculatedPrice: function() {
+    $('#total-price').text(new Number(ReservationSpace.standard_hourly_price_in_cents * NewReservation.durationInHoursValue() / 100.00).toLocaleString());
   },
   monthChanged: function(atag) {
     var month = atag.text().trim();
@@ -100,6 +108,7 @@ var NewReservation = {
     $('#duration-in-hours-label').text(duration);
     
     NewReservation.setRecalculatedEndsAtDate();
+    NewReservation.setRecalculatedPrice();
   }
 };
 
