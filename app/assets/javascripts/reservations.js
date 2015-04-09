@@ -3,12 +3,22 @@
 
 
 var NewReservation = {
+  _originalIndicatorCss: null,
+  _bottomScheduleRowHourValue: null, // the hour value of the very last line of the calendar
   init: function() {
     $('#month-of-year-selector a').click(function(ev) { NewReservation.monthChanged($(this)); });
     $('#day-of-month-selector a').click(function(ev) { NewReservation.dayChanged($(this)); });
     $('#time-of-day-selector a').click(function(ev) { NewReservation.timeChanged($(this)); });
     $('#duration-in-hours-selector a').click(function(ev) { NewReservation.durationChanged($(this)); });
     
+    var indicator = $('#reservation-indicator');
+    this._originalIndicatorCss = { 
+      width:      parseFloat(indicator.attr('data-default-width')), 
+      widthUnit:  indicator.attr('data-default-width-unit'),
+      height:     parseFloat(indicator.attr('data-default-height')),
+      heightUnit: indicator.attr('data-default-height-unit')
+    };
+    this._bottomScheduleRowHourValue = Math.ceil(parseInt($('table.week-scheduler tbody tr:last th').attr('data-datetimerow')) / 100.00);
     this.redrawIndicator();
   },
   _leadingPadding: function(n, width, z) {
@@ -21,8 +31,18 @@ var NewReservation = {
     var startMinutesRounded = startsAt.getMinutes() < 16 ? "00" : "30";
     var timelineValue = startsAt.getDay().toString()+"-"+startsAt.getHours().toString()+startMinutesRounded;
     var startCell = $("td[data-datetimeline='"+timelineValue+"']");
-    $('#reservation-indicator').css({visibility: 'visible', right: (13.5*2)+'%', bottom: '10em'});
-    return startCell;
+    
+    var heightValue = NewReservation._originalIndicatorCss.height * NewReservation.durationInHoursValue() * 2; // each cell is half hour
+    var dayValue = 7 - startsAt.getDay().toString(); // 7 is how many days in a week there are
+    var leftValue = dayValue * NewReservation._originalIndicatorCss.width;
+    
+    $('#reservation-indicator').css({
+      visibility: 'visible',
+      height: heightValue + NewReservation._originalIndicatorCss.heightUnit,
+      right: leftValue + NewReservation._originalIndicatorCss.widthUnit,
+      bottom: '10em'
+    });
+    return $('#reservation-indicator');
   },
   // Usage example: NewReservation.dateTimeSelectValue('starts_at_in_zone')
   dateTimeSelectValue: function(railsAttributeName) {
@@ -45,7 +65,7 @@ var NewReservation = {
   recalculatedEndsAtDate: function() {
     var startsAt = NewReservation.dateTimeSelectValue('starts_at_in_zone');
     var duration = NewReservation.durationInHoursValue();
-    return new Date(startsAt.getTime() + (duration*60*60*1000)); 
+    return new Date(startsAt.getTime() + (duration*60*60*1000));
   },
   setDateTimeSelectValue: function(railsAttributeName, dateValue) {
     $('#reservation_'+railsAttributeName+'_1i').val(dateValue.getFullYear().toString());
@@ -65,6 +85,7 @@ var NewReservation = {
     
     $('#reservation_starts_at_in_zone_2i option').filter(function() { return $(this).text().trim() == month; }).attr('selected', true);
     NewReservation.setRecalculatedEndsAtDate();
+    NewReservation.redrawIndicator();
     
     $('#month-of-year-selector li').removeClass('doms-selected');
     atag.closest('li').addClass('doms-selected');
@@ -75,6 +96,7 @@ var NewReservation = {
     
     $('#reservation_starts_at_in_zone_3i option').filter(function() { return $(this).text().trim() == day; }).attr('selected', true);
     NewReservation.setRecalculatedEndsAtDate();
+    NewReservation.redrawIndicator();
     
     $('#day-of-month-selector li').removeClass('doms-selected');
     atag.closest('li').addClass('doms-selected');
@@ -100,6 +122,7 @@ var NewReservation = {
     
     var startsAt = NewReservation.dateTimeSelectValue('starts_at_in_zone');
     NewReservation.setRecalculatedEndsAtDate();
+    NewReservation.redrawIndicator();
     
     $('#time-of-day-selector li').removeClass('doms-selected');
     atag.closest('li').addClass('doms-selected');
@@ -114,6 +137,7 @@ var NewReservation = {
     
     NewReservation.setRecalculatedEndsAtDate();
     NewReservation.setRecalculatedPrice();
+    NewReservation.redrawIndicator();
   }
 };
 

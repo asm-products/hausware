@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#reservation-indicator { 
+  position:absolute;
+//  width: 13.5%; // set in-line so we can access it from javascript more easily
+//  height:1.2em; // set in-line so we can access it from javascript more easily
+  background-color:green;
+  border-radius:5px;
+  opacity:0.5;
+  
+  visibility:hidden;
+//  right:0; bottom: 0; // (placed by javascript)
+}
+
 body.controller-reservations .thumbnail a[data-toggle=modal] {
   color:#000;
   cursor: zoom-in;
@@ -17,17 +29,7 @@ body.controller-reservations .thumbnail a:hover {
 .week-scheduler-container {
   position:relative;
 }
-#reservation-indicator {
-  position:absolute;
-  width: 13.5%;
-  height:1.2em; 
-  background-color:green;
-  border-radius:5px;
-  opacity:0.5;
-  
-  visibility:hidden;
-//  right:0; bottom: 0; // (placed by javascript)
-}
+
 #reservation-indicator.error {
   background-color:red;
 }

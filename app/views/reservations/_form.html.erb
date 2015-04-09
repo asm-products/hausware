@@ -2,6 +2,7 @@
 
 <script type="text/javascript">
 var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
+var ReservationLocation = <%= @reservation.space.location.to_json.html_safe %>;
 </script>
 
 <div class="container">
@@ -234,7 +235,7 @@ var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
       <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
     </h3>
     <div class="week-scheduler-container">
-      <div id="reservation-indicator"></div>
+      <div id="reservation-indicator" style="width:13.5%" data-default-width="13.5" data-default-width-unit="%" data-default-height="1.2" data-default-height-unit="em"></div>
       <table class="week-scheduler">
         <thead>
           <tr class="on-the-hour">
@@ -254,8 +255,8 @@ var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
           end_hour = ((@reservation.space.location.latest_closing / 100) + 0.5).floor
   
           (start_hour..end_hour).each do |hour| %>
-            <tr class="on-the-hour" data-timeline="<%= hour %>00">
-              <th scope="row"><span><%= hour < 12 ? "#{hour} AM" : (hour == 12 ? "Noon" : "#{hour-12} PM") %></span></th>
+            <tr class="on-the-hour" data-datetimerow="<%= hour %>00">
+              <th data-datetimerow="<%= hour %>00" scope="row"><span><%= hour < 12 ? "#{hour} AM" : (hour == 12 ? "Noon" : "#{hour-12} PM") %></span></th>
               <td data-datetimeline="0-<%= hour %>00"<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
               <td data-datetimeline="1-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
               <td data-datetimeline="2-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
@@ -264,9 +265,9 @@ var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
               <td data-datetimeline="5-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 5).day ? ' class="today-cell"'.html_safe : '' %>></td>
               <td data-datetimeline="6-<%= hour %>00"<%= now_in_zone.day == sunday_start.advance(days: 6).day ? ' class="today-cell"'.html_safe : '' %>></td>
             </tr>
-            <tr class="half-hour" data-timeline="<%= hour %>30">
-              <th scope="row"></th>
-              <td data-datetimeline="0-<%= hour %>00"<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
+            <tr class="half-hour" data-datetimerow="<%= hour %>30">
+              <th data-datetimerow="<%= hour %>30" scope="row"></th>
+              <td data-datetimeline="0-<%= hour %>30"<%= now_in_zone.day == sunday_start.day                                                      ? ' class="today-cell"'.html_safe : '' %>></td>
               <td data-datetimeline="1-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 1).day ? ' class="today-cell"'.html_safe : '' %>></td>
               <td data-datetimeline="2-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 2).day ? ' class="today-cell"'.html_safe : '' %>></td>
               <td data-datetimeline="3-<%= hour %>30"<%= now_in_zone.day == sunday_start.advance(days: 3).day ? ' class="today-cell"'.html_safe : '' %>></td>
