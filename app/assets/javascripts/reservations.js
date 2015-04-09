@@ -36,11 +36,15 @@ var NewReservation = {
     var dayValue = 7 - startsAt.getDay().toString(); // 7 is how many days in a week there are
     var leftValue = dayValue * NewReservation._originalIndicatorCss.width;
     
+    var startHour = startsAt.getHours();
+    var startRow = (NewReservation._bottomScheduleRowHourValue - startHour) * 2 + ( startMinutesRounded == "30" ? 1 : 0 );  // 2 because each cell is half hour
+    var bottomValue = startRow + heightValue;
+    
     $('#reservation-indicator').css({
       visibility: 'visible',
       height: heightValue + NewReservation._originalIndicatorCss.heightUnit,
       right: leftValue + NewReservation._originalIndicatorCss.widthUnit,
-      bottom: '10em'
+      bottom: bottomValue + NewReservation._originalIndicatorCss.heightUnit
     });
     return $('#reservation-indicator');
   },
