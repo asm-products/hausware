@@ -37,8 +37,8 @@ var NewReservation = {
     var leftValue = (dayValue - 1) * NewReservation._originalIndicatorCss.width; // offset by one day for right side
     
     var startHour = startsAt.getHours();
-    var startRow = (NewReservation._bottomScheduleRowHourValue - startHour) * 2 + ( startMinutesRounded == "30" ? 1 : 0 );  // 2 because each cell is half hour
-    var bottomValue = startRow - heightValue;
+    var startRow = (NewReservation._bottomScheduleRowHourValue - startHour) * 2 - ( startMinutesRounded == "30" ? 1 : 0 );  // 2 because each cell is half hour
+    var bottomValue = startRow * NewReservation._originalIndicatorCss.height - heightValue;
     
     $('#reservation-indicator').css({
       visibility: 'visible',
