@@ -46,7 +46,13 @@ var NewReservation = {
       right: leftValue + NewReservation._originalIndicatorCss.widthUnit,
       bottom: bottomValue + NewReservation._originalIndicatorCss.heightUnit
     });
-    return $('#reservation-indicator');
+  },
+  validateNewReservation: function() {
+    $('#reservation-indicator').addClass('validating');
+    $.post(ReservationValidationUrl, $('#new_reservation').serialize(), function(data) {
+      console.log("Validation result:", data);
+      // $('#reservation-indicator').removeClass('validating');
+    }, 'json');
   },
   // Usage example: NewReservation.dateTimeSelectValue('starts_at_in_zone')
   dateTimeSelectValue: function(railsAttributeName) {

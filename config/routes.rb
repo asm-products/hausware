@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   
   resources :locations do
     resources :spaces do
-      resources :reservations
+      resources :reservations do
+        collection do
+          post :validate
+        end
+      end
       resources :slides
     end
   end

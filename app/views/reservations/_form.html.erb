@@ -3,6 +3,7 @@
 <script type="text/javascript">
 var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
 var ReservationLocation = <%= @reservation.space.location.to_json.html_safe %>;
+var ReservationValidationUrl = <%= validate_location_space_reservations_path(@reservation.space.location, @reservation.space, format: 'json').to_json.html_safe %>;
 </script>
 
 <div class="container">

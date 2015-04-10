@@ -31,6 +31,20 @@ class ReservationsController < ApplicationController
   def edit
   end
 
+
+  # POST /reservations/validate.json
+  def validate
+    @reservation = @space.reservations.build(reservation_params.merge(user: authed_user))
+    
+    respond_to do |format|
+      if @reservation.valid?
+        format.json { render json: { valid: true, errors: nil, reservation: @reservation }, status: :ok }
+      else
+        format.json { render json: { valid: false, errors: @reservation.errors, reservation: @reservation }, status: :ok }
+      end
+    end
+  end
+  
   # POST /reservations
   # POST /reservations.json
   def create
