@@ -20,6 +20,7 @@ var NewReservation = {
     };
     this._bottomScheduleRowHourValue = Math.ceil(parseInt($('table.week-scheduler tbody tr:last th').attr('data-datetimerow')) / 100.00);
     this.redrawIndicator();
+    this.validateNewReservation();
   },
   _leadingPadding: function(n, width, z) {
     z = z || '0';
@@ -96,6 +97,7 @@ var NewReservation = {
     $('#reservation_starts_at_in_zone_2i option').filter(function() { return $(this).text().trim() == month; }).attr('selected', true);
     NewReservation.setRecalculatedEndsAtDate();
     NewReservation.redrawIndicator();
+    NewReservation.validateNewReservation();
     
     $('#month-of-year-selector li').removeClass('doms-selected');
     atag.closest('li').addClass('doms-selected');
@@ -107,6 +109,7 @@ var NewReservation = {
     $('#reservation_starts_at_in_zone_3i option').filter(function() { return $(this).text().trim() == day; }).attr('selected', true);
     NewReservation.setRecalculatedEndsAtDate();
     NewReservation.redrawIndicator();
+    NewReservation.validateNewReservation();
     
     $('#day-of-month-selector li').removeClass('doms-selected');
     atag.closest('li').addClass('doms-selected');
@@ -133,6 +136,7 @@ var NewReservation = {
     var startsAt = NewReservation.dateTimeSelectValue('starts_at_in_zone');
     NewReservation.setRecalculatedEndsAtDate();
     NewReservation.redrawIndicator();
+    NewReservation.validateNewReservation();
     
     $('#time-of-day-selector li').removeClass('doms-selected');
     atag.closest('li').addClass('doms-selected');
@@ -148,6 +152,7 @@ var NewReservation = {
     NewReservation.setRecalculatedEndsAtDate();
     NewReservation.setRecalculatedPrice();
     NewReservation.redrawIndicator();
+    NewReservation.validateNewReservation();
   }
 };
 
