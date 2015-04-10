@@ -29,16 +29,16 @@ var NewReservation = {
   redrawIndicator: function() {
     var startsAt = NewReservation.dateTimeSelectValue('starts_at_in_zone');
     var startMinutesRounded = startsAt.getMinutes() < 16 ? "00" : "30";
-    var timelineValue = startsAt.getDay().toString()+"-"+startsAt.getHours().toString()+startMinutesRounded;
-    var startCell = $("td[data-datetimeline='"+timelineValue+"']");
+    // var timelineValue = startsAt.getDay().toString()+"-"+startsAt.getHours().toString()+startMinutesRounded;
+    // var startCell = $("td[data-datetimeline='"+timelineValue+"']");
     
     var heightValue = NewReservation._originalIndicatorCss.height * NewReservation.durationInHoursValue() * 2; // each cell is half hour
     var dayValue = 7 - startsAt.getDay().toString(); // 7 is how many days in a week there are
-    var leftValue = dayValue * NewReservation._originalIndicatorCss.width;
+    var leftValue = (dayValue - 1) * NewReservation._originalIndicatorCss.width; // offset by one day for right side
     
     var startHour = startsAt.getHours();
     var startRow = (NewReservation._bottomScheduleRowHourValue - startHour) * 2 + ( startMinutesRounded == "30" ? 1 : 0 );  // 2 because each cell is half hour
-    var bottomValue = startRow + heightValue;
+    var bottomValue = startRow - heightValue;
     
     $('#reservation-indicator').css({
       visibility: 'visible',
