@@ -35,6 +35,8 @@ body.controller-reservations .thumbnail a:hover {
 }
 table.week-scheduler {
   width:100%;
+  box-sizing: border-box;
+   -webkit-box-sizing: border-box;
 }
 table.week-scheduler thead th {
   border-bottom: 1px solid #e6e5e6;
@@ -49,6 +51,8 @@ table.week-scheduler td {
   text-align:center;
   border-left: 1px solid #e6e5e6;
   height: 1.2em;
+  box-sizing: border-box;
+   -webkit-box-sizing: border-box;
 }
 table.week-scheduler tr td:last-child {
   border-right: 1px solid #e6e5e6;
