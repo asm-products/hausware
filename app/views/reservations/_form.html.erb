@@ -219,7 +219,7 @@ var ReservationValidationUrl = <%= validate_location_space_reservations_path(@re
 </div>
 
 
-<div style="">
+<div style="display:none;">
   <%= f.hidden_field :timezone %>
   <% f.object.hack_for_datetimeselect %>
   <%= f.datetime_select :starts_at, { minute_step: 15 } %>
@@ -233,7 +233,7 @@ var ReservationValidationUrl = <%= validate_location_space_reservations_path(@re
     <h3>
       <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
       &nbsp; 
-      <strong><%= sunday_start.strftime("%B") %></strong> <%= sunday_start.year %>
+      <strong id="h3-month-label"><%= sunday_start.strftime("%B") %></strong> <span id="h3-year-label"><%= sunday_start.year %></span>
       &nbsp; 
       <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
     </h3>
@@ -243,13 +243,13 @@ var ReservationValidationUrl = <%= validate_location_space_reservations_path(@re
         <thead>
           <tr class="on-the-hour">
             <th></th>
-            <th>Sun <strong><%= sunday_start.day %></strong></th>
-            <th>Mon <strong><%= sunday_start.advance(days: 1).in_time_zone(@reservation.timezone).day %></strong></th>
-            <th>Tue <strong><%= sunday_start.advance(days: 2).in_time_zone(@reservation.timezone).day %></strong></th>
-            <th>Wed <strong><%= sunday_start.advance(days: 3).in_time_zone(@reservation.timezone).day %></strong></th>
-            <th>Thu <strong><%= sunday_start.advance(days: 4).in_time_zone(@reservation.timezone).day %></strong></th>
-            <th>Fri <strong><%= sunday_start.advance(days: 5).in_time_zone(@reservation.timezone).day %></strong></th>
-            <th>Sat <strong><%= sunday_start.advance(days: 6).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Sun <strong id="dow-label-0"><%= sunday_start.day %></strong></th>
+            <th>Mon <strong id="dow-label-1"><%= sunday_start.advance(days: 1).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Tue <strong id="dow-label-2"><%= sunday_start.advance(days: 2).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Wed <strong id="dow-label-3"><%= sunday_start.advance(days: 3).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Thu <strong id="dow-label-4"><%= sunday_start.advance(days: 4).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Fri <strong id="dow-label-5"><%= sunday_start.advance(days: 5).in_time_zone(@reservation.timezone).day %></strong></th>
+            <th>Sat <strong id="dow-label-6"><%= sunday_start.advance(days: 6).in_time_zone(@reservation.timezone).day %></strong></th>
           </tr>
         </thead>
         <tbody>

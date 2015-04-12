@@ -3,6 +3,7 @@
 
 
 var NewReservation = {
+  _monthLabels: ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"],
   _originalIndicatorCss: null,
   _bottomScheduleRowHourValue: null, // the hour value of the very last line of the calendar
   init: function() {
@@ -47,12 +48,30 @@ var NewReservation = {
       right: leftValue + NewReservation._originalIndicatorCss.widthUnit,
       bottom: bottomValue + NewReservation._originalIndicatorCss.heightUnit
     });
+    
+    // redraw day labels, starting with sunday
+    var sunday = new Date(startsAt.getTime());
+    sunday.setDate(sunday.getDate() - sunday.getDay());
+    
+    $('#h3-month-label').text(NewReservation._monthLabels[sunday.getMonth()]);
+    $('#h3-year-label').text(sunday.getFullYear());
+    
+    for (var i=0; i < 7; ++i) {
+      var d = new Date(sunday.getTime());
+      d.setDate(d.getDate() + i);
+      $('#dow-label-'+i).text(d.getDate());
+    }
   },
   validateNewReservation: function() {
-    $('#reservation-indicator').addClass('validating');
-    $.post(ReservationValidationUrl, $('#new_reservation').serialize(), function(data) {
-      console.log("Validation result:", data);
-      // $('#reservation-indicator').removeClass('validating');
+    $('#reservation-indicator').removeClass('invalid').addClass('validating');
+    $.post(ReservationValidationUrl, $('#new_reservation').serialize(), function(data) {      
+      // only show time errors
+      if (!data.valid && (data.errors.starts_at != null || data.errors.ends_at != null)) {
+        $('#reservation-indicator').removeClass('validating').addClass('invalid');
+      }
+      else {
+        $('#reservation-indicator').removeClass('validating');
+      }
     }, 'json');
   },
   // Usage example: NewReservation.dateTimeSelectValue('starts_at')
