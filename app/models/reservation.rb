@@ -87,18 +87,18 @@ class Reservation < ActiveRecord::Base
   def adjust_times_to_inside_timezone
     return if self.timezone.blank?
     
-    self.starts_at = ActiveSupport::TimeZone[self.timezone].parse "#{self.starts_at.to_s(:db)} UTC" unless self.starts_at.blank?
-    self.ends_at = ActiveSupport::TimeZone[self.timezone].parse "#{self.ends_at.to_s(:db)} UTC" unless self.ends_at.blank?
+    self.starts_at = ActiveSupport::TimeZone[self.timezone.blank? ? self.space.location.timezone : self.timezone].parse "#{self.starts_at.to_s(:db)}" unless self.starts_at.blank?
+    self.ends_at = ActiveSupport::TimeZone[self.timezone.blank? ? self.space.location.timezone : self.timezone].parse "#{self.ends_at.to_s(:db)}" unless self.ends_at.blank?
     
     true # keep filter chain going
   end
   
   def starts_at_in_zone
-    starts_at.in_time_zone(self.timezone)
+    starts_at.in_time_zone(self.timezone.blank? ? self.space.location.timezone : self.timezone)
   end
   
   def ends_at_in_zone
-    ends_at.in_time_zone(self.timezone)
+    ends_at.in_time_zone(self.timezone.blank? ? self.space.location.timezone : self.timezone)
   end
   
   def duration_in_hours
