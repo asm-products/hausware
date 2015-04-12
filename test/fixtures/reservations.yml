@@ -9,6 +9,8 @@ one:
   zipcode: MyString
   starts_at: 2015-04-04 10:10:01
   ends_at: 2015-04-04 10:10:01
+  price_in_cents: 1
+  confirmation: MyString
   chargeid: MyString
 
 two:
@@ -20,4 +22,6 @@ two:
   zipcode: MyString
   starts_at: 2015-04-04 10:10:01
   ends_at: 2015-04-04 10:10:01
+  confirmation: MyString
+  price_in_cents: 1
   chargeid: MyString

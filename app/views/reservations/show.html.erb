@@ -17,14 +17,19 @@ Reservation Details -
 
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Space</label>
-    <div class="col-sm-9"><%= @reservation.space %></div>
+    <div class="col-sm-9"><%= @reservation.space.name %></div>
   </div>
 
   <div class="row">
     <label class="col-sm-3 text-right text-muted">User</label>
-    <div class="col-sm-9"><%= @reservation.user %></div>
+    <div class="col-sm-9"><%= @reservation.user.full_name %></div>
   </div>
 
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Confirmation</label>
+    <div class="col-sm-9"><%= @reservation.confirmation %></div>
+  </div>
+  
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Name</label>
     <div class="col-sm-9"><%= @reservation.name %></div>
@@ -46,8 +51,8 @@ Reservation Details -
   </div>
 
   <div class="row">
-    <label class="col-sm-3 text-right text-muted">Starts at</label>
-    <div class="col-sm-9"><%= @reservation.starts_at %></div>
+    <label class="col-sm-3 text-right text-muted">Price</label>
+    <div class="col-sm-9"><%= number_to_currency(@reservation.price_in_cents / 100.00) %></div>
   </div>
 
   <div class="row">

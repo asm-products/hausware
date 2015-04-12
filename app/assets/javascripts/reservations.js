@@ -6,6 +6,15 @@ var NewReservation = {
   _monthLabels: ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"],
   _originalIndicatorCss: null,
   _bottomScheduleRowHourValue: null, // the hour value of the very last line of the calendar
+  _stripeCompleted: false,
+  lastReservationServerObject: null,
+  
+  _stripeHandler: StripeCheckout.configure({
+    key: (typeof(StripeKey) != "undefined") ? StripeKey : null,
+    image: 'https://s3.amazonaws.com/hausware-cdn/images/hanahaus-613w.png',
+    token: function(token) { NewReservation.stripeTokenCreated(token); }
+  }),
+  
   init: function() {
     $('#month-of-year-selector a').click(function(ev) { NewReservation.monthChanged($(this)); });
     $('#day-of-month-selector a').click(function(ev) { NewReservation.dayChanged($(this)); });
@@ -22,11 +31,40 @@ var NewReservation = {
     this._bottomScheduleRowHourValue = Math.ceil(parseInt($('table.week-scheduler tbody tr:last th').attr('data-datetimerow')) / 100.00);
     this.redrawIndicator();
     this.validateNewReservation();
+    
+    // Deal with payment
+    $('form#new_reservation').submit(function(ev) { 
+      if (!NewReservation._stripeCompleted) {
+        ev.preventDefault();
+        NewReservation.reservationFormSubmitted();
+      }
+      // else, just submit normally
+    });
+    
+    // Close Checkout on page navigation
+    $(window).on('popstate', function() { NewReservation._stripeHandler.close(); });
   },
   _leadingPadding: function(n, width, z) {
     z = z || '0';
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+  },
+  reservationFormSubmitted: function() {
+    var durationInHours = NewReservation.durationInHoursValue();
+    var startsAt = NewReservation.dateTimeSelectValue('starts_at');
+    // Open Checkout with further options
+    NewReservation._stripeHandler.open({
+      name: ReservationSpace.name + ' at ' + ReservationLocation.name,
+      description: startsAt.toLocaleDateString() + ' @ ' + startsAt.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}) + ' - ' + durationInHours + ' hour' + (durationInHours == 1 ? '.' : 's.'),
+      amount: NewReservation.lastReservationServerObject.price_in_cents,
+      email: $('#reservation_email').val()
+    });
+  },
+  stripeTokenCreated: function(stripeToken) {
+    console.log(stripeToken);
+    $('#reservation_stripe_token').val(stripeToken.id);
+    NewReservation._stripeCompleted = true;
+    $('form#new_reservation').submit();
   },
   redrawIndicator: function() {
     var startsAt = NewReservation.dateTimeSelectValue('starts_at');
@@ -62,8 +100,9 @@ var NewReservation = {
   },
   validateNewReservation: function() {
     $('#reservation-indicator').removeClass('invalid').addClass('validating');
-    $.post(ReservationValidationUrl, $('#new_reservation').serialize(), function(data) {      
-      // only show time errors
+    $.post(ReservationValidationUrl, $('#new_reservation').serialize(), function(data) {
+      NewReservation.lastReservationServerObject = data.reservation; 
+      // only show time errors, not name/email errors
       if (!data.valid && (data.errors.starts_at != null || data.errors.ends_at != null)) {
         $('#reservation-indicator').removeClass('validating').addClass('invalid');
       }

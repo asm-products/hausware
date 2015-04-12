@@ -101,11 +101,12 @@ class ReservationsController < ApplicationController
   
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
-      @reservation = @space.reservations.find(params[:id])
+      @reservation = @space.reservations.find_by_confirmation(params[:id])
+      raise ActiveRecord::RecordNotFound unless @reservation
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:space_id, :name, :email, :phone, :zipcode, :starts_at, :ends_at, :chargeid, :save_details_for_next_time, :timezone)
+      params.require(:reservation).permit(:space_id, :name, :email, :phone, :zipcode, :starts_at, :ends_at, :stripe_token, :save_details_for_next_time, :timezone)
     end
 end

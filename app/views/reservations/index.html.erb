@@ -26,12 +26,14 @@ Reservations -
     
         <th><span>Space</span></th>
         <th><span>User</span></th>
+        <th><span>Confirmation Code</span></th>
         <th><span>Name</span></th>
         <th><span>Email</span></th>
         <th><span>Phone</span></th>
         <th><span>Zipcode</span></th>
         <th><span>Starts at</span></th>
         <th><span>Ends at</span></th>
+        <th><span>Price</span></th>
         <th><span>Chargeid</span></th>
       
       </tr>
@@ -40,21 +42,23 @@ Reservations -
     <tbody>
       <% unless @reservations.any? %>
       <tr id="empty-table">
-        <td class="bg-warning" colspan="2">No reservations created yet.</td>
+        <td class="bg-warning" colspan="10">No reservations created yet.</td>
       </tr>
       <% end %>
       <% @reservations.each do |reservation| %>
-      <tr class="linked-row" data-href="<%= reservation_path(reservation) %>">
+      <tr class="linked-row" data-href="<%= location_space_reservation_path(reservation.space.location, reservation.space, reservation) %>">
       
-        <td><%= link_to reservation.space.name, reservation %></td>
-        <td><%= link_to reservation.user, reservation %></td>
-        <td><%= link_to reservation.name, reservation %></td>
-        <td><%= link_to reservation.email, reservation %></td>
-        <td><%= link_to reservation.phone, reservation %></td>
-        <td><%= link_to reservation.zipcode, reservation %></td>
-        <td><%= link_to reservation.starts_at, reservation %></td>
-        <td><%= link_to reservation.ends_at, reservation %></td>
-        <td><%= link_to reservation.chargeid, reservation %></td>
+        <td><%= link_to reservation.space.name, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.user.full_name, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.confirmation, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.name, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.email, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.phone, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.zipcode, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.starts_at, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.ends_at, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to number_to_currency(reservation.price_in_cents / 100.00), [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.chargeid, [reservation.space.location, reservation.space, reservation] %></td>
         
         
         

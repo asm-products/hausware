@@ -75,14 +75,18 @@ ActiveRecord::Schema.define(version: 20150404171001) do
     t.string   "zipcode"
     t.datetime "starts_at"
     t.datetime "ends_at"
+    t.string   "confirmation"
+    t.integer  "price_in_cents"
     t.string   "chargeid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "reservations", ["chargeid"], name: "index_reservations_on_chargeid"
+  add_index "reservations", ["confirmation"], name: "index_reservations_on_confirmation"
   add_index "reservations", ["email"], name: "index_reservations_on_email"
   add_index "reservations", ["ends_at"], name: "index_reservations_on_ends_at"
+  add_index "reservations", ["price_in_cents"], name: "index_reservations_on_price_in_cents"
   add_index "reservations", ["space_id", "starts_at", "ends_at"], name: "index_reservations_on_space_id_and_starts_at_and_ends_at"
   add_index "reservations", ["space_id"], name: "index_reservations_on_space_id"
   add_index "reservations", ["starts_at"], name: "index_reservations_on_starts_at"

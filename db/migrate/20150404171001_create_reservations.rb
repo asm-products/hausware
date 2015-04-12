@@ -9,6 +9,8 @@ class CreateReservations < ActiveRecord::Migration
       t.string :zipcode
       t.datetime :starts_at, index: true
       t.datetime :ends_at, index: true
+      t.string :confirmation, index: true
+      t.integer :price_in_cents, index: true
       t.string :chargeid, index: true
 
       t.timestamps null: false

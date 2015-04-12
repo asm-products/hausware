@@ -4,6 +4,7 @@
 var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
 var ReservationLocation = <%= @reservation.space.location.to_json.html_safe %>;
 var ReservationValidationUrl = <%= validate_location_space_reservations_path(@reservation.space.location, @reservation.space, format: 'json').to_json.html_safe %>;
+var StripeKey = <%= Rails.configuration.stripe[:publishable_key].to_json.html_safe %>;
 </script>
 
 <div class="container">
@@ -220,6 +221,7 @@ var ReservationValidationUrl = <%= validate_location_space_reservations_path(@re
 
 
 <div style="display:none;">
+  <%= f.hidden_field :stripe_token %>
   <%= f.hidden_field :timezone %>
   <% f.object.hack_for_datetimeselect %>
   <%= f.datetime_select :starts_at, { minute_step: 15 } %>

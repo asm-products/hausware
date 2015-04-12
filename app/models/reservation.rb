@@ -2,17 +2,28 @@ class Reservation < ActiveRecord::Base
   belongs_to :space
   belongs_to :user
   
+  before_validation :autofill_confirmation_if_blank
   before_validation :adjust_times_to_inside_timezone
+  before_validation :recalculate_price_in_cents
   
+  validates :confirmation, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9\-_]+\Z/ }
   validates :space, presence: true
   validates :name, presence: true
   validates :email, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
   
-  attr_accessor :save_details_for_next_time, :timezone
+  attr_accessor :save_details_for_next_time, :timezone, :stripe_token
   
   after_save :save_details_for_next_time_to_user
+
+  def to_param
+    self.confirmation
+  end
+  
+  def recalculate_price_in_cents
+    self.price_in_cents = ((ends_at.minus_with_coercion(starts_at)/ 1.hour) * self.space.standard_hourly_price_in_cents).floor
+  end
   
   def hack_for_datetimeselect
     @hack_for_datetimeselect = {
@@ -61,5 +72,10 @@ class Reservation < ActiveRecord::Base
   
   def duration_in_hours
     ((ends_at - starts_at) / 1.hour).round
+  end
+  
+  def autofill_confirmation_if_blank
+    return true unless self.confirmation.blank? # Bypass if username is already set
+    self.confirmation = AutoPermalink::cleaned_deduped_permalink(self.class, /[:word:]-[:word:]-\d{1,3}+/.gen, 'confirmation')
   end
 end

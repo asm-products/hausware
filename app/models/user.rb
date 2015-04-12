@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   before_validation :autofill_username_if_blank
   
   validates :username, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9\-_]+\Z/ }
-
   # Only allow one account per Provider ID
   validates :angellistid,  uniqueness: { case_sensitive: false, allow_nil: true }
   validates :facebookid,   uniqueness: { case_sensitive: false, allow_nil: true }
