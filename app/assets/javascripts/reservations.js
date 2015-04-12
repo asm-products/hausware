@@ -31,8 +31,6 @@ var NewReservation = {
   redrawIndicator: function() {
     var startsAt = NewReservation.dateTimeSelectValue('starts_at');
     var startMinutesRounded = startsAt.getMinutes() < 16 ? "00" : "30";
-    // var timelineValue = startsAt.getDay().toString()+"-"+startsAt.getHours().toString()+startMinutesRounded;
-    // var startCell = $("td[data-datetimeline='"+timelineValue+"']");
     
     var heightValue = NewReservation._originalIndicatorCss.height * NewReservation.durationInHoursValue() * 2; // each cell is half hour
     var dayValue = 7 - startsAt.getDay().toString(); // 7 is how many days in a week there are

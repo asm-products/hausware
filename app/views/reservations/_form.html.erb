@@ -231,11 +231,12 @@ var ReservationValidationUrl = <%= validate_location_space_reservations_path(@re
 <div class="page-wide-padding">
   <div class="page-wide-padding-inside">
     <h3>
-      <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+      <!-- <a id="scheduler-previous" class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a> -->
       &nbsp; 
       <strong id="h3-month-label"><%= sunday_start.strftime("%B") %></strong> <span id="h3-year-label"><%= sunday_start.year %></span>
       &nbsp; 
-      <a class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+      <!-- <a id="scheduler-today" class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> Today</a> -->
+      <!-- <a id="scheduler-next" class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> -->
     </h3>
     <div class="week-scheduler-container">
       <div id="reservation-indicator" style="width:13.5%" data-default-width="13.5" data-default-width-unit="%" data-default-height="1.215" data-default-height-unit="em"></div>
