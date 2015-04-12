@@ -15,14 +15,45 @@ class Reservation < ActiveRecord::Base
   
   attr_accessor :save_details_for_next_time, :timezone, :stripe_token
   
+  before_create :charge_via_stripe
+  
   after_save :save_details_for_next_time_to_user
 
   def to_param
     self.confirmation
   end
   
+  def charge_via_stripe
+    begin
+      customer = Stripe::Customer.create(
+        email: self.email,
+        card: self.stripe_token,
+        metadata: (self.user.blank? ? {} : { user_id: self.user.id })
+      )
+
+      charge = Stripe::Charge.create(
+        customer: customer.id,
+        amount: self.recalculate_price_in_cents,
+        description: "#{self.duration_in_hours} hour#{self.duration_in_hours == 1 ? '' : 's'} starting at #{self.starts_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y')} - #{self.space.name}, #{self.space.location.name}",
+        currency: 'usd',
+        metadata: { confirmation: self.confirmation, location_permalink: self.space.location.permalink, space_permalink: self.space.permalink }
+      )
+
+      self.chargeid = "stripe-#{charge.id}"
+      
+      return true
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      return false
+    end
+  end
+  
+  def duration_in_hours
+    ends_at.minus_with_coercion(starts_at) / 1.hour
+  end
+  
   def recalculate_price_in_cents
-    self.price_in_cents = ((ends_at.minus_with_coercion(starts_at)/ 1.hour) * self.space.standard_hourly_price_in_cents).floor
+    self.price_in_cents = (self.duration_in_hours * self.space.standard_hourly_price_in_cents).floor
   end
   
   def hack_for_datetimeselect

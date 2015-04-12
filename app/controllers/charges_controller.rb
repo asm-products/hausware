@@ -8,7 +8,8 @@ class ChargesController < ApplicationController
 
     customer = Stripe::Customer.create(
       email: 'example@stripe.com',
-      card: params[:stripeToken]
+      card: params[:stripeToken],
+      metadata: {  }
     )
 
     charge = Stripe::Charge.create(
