@@ -219,10 +219,12 @@ var ReservationValidationUrl = <%= validate_location_space_reservations_path(@re
 </div>
 
 
-<div style="display:none;">
+<div style="">
   <%= f.hidden_field :timezone %>
-  <%= f.datetime_select :starts_at_in_zone, { minute_step: 15 } %>
-  <%= f.datetime_select :ends_at_in_zone, { minute_step: 15 } %>
+  <% f.object.hack_for_datetimeselect %>
+  <%= f.datetime_select :starts_at, { minute_step: 15 } %>
+  <%= f.datetime_select :ends_at, { minute_step: 15 } %>
+  <% f.object.undo_hack_for_datetimeselect %>
 </div>
 
 

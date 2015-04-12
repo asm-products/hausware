@@ -14,6 +14,20 @@ class Reservation < ActiveRecord::Base
   
   after_save :save_details_for_next_time_to_user
   
+  def hack_for_datetimeselect
+    @hack_for_datetimeselect = {
+      starts_at: self.starts_at,
+      ends_at: self.ends_at
+    }
+    
+    self.starts_at = ActiveSupport::TimeZone['UTC'].parse starts_at_in_zone.strftime('%F %T')
+    self.ends_at = ActiveSupport::TimeZone['UTC'].parse ends_at_in_zone.strftime('%F %T')
+  end
+  def undo_hack_for_datetimeselect
+    self.starts_at = @hack_for_datetimeselect[:starts_at]
+    self.ends_at = @hack_for_datetimeselect[:ends_at]
+  end
+  
   # Only overwrites phone & zipcode, and imports email if not previously saved to user
   def save_details_for_next_time_to_user
     return true unless self.user # require a user to save to next time

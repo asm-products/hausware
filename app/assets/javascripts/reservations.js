@@ -28,7 +28,7 @@ var NewReservation = {
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   },
   redrawIndicator: function() {
-    var startsAt = NewReservation.dateTimeSelectValue('starts_at_in_zone');
+    var startsAt = NewReservation.dateTimeSelectValue('starts_at');
     var startMinutesRounded = startsAt.getMinutes() < 16 ? "00" : "30";
     // var timelineValue = startsAt.getDay().toString()+"-"+startsAt.getHours().toString()+startMinutesRounded;
     // var startCell = $("td[data-datetimeline='"+timelineValue+"']");
@@ -55,7 +55,7 @@ var NewReservation = {
       // $('#reservation-indicator').removeClass('validating');
     }, 'json');
   },
-  // Usage example: NewReservation.dateTimeSelectValue('starts_at_in_zone')
+  // Usage example: NewReservation.dateTimeSelectValue('starts_at')
   dateTimeSelectValue: function(railsAttributeName) {
     var value = new Date(
       parseInt($('#reservation_'+railsAttributeName+'_1i').val()), // year
@@ -74,7 +74,7 @@ var NewReservation = {
   },
   // Assuming starts_at has been set correctly, recalculates correct end time based on duration
   recalculatedEndsAtDate: function() {
-    var startsAt = NewReservation.dateTimeSelectValue('starts_at_in_zone');
+    var startsAt = NewReservation.dateTimeSelectValue('starts_at');
     var duration = NewReservation.durationInHoursValue();
     return new Date(startsAt.getTime() + (duration*60*60*1000));
   },
@@ -86,7 +86,7 @@ var NewReservation = {
     $('#reservation_'+railsAttributeName+'_5i').val(NewReservation._leadingPadding(dateValue.getMinutes(), 2));
   },
   setRecalculatedEndsAtDate: function() {
-    NewReservation.setDateTimeSelectValue('ends_at_in_zone', NewReservation.recalculatedEndsAtDate());
+    NewReservation.setDateTimeSelectValue('ends_at', NewReservation.recalculatedEndsAtDate());
   },
   setRecalculatedPrice: function() {
     $('#total-price').text(new Number(ReservationSpace.standard_hourly_price_in_cents * NewReservation.durationInHoursValue() / 100.00).toLocaleString());
@@ -94,7 +94,7 @@ var NewReservation = {
   monthChanged: function(atag) {
     var month = atag.text().trim();
     
-    $('#reservation_starts_at_in_zone_2i option').filter(function() { return $(this).text().trim() == month; }).attr('selected', true);
+    $('#reservation_starts_at_2i option').filter(function() { return $(this).text().trim() == month; }).attr('selected', true);
     NewReservation.setRecalculatedEndsAtDate();
     NewReservation.redrawIndicator();
     NewReservation.validateNewReservation();
@@ -106,7 +106,7 @@ var NewReservation = {
   dayChanged: function(atag) {
     var day = atag.text().trim();
     
-    $('#reservation_starts_at_in_zone_3i option').filter(function() { return $(this).text().trim() == day; }).attr('selected', true);
+    $('#reservation_starts_at_3i option').filter(function() { return $(this).text().trim() == day; }).attr('selected', true);
     NewReservation.setRecalculatedEndsAtDate();
     NewReservation.redrawIndicator();
     NewReservation.validateNewReservation();
@@ -130,10 +130,10 @@ var NewReservation = {
     }
     hour24string = NewReservation._leadingPadding(hour, 2);
     
-    $('#reservation_starts_at_in_zone_4i').val(hour24string);
-    $('#reservation_starts_at_in_zone_5i').val(minute);
+    $('#reservation_starts_at_4i').val(hour24string);
+    $('#reservation_starts_at_5i').val(minute);
     
-    var startsAt = NewReservation.dateTimeSelectValue('starts_at_in_zone');
+    var startsAt = NewReservation.dateTimeSelectValue('starts_at');
     NewReservation.setRecalculatedEndsAtDate();
     NewReservation.redrawIndicator();
     NewReservation.validateNewReservation();
