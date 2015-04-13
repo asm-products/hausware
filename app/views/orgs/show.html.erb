@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @org.name %>
+</p>
+
+<p>
+  <strong>Permalink:</strong>
+  <%= @org.permalink %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @org.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @org.phone %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @org.owner %>
+</p>
+
+<%= link_to 'Edit', edit_org_path(@org) %> |
+<%= link_to 'Back', orgs_path %>

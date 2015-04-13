@@ -1,9 +1,9 @@
-<%= form_for([@reservation.space.location, @reservation.space, @reservation]) do |f| %>
+<%= form_for([@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation]) do |f| %>
 
 <script type="text/javascript">
 var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
 var ReservationLocation = <%= @reservation.space.location.to_json.html_safe %>;
-var ReservationValidationUrl = <%= validate_location_space_reservations_path(@reservation.space.location, @reservation.space, format: 'json').to_json.html_safe %>;
+var ReservationValidationUrl = <%= validate_org_location_space_reservations_path(@reservation.space.location.org, @reservation.space.location, @reservation.space, format: 'json').to_json.html_safe %>;
 var StripeKey = <%= Rails.configuration.stripe[:publishable_key].to_json.html_safe %>;
 </script>
 
@@ -79,7 +79,7 @@ var StripeKey = <%= Rails.configuration.stripe[:publishable_key].to_json.html_sa
             <% if @reservation.space.id == space.id %>
             <p class="text-center"><a href="#" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Selected</a></p>
             <% else %>
-            <p class="text-center"><a href="<%= new_location_space_reservation_path(@reservation.space.location, space) %>" class="btn btn-primary" role="button">Select</a></p>
+            <p class="text-center"><a href="<%= new_org_location_space_reservation_path(@reservation.space.location.org, @reservation.space.location, space) %>" class="btn btn-primary" role="button">Select</a></p>
             <% end %>
           </div>
         </div>

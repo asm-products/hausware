@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :set_org
   before_action :set_location
   before_action :set_space
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
@@ -88,8 +89,14 @@ class ReservationsController < ApplicationController
   private
 
     # Use callbacks to share common setup or constraints between actions.
+    def set_org
+      @org = Org.find_by_permalink(params[:org_id])
+      raise ActiveRecord::RecordNotFound unless @org
+    end
+    
+    # Use callbacks to share common setup or constraints between actions.
     def set_location
-      @location = Location.find_by_permalink(params[:location_id])
+      @location = @org.locations.find_by_permalink(params[:location_id])
       raise ActiveRecord::RecordNotFound unless @location
     end
 

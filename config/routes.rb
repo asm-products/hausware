@@ -8,16 +8,19 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :locations do
-    resources :spaces do
-      resources :reservations do
-        collection do
-          post :validate
+  resources :orgs do
+    resources :locations do
+      resources :spaces do
+        resources :reservations do
+          collection do
+            post :validate
+          end
         end
+        resources :slides
       end
-      resources :slides
     end
   end
+    
   # OmniAuth for all providers, see `config/initializers/omniauth.rb` for more
   get '/auth/:provider/callback', to: 'sessions#create'
   get 'sessions/new'

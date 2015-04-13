@@ -1,10 +1,12 @@
 class Location < ActiveRecord::Base
+  belongs_to :org
   has_many :spaces
   
   before_validation :autofill_permalink_if_blank
   
-  validates :permalink, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9\-_]+\Z/ }
+  validates :permalink, presence: true, uniqueness: { case_sensitive: false, scope: :org_id }, format: { with: /\A[a-zA-Z0-9\-_]+\Z/ }
   validates :timezone, presence: true
+  validates :org, presence: true
   
   def autofill_permalink_if_blank
     return true unless self.permalink.blank? # Bypass if permalink is already set

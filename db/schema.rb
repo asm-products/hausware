@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20150404171001) do
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.string   "permalink"
+    t.integer  "org_id"
     t.string   "phone"
     t.string   "email"
     t.string   "timezone"
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150404171001) do
   add_index "locations", ["longitude"], name: "index_locations_on_longitude"
   add_index "locations", ["monday_closing"], name: "index_locations_on_monday_closing"
   add_index "locations", ["monday_opening"], name: "index_locations_on_monday_opening"
+  add_index "locations", ["org_id"], name: "index_locations_on_org_id"
   add_index "locations", ["permalink"], name: "index_locations_on_permalink"
   add_index "locations", ["saturday_closing"], name: "index_locations_on_saturday_closing"
   add_index "locations", ["saturday_opening"], name: "index_locations_on_saturday_opening"
@@ -65,6 +67,19 @@ ActiveRecord::Schema.define(version: 20150404171001) do
   add_index "locations", ["tuesday_opening"], name: "index_locations_on_tuesday_opening"
   add_index "locations", ["wednesday_closing"], name: "index_locations_on_wednesday_closing"
   add_index "locations", ["wednesday_opening"], name: "index_locations_on_wednesday_opening"
+
+  create_table "orgs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "permalink"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "orgs", ["owner_id"], name: "index_orgs_on_owner_id"
+  add_index "orgs", ["permalink"], name: "index_orgs_on_permalink"
 
   create_table "reservations", force: :cascade do |t|
     t.integer  "space_id"

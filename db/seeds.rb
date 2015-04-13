@@ -6,12 +6,26 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+hana_org = Org.find_by_permalink('hana')
+if hana_org.blank?
+  hana_org = Org.create!(
+    {
+      name: 'HanaHaus',
+      permalink: 'hana',
+
+    }
+  )
+  puts "Creating org: #{hana_org.permalink}: #{hana_org.id.to_s}"
+end
+
 palo_alto_location = Location.find_by_permalink('palo-alto')
 if palo_alto_location.blank?
   palo_alto_location = Location.create!(
     {
       name: 'Palo Alto',
       permalink: 'palo-alto',
+      org: hana_org,
       phone: '650.326.1263',
       email: 'info@hanahaus.com',
       timezone: 'Pacific Time (US & Canada)',

@@ -3,6 +3,7 @@ class CreateLocations < ActiveRecord::Migration
     create_table :locations do |t|
       t.string :name
       t.string :permalink, index: true
+      t.references :org, index: true, foreign_key: true
       t.string :phone
       t.string :email
       t.string :timezone
