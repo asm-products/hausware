@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # memorable words for confirmation code
-gem 'randexp'
+gem 'randexp', git: 'https://github.com/thrivesmart/randexp'
 
 # Single Sign-On 
 gem 'omniauth'
