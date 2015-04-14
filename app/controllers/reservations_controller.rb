@@ -53,8 +53,8 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        format.html { redirect_to [@reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully created.' }
-        format.json { render :show, status: :created, location: [@reservation.space.location, @reservation.space, @reservation] }
+        format.html { redirect_to [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully created.' }
+        format.json { render :show, status: :created, location: [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation] }
       else
         format.html { render :new }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
@@ -67,8 +67,8 @@ class ReservationsController < ApplicationController
   def update
     respond_to do |format|
       if @reservation.update(reservation_params)
-        format.html { redirect_to [@reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully updated.' }
-        format.json { render :show, status: :ok, location: [@reservation.space.location, @reservation.space, @reservation] }
+        format.html { redirect_to [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation] }
       else
         format.html { render :edit }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }

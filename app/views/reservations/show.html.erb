@@ -5,7 +5,7 @@ Reservation `<%= @reservation.confirmation %>` Details -
   <div class="page-header">
     <h1>
       <div class="pull-left">
-        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, [@reservation.space.location, @reservation.space, :reservations], class: "btn btn-default", title: "Back to reservations" %>
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, [@reservation.space.location.org, @reservation.space.location, @reservation.space, :reservations], class: "btn btn-default", title: "Back to reservations" %>
         &nbsp;
       </div>
       <small>Reservation:</small> <%= @reservation.confirmation %>

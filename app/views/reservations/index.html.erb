@@ -46,19 +46,19 @@ Reservations -
       </tr>
       <% end %>
       <% @reservations.each do |reservation| %>
-      <tr class="linked-row" data-href="<%= location_space_reservation_path(reservation.space.location, reservation.space, reservation) %>">
+      <tr class="linked-row" data-href="<%= org_location_space_reservation_path(reservation.space.location.org, reservation.space.location, reservation.space, reservation) %>">
       
-        <td><%= link_to reservation.space.name, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.user.full_name, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.confirmation, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.name, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.email, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.phone, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.zipcode, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.starts_at, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.ends_at, [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to number_to_currency(reservation.price_in_cents / 100.00), [reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.chargeid, [reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.space.name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.user.full_name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.confirmation, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.email, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.phone, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.zipcode, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.starts_at, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.ends_at, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to number_to_currency(reservation.price_in_cents / 100.00), [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.chargeid, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         
         
         
