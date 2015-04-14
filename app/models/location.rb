@@ -39,7 +39,7 @@ class Location < ActiveRecord::Base
       end
     end
     hour = (opening_value / 100.00).floor
-    return date_and_time.change({ hour: (opening_value / 100.00).floor, minute: opening_value - (hour*100) }).in_time_zone(self.timezone)
+    return date_and_time.change({ hour: (opening_value / 100.00).floor, minute: opening_value - (hour*100) })
   end
   
   def earliest_opening
