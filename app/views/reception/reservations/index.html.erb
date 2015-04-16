@@ -1,7 +1,5 @@
-<p id="notice"><%= notice %></p>
-
 <% content_for :page_title do %>
-<% @location.name %>: Reservations - Reception -  
+<%= @location.name %>: Reservations - Reception -  
 <% end %>
 <div class="container">
   <div class="page-header">
@@ -11,7 +9,7 @@
         &nbsp;
       </div>
 
-      Listing Reservations
+      Listing Reservations <small><%= @location.name %></small>
     </h1>
   </div>
 
@@ -22,14 +20,13 @@
       <tr>
     
         <th><span>Space</span></th>
-        <th><span>User</span></th>
+        <th><span>Starts at</span></th>
+        <th><span>Ends at</span></th>
         <th><span>Confirmation Code</span></th>
         <th><span>Name</span></th>
         <th><span>Email</span></th>
         <th><span>Phone</span></th>
         <th><span>Zipcode</span></th>
-        <th><span>Starts at</span></th>
-        <th><span>Ends at</span></th>
         <th><span>Price</span></th>
         <th><span>Chargeid</span></th>
       
@@ -46,14 +43,18 @@
       <tr class="linked-row" data-href="<%= org_location_space_reservation_path(reservation.space.location.org, reservation.space.location, reservation.space, reservation) %>">
       
         <td><%= link_to reservation.space.name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.user.full_name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.starts_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><%= link_to reservation.ends_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         <td><%= link_to reservation.confirmation, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td>
+          <%= link_to reservation.name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %>
+          <% if reservation.user %>
+          (<%= link_to 'account', reservation.user %>)
+          <% end %>
+        </td>
         <td><%= link_to reservation.email, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         <td><%= link_to reservation.phone, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         <td><%= link_to reservation.zipcode, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.starts_at, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
-        <td><%= link_to reservation.ends_at, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         <td><%= link_to number_to_currency(reservation.price_in_cents / 100.00), [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         <td><%= link_to reservation.chargeid, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         
