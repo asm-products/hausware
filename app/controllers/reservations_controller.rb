@@ -114,6 +114,6 @@ class ReservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
-      params.require(:reservation).permit(:space_id, :name, :email, :phone, :zipcode, :starts_at, :ends_at, :stripe_token, :save_details_for_next_time, :timezone)
+      params.require(:reservation).permit(:name, :email, :phone, :zipcode, :starts_at, :ends_at, :stripe_token, :save_details_for_next_time, :timezone)
     end
 end

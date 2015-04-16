@@ -1,0 +1,2 @@
+module Reception::LocationsHelper
+end

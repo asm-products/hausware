@@ -1,0 +1,2 @@
+module Reception::ReservationsHelper
+end

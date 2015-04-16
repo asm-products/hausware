@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
   
+  namespace :reception do
+    resources :orgs do
+      resources :locations do
+        resources :reservations
+      end
+    end 
+  end
+
   namespace :admin do
     resources :locations do
       resources :spaces do
