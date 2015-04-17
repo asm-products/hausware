@@ -12,6 +12,7 @@ one:
   price_in_cents: 1
   confirmation: MyString
   chargeid: MyString
+  canceled_at: 2015-04-04 10:10:01
 
 two:
   space_id: 
@@ -25,3 +26,4 @@ two:
   confirmation: MyString
   price_in_cents: 1
   chargeid: MyString
+  canceled_at: 2015-04-04 10:10:01

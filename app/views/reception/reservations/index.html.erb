@@ -22,6 +22,7 @@
         <th><span>Space</span></th>
         <th><span>Starts at</span></th>
         <th><span>Ends at</span></th>
+        <th><span>Canceled at</span></th>
         <th><span>Confirmation Code</span></th>
         <th><span>Name</span></th>
         <th><span>Email</span></th>
@@ -45,6 +46,7 @@
         <td><%= link_to reservation.space.name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         <td><%= link_to reservation.starts_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         <td><%= link_to reservation.ends_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
+        <td><% unless reservation.canceled_at.blank? %><%= link_to reservation.canceled_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %><% end %></td>
         <td><%= link_to reservation.confirmation, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %></td>
         <td>
           <%= link_to reservation.name, [reservation.space.location.org, reservation.space.location, reservation.space, reservation] %>

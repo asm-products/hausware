@@ -93,10 +93,12 @@ ActiveRecord::Schema.define(version: 20150404171001) do
     t.string   "confirmation"
     t.integer  "price_in_cents"
     t.string   "chargeid"
+    t.datetime "canceled_at"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
+  add_index "reservations", ["canceled_at"], name: "index_reservations_on_canceled_at"
   add_index "reservations", ["chargeid"], name: "index_reservations_on_chargeid"
   add_index "reservations", ["confirmation"], name: "index_reservations_on_confirmation"
   add_index "reservations", ["email"], name: "index_reservations_on_email"

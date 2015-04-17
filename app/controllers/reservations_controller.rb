@@ -28,11 +28,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-  # GET /reservations/1/edit
-  def edit
-  end
-
-
   # POST /reservations/validate.json
   def validate
     @reservation = @space.reservations.build(reservation_params.merge(user: authed_user))
@@ -59,30 +54,6 @@ class ReservationsController < ApplicationController
         format.html { render :new }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /reservations/1
-  # PATCH/PUT /reservations/1.json
-  def update
-    respond_to do |format|
-      if @reservation.update(reservation_params)
-        format.html { redirect_to [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully updated.' }
-        format.json { render :show, status: :ok, location: [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation] }
-      else
-        format.html { render :edit }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /reservations/1
-  # DELETE /reservations/1.json
-  def destroy
-    @reservation.destroy
-    respond_to do |format|
-      format.html { redirect_to location_space_reservations_url(@reservation.space.location, @reservation.space), notice: 'Reservation was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
