@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= yield :page_title %>HausWare</title>
+  <title><%= yield :page_title %><%= @location ? "#{@location.name} - " : '' %><%= @org ? @org.name : 'HausWare' %></title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   
@@ -21,6 +21,10 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+
+        <% if authed_receptionist %>
+        <li<%= request.path.starts_with?("/reception/") ? " class=\"active\"".html_safe : "" %>><a href="<%= reception_org_location_path(@location.org, @location) %>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Reception - <%= @location.name %></a></li>
+        <% end %>
         <li<%= request.path.ends_with?("/reservations/new") ? " class=\"active\"".html_safe : "" %>><a href="/orgs/hana/locations/palo-alto/spaces/open-seating/reservations/new"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
       </ul> 
       <% if !authed_user %><%# ---- logged out ---- %>
@@ -34,7 +38,9 @@
       </ul>
       <% else %><%# ---- logged in ---- %>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Menu</a></li>
+        <% if authed_administrator %>
+        <li<%= request.path.starts_with?("/admin/") ? " class=\"active\"".html_safe : "" %>><a href="<%= admin_org_path(@org) %>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Administrate <%= @org.name %></a></li>
+        <% end %>
         <li class="profile dropdown">
           <a class="dropdown-toggle" type="button" id="profile-dropdown" data-toggle="dropdown" aria-expanded="false"><img src='<%= authed_user.picurl %>'> <%= authed_user.full_name %> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="profile-dropdown">

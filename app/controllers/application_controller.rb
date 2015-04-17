@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   
   helper_method :auth_hash
   helper_method :authed_user
+  helper_method :authed_receptionist
+  helper_method :authed_administrator
   # before_filter :enforce_auth ## Use this in your own controllers hidden behind auths.
   # before_filter :enforce_superuser ## Use this in your own controllers hidden behind auths.
   
@@ -66,8 +68,7 @@ class ApplicationController < ActionController::Base
   end
   
   def enforce_org_receptionist
-    membership = set_authed_membership
-    if (!membership || !membership.reception?) && !enforce_org_administrator && !authed_user.superuser
+    if !authed_receptionist
       render :text => "Sorry, you aren't authorized to access this page.", :status => :unauthorized
       return false
     else
@@ -76,8 +77,7 @@ class ApplicationController < ActionController::Base
   end
 
   def enforce_org_administrator
-    membership = set_authed_membership
-    if (!membership || !membership.administration?) && !authed_user.superuser
+    if !authed_administrator
       render :text => "Sorry, you aren't authorized to access this page.", :status => :unauthorized
       return false
     else
@@ -87,6 +87,28 @@ class ApplicationController < ActionController::Base
   
   def auth_hash
     request.env['omniauth.auth']
+  end
+  
+  def authed_receptionist
+    @authed_receptionist ||= begin
+      membership = set_authed_membership
+      if (!membership || !membership.reception?) && !enforce_org_administrator && !authed_user.superuser
+        false
+      else
+        true
+      end
+    end
+  end
+
+  def authed_administrator
+    @authed_administrator ||= begin
+      membership = set_authed_membership
+      if (!membership || !membership.administration?) && !authed_user.superuser
+        false
+      else
+        true
+      end
+    end
   end
   
   def authed_user
