@@ -92,7 +92,9 @@ class ApplicationController < ActionController::Base
   def authed_receptionist
     @authed_receptionist ||= begin
       membership = set_authed_membership
-      if (!membership || !membership.reception?) && !enforce_org_administrator && !authed_user.superuser
+      if !authed_user
+        false
+      elsif (!membership || !membership.reception?) && !enforce_org_administrator && !authed_user.superuser
         false
       else
         true
@@ -103,7 +105,9 @@ class ApplicationController < ActionController::Base
   def authed_administrator
     @authed_administrator ||= begin
       membership = set_authed_membership
-      if (!membership || !membership.administration?) && !authed_user.superuser
+      if !authed_user
+        false
+      elsif (!membership || !membership.administration?) && !authed_user.superuser
         false
       else
         true

@@ -1,6 +1,18 @@
+<% content_for :page_title do %>
+Edit Org - 
+<% end %>
+<div class="container">
+<div class="page-header">
 <h1>Editing Org</h1>
+</div>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @org %> |
-<%= link_to 'Back', orgs_path %>
+<div class="clearfix"></div>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, @org, class: "btn btn-default" %>
+</div>
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> Delete org...".html_safe, @org, method: :delete, data: { confirm: "Are you sure you want to delete this org?" }, class: "btn btn-danger" %>
+</div>
+</div>

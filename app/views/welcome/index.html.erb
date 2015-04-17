@@ -1,11 +1,14 @@
 <div class="container">
-  <h1>Welcome to HausWare</h1>
-  <p>This is a beta product, still in progress!</p>
+  <h1>Welcome to HausWare<sup>[beta]</sup></h1>
+  <p>Handle your reservations at multiple locations, with ease.</p>
   
+  <p><a href="/orgs" class="btn btn-default btn-lg">Organizations using HausWare &raquo;</a></p>
 
+  <hr/>
+  
   <% if !authed_user %><%# ---- logged out ---- %>
   <p>For now, try <a href="/sessions/new">logging in</a>.</p>
   <% else %><%# ---- logged in ---- %>
-  <p>Hi, <img src='<%= authed_user.picurl %>'>.  See <%= link_to 'your profile', user_path(authed_user) %>.</p>
+  <p>Hi, <img src='<%= authed_user.picurl %>' style="max-width:2em; max-height:2em">.  See <%= link_to 'your profile', user_path(authed_user) %>.</p>
   <% end %>
 </div>

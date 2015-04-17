@@ -22,7 +22,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 
-        <% if authed_receptionist %>
+        <% if @location && authed_receptionist %>
         <li<%= request.path.starts_with?("/reception/") ? " class=\"active\"".html_safe : "" %>><a href="<%= reception_org_location_path(@location.org, @location) %>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Reception - <%= @location.name %></a></li>
         <% end %>
         <li<%= request.path.ends_with?("/reservations/new") ? " class=\"active\"".html_safe : "" %>><a href="/orgs/hana/locations/palo-alto/spaces/open-seating/reservations/new"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
@@ -38,7 +38,7 @@
       </ul>
       <% else %><%# ---- logged in ---- %>
       <ul class="nav navbar-nav navbar-right">
-        <% if authed_administrator %>
+        <% if @org && authed_administrator %>
         <li<%= request.path.starts_with?("/admin/") ? " class=\"active\"".html_safe : "" %>><a href="<%= admin_org_path(@org) %>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Administrate <%= @org.name %></a></li>
         <% end %>
         <li class="profile dropdown">

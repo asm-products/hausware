@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20150417003225) do
     t.string   "permalink"
     t.string   "email"
     t.string   "phone"
+    t.string   "url"
     t.integer  "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -5,6 +5,7 @@ class CreateOrgs < ActiveRecord::Migration
       t.string :permalink, index: true
       t.string :email
       t.string :phone
+      t.string :url
       t.references :owner, references: :users, index: true
 
       t.timestamps null: false

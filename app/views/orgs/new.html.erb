@@ -1,5 +1,15 @@
-<h1>New Org</h1>
+<% content_for :page_title do %>
+Create Org - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+New Org
+</h1>
+</div>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', orgs_path %>
+<div class="clearfix"></div>
+<%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, orgs_path, class: "btn btn-default" %>
+</div>

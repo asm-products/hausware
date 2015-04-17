@@ -1,35 +1,40 @@
-<p id="notice"><%= notice %></p>
+<% 
+require 'digest/md5' 
+%>
+<% content_for :page_title do %>
+Orgs - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Welcome" %>
+        &nbsp;
+      </div>
 
-<h1>Listing Orgs</h1>
+      <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> Sign Up My Organization".html_safe, [:new, :org], class: "btn btn-success" %>
+      </div>
+      Organizations Using HausWare
+    </h1>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Permalink</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Owner</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <% @orgs.each do |org| %>
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+      <div class="thumbnail">
+        <img src="<%= "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(org.email.to_s)}" %>" alt="<%= org.name %>">
+        <div class="caption">
+          <h3><%= org.name %></h3>
+          <p><a href="<%= org_path(org) %>" class="btn btn-primary" role="button">Go &raquo;</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+      
+</div>
 
-  <tbody>
-    <% @orgs.each do |org| %>
-      <tr>
-        <td><%= org.name %></td>
-        <td><%= org.permalink %></td>
-        <td><%= org.email %></td>
-        <td><%= org.phone %></td>
-        <td><%= org.owner %></td>
-        <td><%= link_to 'Show', org %></td>
-        <td><%= link_to 'Edit', edit_org_path(org) %></td>
-        <td><%= link_to 'Destroy', org, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
 
-<%= link_to 'New Org', new_org_path %>
+
