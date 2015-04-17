@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  org_id: 
+  location_id: 
+  user_id: 
+  privileges: MyString
+
+two:
+  org_id: 
+  location_id: 
+  user_id: 
+  privileges: MyString

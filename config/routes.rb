@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   
+  namespace :admin do
+    resources :orgs do
+      resources :memberships
+    end
+  end
+
   namespace :reception do
     resources :orgs do
       resources :locations do
@@ -7,17 +13,11 @@ Rails.application.routes.draw do
       end
     end 
   end
-
-  namespace :admin do
-    resources :locations do
-      resources :spaces do
-        resources :slides
-      end
-    end
-  end
   
   resources :orgs do
+    resources :memberships
     resources :locations do
+      resources :memberships
       resources :spaces do
         resources :reservations do
           collection do

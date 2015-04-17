@@ -36,6 +36,54 @@ class ApplicationController < ActionController::Base
     end
     return true
   end
+
+  def set_authed_org_membership
+    return nil if @org.nil? && params[:org_id].nil? # org doesn't exist, so ignore
+    
+    org = @org || Org.find_by_permalink(params[:org_id])
+    return nil unless org
+    
+    @org_membership = org.memberships.where(user_id: authed_user.id).first
+    return nil unless @org_membership
+    return @org_membership
+  end
+  
+  def set_authed_location_membership
+    return nil if @org.nil? || (@location.nil? && params[:location_id].nil?) # location doesn't exist, so ignore
+    
+    location = @location || @org.locations.find_by_permalink(params[:location_id])
+    return nil unless location
+    
+    @location_membership = location.memberships.where(user_id: authed_user.id).first
+    return nil unless @location_membership
+    return @location_membership
+  end
+  
+  def set_authed_membership
+    @authed_membership ||= begin
+      set_authed_org_membership || set_authed_location_membership # org membership overrides location membership always, so find that first
+    end
+  end
+  
+  def enforce_org_receptionist
+    membership = set_authed_membership
+    if (!membership || !membership.reception?) && !enforce_org_administrator && !authed_user.superuser
+      render :text => "Sorry, you aren't authorized to access this page.", :status => :unauthorized
+      return false
+    else
+      return true
+    end
+  end
+
+  def enforce_org_administrator
+    membership = set_authed_membership
+    if (!membership || !membership.administration?) && !authed_user.superuser
+      render :text => "Sorry, you aren't authorized to access this page.", :status => :unauthorized
+      return false
+    else
+      return true
+    end
+  end
   
   def auth_hash
     request.env['omniauth.auth']

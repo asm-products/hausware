@@ -2,6 +2,7 @@ class Location < ActiveRecord::Base
   belongs_to :org
   has_many :spaces
   has_many :reservations, through: :spaces
+  has_many :memberships
   
   before_validation :autofill_permalink_if_blank
   

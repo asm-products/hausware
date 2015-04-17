@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404171001) do
+ActiveRecord::Schema.define(version: 20150417003225) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
@@ -67,6 +67,21 @@ ActiveRecord::Schema.define(version: 20150404171001) do
   add_index "locations", ["tuesday_opening"], name: "index_locations_on_tuesday_opening"
   add_index "locations", ["wednesday_closing"], name: "index_locations_on_wednesday_closing"
   add_index "locations", ["wednesday_opening"], name: "index_locations_on_wednesday_opening"
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "org_id"
+    t.integer  "location_id"
+    t.integer  "user_id"
+    t.string   "privileges"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "memberships", ["location_id", "user_id", "privileges"], name: "index_memberships_on_location_id_and_user_id_and_privileges"
+  add_index "memberships", ["location_id"], name: "index_memberships_on_location_id"
+  add_index "memberships", ["org_id", "user_id", "privileges"], name: "index_memberships_on_org_id_and_user_id_and_privileges"
+  add_index "memberships", ["org_id"], name: "index_memberships_on_org_id"
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
 
   create_table "orgs", force: :cascade do |t|
     t.string   "name"

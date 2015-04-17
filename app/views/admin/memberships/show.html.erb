@@ -1,0 +1,42 @@
+<% content_for :page_title do %>
+membership Details - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, admin_org_memberships_path(@org), class: "btn btn-default", title: "Back to memberships" %>
+        &nbsp;
+      </div>
+      <div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> Remove member...".html_safe, admin_org_membership_path(@org, @membership), method: :delete, data: { confirm: "Are you sure you want to remove this member?" }, class: "btn btn-danger" %>
+      </div>
+      Membership Details
+      <small>
+        <%= @membership.user.full_name %> at <%= @membership.location ? @membership.location.name : @membership.org.name %>
+      </small>
+    </h1>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Org</label>
+    <div class="col-sm-9"><%= @membership.org.name %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Location</label>
+    <div class="col-sm-9"><%= @membership.location ? @membership.location.name : '[all]' %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">User</label>
+    <div class="col-sm-9"><%= @membership.user.full_name %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Privileges</label>
+    <div class="col-sm-9"><%= @membership.privileges %></div>
+  </div>
+
+</div>
+

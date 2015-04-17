@@ -1,6 +1,7 @@
 class Org < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
   has_many :locations
+  has_many :memberships
   
   before_validation :autofill_permalink_if_blank
   
@@ -13,5 +14,9 @@ class Org < ActiveRecord::Base
 
   def to_param
     self.permalink
+  end
+  
+  def location_memberships
+    locations.concat(&:memberships)
   end
 end
