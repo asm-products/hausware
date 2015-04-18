@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :page_title do %>
+Spaces - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, [:admin, @location.org, @location], class: "btn btn-default", title: "Back" %>
+        &nbsp;
+      </div>
+
+      <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Space".html_safe, [:new, :admin, @location.org, @location, :space], class: "btn btn-success" %>
+      </div>
+      Listing Spaces
+      <small>
+        at
+        <%= @location.name %>
+      </small>
+    </h1>
+  </div>
+
+  <table class="table table-striped table-hover tablesorter" id="Spaces-table">
+
+
+    <thead>
+      <tr>
+        
+        <th><span>Name</span></th>
+        <th><span>Permalink</span></th>
+        <th><span>Standard Hourly Price</span></th>
+        <th><span>Picurl</span></th>
+        <th><span>Reservable quantity</span></th>
+        <th><span>Max days in advance reservable</span></th>
+        <th><span>Description</span></th>
+      
+      </tr>
+    </thead>
+
+    <tbody>
+      <% unless @spaces.any? %>
+      <tr id="empty-table">
+        <td class="bg-warning" colspan="8">No spaces created yet.</td>
+      </tr>
+      <% end %>
+      <% @spaces.each do |space| %>
+      <tr class="linked-row" data-href="<%= admin_org_location_space_path(space.location.org, space.location, space) %>">
+      
+        <td><%= link_to space.name, [:admin, space.location.org, space.location, space] %></td>
+        <td><%= link_to space.permalink, [:admin, space.location.org, space.location, space] %></td>
+        <td><%= link_to number_to_currency(space.standard_hourly_price_in_cents / 100.00), [:admin, space.location.org, space.location, space] %></td>
+        <td><%= link_to space.picurl, [:admin, space.location.org, space.location, space] %></td>
+        <td><%= link_to space.reservable_quantity, [:admin, space.location.org, space.location, space] %></td>
+        <td><%= link_to space.max_days_in_advance_reservable, [:admin, space.location.org, space.location, space] %></td>
+        <td><%= link_to space.description, [:admin, space.location.org, space.location, space] %></td>
+        
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+

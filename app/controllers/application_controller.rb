@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
   protected
   
   def enforce_auth
-    auth_hash
+    authed_user
     
-    if auth_hash.blank?
+    if authed_user.blank?
       session[:after_auth_url] = request.url
       session[:current_user] = nil
       redirect_to '/sessions/new'
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
   
   def enforce_org_receptionist
     if !authed_receptionist
-      render :text => "Sorry, you aren't authorized to access this page.", :status => :unauthorized
+      render :text => "Sorry, you aren't a receptionist here.", :status => :unauthorized
       return false
     else
       return true
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
 
   def enforce_org_administrator
     if !authed_administrator
-      render :text => "Sorry, you aren't authorized to access this page.", :status => :unauthorized
+      render :text => "Sorry, you aren't an administrator here.", :status => :unauthorized
       return false
     else
       return true
@@ -90,10 +90,8 @@ class ApplicationController < ActionController::Base
   def authed_receptionist
     @authed_receptionist ||= begin
       membership = set_authed_membership
-      if !authed_user
-        false
-      elsif (!membership || !membership.reception?) && !enforce_org_administrator && !authed_user.superuser
-        false
+      if authed_user && (authed_user.superuser || (membership && membership.reception?) || authed_administrator)
+        true
       else
         true
       end
@@ -103,12 +101,10 @@ class ApplicationController < ActionController::Base
   def authed_administrator
     @authed_administrator ||= begin
       membership = set_authed_membership
-      if !authed_user
-        false
-      elsif (!membership || !membership.administration?) && !authed_user.superuser
-        false
-      else
+      if authed_user && (authed_user.superuser || (membership && membership.administration?))
         true
+      else
+        false
       end
     end
   end

@@ -1,8 +1,8 @@
 class Admin::MembershipsController < ApplicationController
-  before_filter :enforce_org_administrator
   before_action :set_org
   before_action :set_location_if_present
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_org_administrator
 
   # GET /memberships
   # GET /memberships.json

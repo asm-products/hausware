@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  
-  namespace :admin do
-  get 'orgs/index'
-  end
 
   namespace :admin do
     resources :orgs do
+      resources :locations do
+        resources :memberships
+        resources :spaces
+      end
       resources :memberships
     end
   end

@@ -3,6 +3,11 @@ class Admin::OrgsController < ApplicationController
   before_filter :enforce_auth
   before_filter :enforce_org_administrator
   
+
+  # GET /orgs/1
+  # GET /orgs/1.json
+  def show
+  end
   
   # GET /orgs/1/edit
   def edit
@@ -13,8 +18,8 @@ class Admin::OrgsController < ApplicationController
   def update
     respond_to do |format|
       if @org.update(org_params)
-        format.html { redirect_to @org, notice: 'Organization was successfully updated.' }
-        format.json { render :show, status: :ok, location: @org }
+        format.html { redirect_to [:admin, @org], notice: 'Organization was successfully updated.' }
+        format.json { render :show, status: :ok, location: [:admin, @org] }
       else
         format.html { render :edit }
         format.json { render json: @org.errors, status: :unprocessable_entity }

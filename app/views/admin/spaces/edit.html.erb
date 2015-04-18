@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+Edit Space - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>Editing Space</h1>
+  </div>
+
+  <%= render 'form' %>
+
+  <div class="clearfix"></div>
+  <div class="pull-left">
+    <%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, [:admin, @space.location.org, @space.location, @space], class: "btn btn-default" %>
+  </div>
+  <div class="pull-right">
+    <%= link_to "<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> Delete space...".html_safe, [:admin, @space.location.org, @space.location, @space], method: :delete, data: { confirm: "Are you sure you want to delete this space?" }, class: "btn btn-danger" %>
+  </div>
+</div>
