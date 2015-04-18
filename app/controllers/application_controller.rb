@@ -26,14 +26,12 @@ class ApplicationController < ActionController::Base
   
   def enforce_superuser    
     if !enforce_auth
+      render :text => "Sorry, you need to be logged in to see this.", :status => :unauthorized
       return false
     end
     
     if !authed_user || !authed_user.superuser 
-      session[:after_auth_url] = request.url
-      session[:current_user] = nil
-      flash[:notice] = 'You need to be an admin to see that.'
-      redirect_to '/'
+      render :text => "Sorry, you aren't authorized to access this page.", :status => :unauthorized
       return false
     end
     return true

@@ -1,8 +1,8 @@
 class Location < ActiveRecord::Base
   belongs_to :org
-  has_many :spaces
+  has_many :spaces, dependent: :destroy
   has_many :reservations, through: :spaces
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   
   before_validation :autofill_permalink_if_blank
   

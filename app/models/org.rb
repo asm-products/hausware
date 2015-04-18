@@ -1,7 +1,7 @@
 class Org < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
-  has_many :locations
-  has_many :memberships
+  has_many :locations, dependent: :destroy
+  has_many :memberships, dependent: :destroy
   
   before_validation :autofill_permalink_if_blank
   

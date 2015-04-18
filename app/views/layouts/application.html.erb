@@ -17,7 +17,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">HanaHaus</a>
+      <a class="navbar-brand" href="<%= @org ? @org.url : '/' %>"><%= @org ? @org.name : 'HausWare' %></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -29,11 +29,6 @@
       </ul> 
       <% if !authed_user %><%# ---- logged out ---- %>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Partners</a></li>
-        <li><a href="#">Find Us</a></li>
         <li><a href="/sessions/new">Login</a></li>
       </ul>
       <% else %><%# ---- logged in ---- %>

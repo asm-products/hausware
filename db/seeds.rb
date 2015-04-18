@@ -35,6 +35,8 @@ if palo_alto_location.blank?
       state_province_region: 'CA',
       zip_postal_code: '94301',
       country_code: 'US',
+      latitude: 37.4475590,
+      longitude: -122.1595500,
       sunday_opening: 700, 
       sunday_closing: 2100,
       monday_opening: 700,  
