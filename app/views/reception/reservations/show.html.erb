@@ -1,0 +1,88 @@
+<% content_for :page_title do %>
+Reservation `<%= @reservation.confirmation %>` Details - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, [:reception, @reservation.space.location.org, @reservation.space.location, :reservations], class: "btn btn-default", title: "Back to reservations" %>
+        &nbsp;
+      </div>
+      <small>Reservation:</small> <%= @reservation.confirmation %>
+    </h1>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Stripe Charge</label>
+    <div class="col-sm-9">
+      <a href="https://dashboard.stripe.com/payments/<%= @reservation.chargeid.split('stripe-').last %>" target="_blank"><%= @reservation.chargeid %> <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
+    </div>
+  </div>
+  
+  <hr/>
+  
+  <% if @reservation.canceled_at %>
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Canceled At</label>
+    <div class="col-sm-9"><%= @reservation.canceled_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+  <% end %>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Space</label>
+    <div class="col-sm-9"><%= @reservation.space.name %> at <%= @reservation.space.location.name %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Starts at</label>
+    <div class="col-sm-9"><%= @reservation.starts_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Ends at</label>
+    <div class="col-sm-9"><%= @reservation.ends_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+  
+  <hr/>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Confirmation</label>
+    <div class="col-sm-9"><%= @reservation.confirmation %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Price</label>
+    <div class="col-sm-9"><%= number_to_currency(@reservation.price_in_cents / 100.00) %></div>
+  </div>
+  
+  <hr/>
+  
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Name</label>
+    <div class="col-sm-9">
+      <%= @reservation.name %>
+      <% if @reservation.user %>
+      (<%= link_to "profile", @reservation.user %>)
+      <% end %>
+    </div>
+  </div>
+  
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Email</label>
+    <div class="col-sm-9"><%= link_to @reservation.email, "mailto:#{@reservation.email}" %></div>
+  </div>
+  
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Phone</label>
+    <div class="col-sm-9"><%= @reservation.phone %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Zipcode</label>
+    <div class="col-sm-9"><%= @reservation.zipcode %></div>
+  </div>
+
+
+</div>
+

@@ -1,6 +1,7 @@
 class Reception::ReservationsController < ApplicationController
-  # before_filter :enforce_auth
   before_action :set_org
+  before_filter :enforce_auth
+  before_filter :enforce_org_receptionist
   before_action :set_location
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   
