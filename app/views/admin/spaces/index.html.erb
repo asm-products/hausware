@@ -27,11 +27,10 @@ Spaces -
 
     <thead>
       <tr>
-        
+
+        <th><span>Pic</span></th>
         <th><span>Name</span></th>
-        <th><span>Permalink</span></th>
         <th><span>Standard Hourly Price</span></th>
-        <th><span>Picurl</span></th>
         <th><span>Reservable quantity</span></th>
         <th><span>Max days in advance reservable</span></th>
         <th><span>Description</span></th>
@@ -47,14 +46,13 @@ Spaces -
       <% end %>
       <% @spaces.each do |space| %>
       <tr class="linked-row" data-href="<%= admin_org_location_space_path(space.location.org, space.location, space) %>">
-      
+
+        <td><%= link_to space.picurl ? image_tag(space.picurl) : '', [:admin, space.location.org, space.location, space] %></td>
         <td><%= link_to space.name, [:admin, space.location.org, space.location, space] %></td>
-        <td><%= link_to space.permalink, [:admin, space.location.org, space.location, space] %></td>
         <td><%= link_to number_to_currency(space.standard_hourly_price_in_cents / 100.00), [:admin, space.location.org, space.location, space] %></td>
-        <td><%= link_to space.picurl, [:admin, space.location.org, space.location, space] %></td>
         <td><%= link_to space.reservable_quantity, [:admin, space.location.org, space.location, space] %></td>
         <td><%= link_to space.max_days_in_advance_reservable, [:admin, space.location.org, space.location, space] %></td>
-        <td><%= link_to space.description, [:admin, space.location.org, space.location, space] %></td>
+        <td><%= link_to truncate(space.description), [:admin, space.location.org, space.location, space] %></td>
         
       </tr>
       <% end %>
