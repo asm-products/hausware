@@ -25,7 +25,9 @@
         <% if @location && authed_receptionist %>
         <li<%= request.path.starts_with?("/reception/") ? " class=\"active\"".html_safe : "" %>><a href="<%= reception_org_location_reservations_path(@location.org, @location) %>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Reception - <%= @location.name %></a></li>
         <% end %>
-        <li<%= request.path.ends_with?("/reservations/new") ? " class=\"active\"".html_safe : "" %>><a href="/orgs/hana/locations/palo-alto/spaces/open-seating/reservations/new"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
+        <% if @location %>
+        <li<%= request.path.ends_with?("/reservations/new") ? " class=\"active\"".html_safe : "" %>><a href="<%= new_org_location_space_reservation_path(@location.org, @location, (@space ? @space : @location.default_space_for_reservation)) %>"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Make a Reservation</a></li>
+        <% end %>
       </ul> 
       <% if !authed_user %><%# ---- logged out ---- %>
       <ul class="nav navbar-nav navbar-right">

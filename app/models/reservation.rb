@@ -96,6 +96,9 @@ class Reservation < ActiveRecord::Base
   def starts_at_in_zone
     starts_at.in_time_zone(self.timezone.blank? ? self.space.location.timezone : self.timezone)
   end
+  def checked_in_at_in_zone
+    checked_in_at.in_time_zone(self.timezone.blank? ? self.space.location.timezone : self.timezone)
+  end
   def canceled_at_in_zone
     canceled_at.in_time_zone(self.timezone.blank? ? self.space.location.timezone : self.timezone)
   end

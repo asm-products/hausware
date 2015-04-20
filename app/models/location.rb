@@ -10,6 +10,10 @@ class Location < ActiveRecord::Base
   validates :timezone, presence: true
   validates :org, presence: true
   
+  def default_space_for_reservation
+    org.setting && org.setting.default_location_spaces && org.setting.default_location_spaces['locations'] && org.setting.default_location_spaces['locations'][self.id.to_s] ? Space.find(org.setting.default_location_spaces['locations'][self.id.to_s]) : spaces.offset(rand(spaces.count)).first
+  end
+  
   def autofill_permalink_if_blank
     return true unless self.permalink.blank? # Bypass if permalink is already set
     self.permalink = AutoPermalink::cleaned_deduped_permalink(self.class, self.name)

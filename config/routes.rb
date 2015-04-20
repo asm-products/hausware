@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         resources :memberships
         resources :spaces
       end
+      resources :settings
       resources :memberships
     end
   end

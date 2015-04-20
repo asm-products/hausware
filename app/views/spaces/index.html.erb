@@ -11,9 +11,6 @@ Spaces -
         &nbsp;
       </div>
 
-      <div class="pull-right">
-        <%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Space".html_safe, [:new, @location, :space], class: "btn btn-success" %>
-      </div>
       Listing Spaces
       <small>
         at
@@ -46,15 +43,15 @@ Spaces -
       </tr>
       <% end %>
       <% @spaces.each do |space| %>
-      <tr class="linked-row" data-href="<%= location_space_path(space.location, space) %>">
+      <tr class="linked-row" data-href="<%= org_location_space_path(space.location.org, space.location, space) %>">
       
-        <td><%= link_to space.name, [space.location, space] %></td>
-        <td><%= link_to space.permalink, [space.location, space] %></td>
-        <td><%= link_to number_to_currency(space.standard_hourly_price_in_cents / 100.00), [space.location, space] %></td>
-        <td><%= link_to space.picurl, [space.location, space] %></td>
-        <td><%= link_to space.reservable_quantity, [space.location, space] %></td>
-        <td><%= link_to space.max_days_in_advance_reservable, [space.location, space] %></td>
-        <td><%= link_to space.description, [space.location, space] %></td>
+        <td><%= link_to space.name, [space.location.org, space.location, space] %></td>
+        <td><%= link_to space.permalink, [space.location.org, space.location, space] %></td>
+        <td><%= link_to number_to_currency(space.standard_hourly_price_in_cents / 100.00), [space.location.org, space.location, space] %></td>
+        <td><%= link_to space.picurl, [space.location.org, space.location, space] %></td>
+        <td><%= link_to space.reservable_quantity, [space.location.org, space.location, space] %></td>
+        <td><%= link_to space.max_days_in_advance_reservable, [space.location.org, space.location, space] %></td>
+        <td><%= link_to space.description, [space.location.org, space.location, space] %></td>
         
       </tr>
       <% end %>

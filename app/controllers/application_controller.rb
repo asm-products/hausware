@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
 
   def set_authed_org_membership
     return nil if @org.nil? && params[:org_id].nil? # org doesn't exist, so ignore
+    return nil if !authed_user # not logged in
     
     org = @org || Org.find_by_permalink(params[:org_id])
     return nil unless org
@@ -50,6 +51,7 @@ class ApplicationController < ActionController::Base
   
   def set_authed_location_membership
     return nil if @org.nil? || (@location.nil? && params[:location_id].nil?) # location doesn't exist, so ignore
+    return nil if !authed_user # not logged in
     
     location = @location || @org.locations.find_by_permalink(params[:location_id])
     return nil unless location

@@ -12,6 +12,7 @@ class CreateReservations < ActiveRecord::Migration
       t.string :confirmation, index: true
       t.integer :price_in_cents, index: true
       t.string :chargeid, index: true
+      t.datetime :checked_in_at, index: true
       t.datetime :canceled_at, index: true
 
       t.timestamps null: false

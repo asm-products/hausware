@@ -1,0 +1,49 @@
+<%= form_for([:admin, @setting.org, @setting]) do |f| %>
+<% if @setting.errors.any? %>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+  <strong><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</strong>
+
+  <ul>
+    <% @setting.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="row">
+  <div class="form-group<%= f.object.errors[:space_id].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :default_location_spaces, 'Default Space for Reservations', { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_area :default_location_spaces, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:stripe_publishable_key].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :stripe_publishable_key, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :stripe_publishable_key, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:stripe_secret_key_encrypted].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :stripe_secret_key_unencrypted, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :stripe_secret_key_unencrypted, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:salt].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :salt, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :salt, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="actions text-center">
+  <%= f.submit class: "btn btn-success" %>
+</div>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417003225) do
+ActiveRecord::Schema.define(version: 20150420000933) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20150417003225) do
     t.string   "confirmation"
     t.integer  "price_in_cents"
     t.string   "chargeid"
+    t.datetime "checked_in_at"
     t.datetime "canceled_at"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -116,6 +117,7 @@ ActiveRecord::Schema.define(version: 20150417003225) do
 
   add_index "reservations", ["canceled_at"], name: "index_reservations_on_canceled_at"
   add_index "reservations", ["chargeid"], name: "index_reservations_on_chargeid"
+  add_index "reservations", ["checked_in_at"], name: "index_reservations_on_checked_in_at"
   add_index "reservations", ["confirmation"], name: "index_reservations_on_confirmation"
   add_index "reservations", ["email"], name: "index_reservations_on_email"
   add_index "reservations", ["ends_at"], name: "index_reservations_on_ends_at"
@@ -124,6 +126,18 @@ ActiveRecord::Schema.define(version: 20150417003225) do
   add_index "reservations", ["space_id"], name: "index_reservations_on_space_id"
   add_index "reservations", ["starts_at"], name: "index_reservations_on_starts_at"
   add_index "reservations", ["user_id"], name: "index_reservations_on_user_id"
+
+  create_table "settings", force: :cascade do |t|
+    t.integer  "org_id"
+    t.string   "stripe_publishable_key"
+    t.string   "stripe_secret_key_encrypted"
+    t.string   "salt"
+    t.text     "default_location_spaces"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "settings", ["org_id"], name: "index_settings_on_org_id"
 
   create_table "slides", force: :cascade do |t|
     t.integer  "slideshowable_id"

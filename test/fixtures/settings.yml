@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  org_id: 
+  default_location_spaces: 
+  stripe_publishable_key: MyString
+  stripe_secret_key_encrypted: MyString
+  salt: MyString
+
+two:
+  org_id: 
+  default_location_spaces: 
+  stripe_publishable_key: MyString
+  stripe_secret_key_encrypted: MyString
+  salt: MyString

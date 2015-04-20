@@ -13,7 +13,9 @@ if hana_org.blank?
     {
       name: 'HanaHaus',
       permalink: 'hana',
-
+      url: 'http://hanahaus.com',
+      phone: '(650) 326-1263',
+      email: 'info@hanahaus.com'
     }
   )
   puts "Creating org: #{hana_org.permalink}: #{hana_org.id.to_s}"
@@ -26,7 +28,7 @@ if palo_alto_location.blank?
       name: 'Palo Alto',
       permalink: 'palo-alto',
       org: hana_org,
-      phone: '650.326.1263',
+      phone: '(650) 326-1263',
       email: 'info@hanahaus.com',
       timezone: 'Pacific Time (US & Canada)',
       street_address1: 'New Varsity Theatre',

@@ -21,6 +21,13 @@ Reservation `<%= @reservation.confirmation %>` Details -
   
   <hr/>
   
+  <% if @reservation.checked_in_at %>
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Checked In At</label>
+    <div class="col-sm-9"><%= @reservation.checked_in_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+  <% end %>
+  
   <% if @reservation.canceled_at %>
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Canceled At</label>

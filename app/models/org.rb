@@ -2,6 +2,7 @@ class Org < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
   has_many :locations, dependent: :destroy
   has_many :memberships, dependent: :destroy
+  has_one :setting
   
   before_validation :autofill_permalink_if_blank
   
@@ -19,4 +20,5 @@ class Org < ActiveRecord::Base
   def location_memberships
     locations.concat(&:memberships)
   end
+  
 end
