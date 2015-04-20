@@ -1,0 +1,74 @@
+<%= form_for([:account, @user]) do |f| %>
+<% if @user.errors.any? %>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+  <strong><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</strong>
+
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="row">
+  <div class="form-group<%= f.object.errors[:email].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :email, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :email, { class: "form-control", type: 'email' } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:username].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :username, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :username, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:first_name].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :first_name, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :first_name, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:middle_name].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :middle_name, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :middle_name, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:last_name].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :last_name, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :last_name, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:phone].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :phone, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :phone, { class: "form-control", type: "tel" } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group<%= f.object.errors[:zipcode].empty? ? "" : " has-error has-feedback" %>">
+    <%= f.label :zipcode, { class: "control-label col-sm-2" } %>
+    <div class="col-sm-10">
+      <%= f.text_field :zipcode, { class: "form-control" } %>
+    </div>
+  </div>
+</div>
+
+<div class="actions text-center">
+  <%= f.submit class: "btn btn-success" %>
+</div>
+<% end %>

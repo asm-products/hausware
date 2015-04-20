@@ -4,14 +4,28 @@ Reservation `<%= @reservation.confirmation %>` Details -
 <div class="container">
   <div class="page-header">
     <h1>
-      <div class="pull-left">
-        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, [@reservation.space.location.org, @reservation.space.location, @reservation.space, :reservations], class: "btn btn-default", title: "Back to reservations" %>
-        &nbsp;
-      </div>
       <small>Reservation:</small> <%= @reservation.confirmation %>
     </h1>
   </div>
-
+  
+  <% if @reservation.checked_in_at %>
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Checked In At</label>
+    <div class="col-sm-9"><%= @reservation.checked_in_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+  
+  <hr/>
+  <% end %>
+  
+  <% if @reservation.canceled_at %>
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Canceled At</label>
+    <div class="col-sm-9"><%= @reservation.canceled_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+  
+  <hr/>
+  <% end %>
+  
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Space</label>
     <div class="col-sm-9"><%= @reservation.space.name %> at <%= @reservation.space.location.name %></div>
@@ -43,17 +57,17 @@ Reservation `<%= @reservation.confirmation %>` Details -
   
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Name</label>
-    <div class="col-sm-9"><%= @reservation.name %></div>
-  </div>
-  
-  <div class="row">
-    <label class="col-sm-3 text-right text-muted">User</label>
-    <div class="col-sm-9"><%= @reservation.user.full_name %></div>
+    <div class="col-sm-9">
+      <%= @reservation.name %>
+      <% if @reservation.user %>
+      (<%= link_to "profile", @reservation.user %>)
+      <% end %>
+    </div>
   </div>
 
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Email</label>
-    <div class="col-sm-9"><%= @reservation.email %></div>
+    <div class="col-sm-9"><%= link_to @reservation.email, "mailto:#{@reservation.email}" %></div>
   </div>
   
   <div class="row">

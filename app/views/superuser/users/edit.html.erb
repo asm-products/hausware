@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+Edit User - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>Editing User</h1>
+  </div>
+
+  <%= render 'form' %>
+
+  <div class="clearfix"></div>
+  <div class="pull-left">
+    <%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, @user, class: "btn btn-default" %>
+  </div>
+  <div class="pull-right">
+    <%= link_to "<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> Delete user...".html_safe, @user, method: :delete, data: { confirm: "Are you sure you want to delete this user?" }, class: "btn btn-danger" %>
+  </div>
+</div>

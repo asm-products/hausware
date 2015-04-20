@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
       if authed_user && (authed_user.superuser || (membership && membership.reception?) || authed_administrator)
         true
       else
-        true
+        false
       end
     end
   end

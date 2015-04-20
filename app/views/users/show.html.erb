@@ -8,15 +8,18 @@
         <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, users_path, class: "btn btn-default", title: "Back to users" %>
         &nbsp;
       </div>
+      <% if @user.id.to_s == authed_user.id.to_s %>
       <div class="pull-right">
-        <%= link_to "<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Edit".html_safe, edit_user_path(@user), class: "btn btn-warning" %>
+        <%= link_to "<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Edit Account Details".html_safe, edit_account_user_path(@user), class: "btn btn-warning" %>
       </div>
+      <% end %>
       <%= image_tag(@user.picurl) %> <%= @user.full_name %>
       <span class="text-muted">(<%= @user.username %>)</span>
     </h1>
   </div>
 
-  
+
+  <% if @user.id.to_s == authed_user.id.to_s %>
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Email</label>
     <div class="col-sm-9"><%= link_to @user.email, "mailto:#{@user.email}" %></div>
@@ -64,7 +67,7 @@
     <label class="col-sm-3 text-right text-muted">Twitter</label>
     <div class="col-sm-9"><%= @user.twitterid.blank? ? link_to('Connect Twitter', '/auth/twitter') : '<span class="glyphicon glyphicon-check" aria-hidden="true"></span>'.html_safe %></div>
   </div>
-
+  <% end %>
 
 </div>
 

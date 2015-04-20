@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :reservations
   has_many :orgs, foreign_key: 'owner_id'
+  has_many :memberships
   
   before_validation :autofill_username_if_blank
   

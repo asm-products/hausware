@@ -35,9 +35,13 @@
       </ul>
       <% else %><%# ---- logged in ---- %>
       <ul class="nav navbar-nav navbar-right">
+        <% if authed_user.superuser %>
+        <li<%= request.path.starts_with?("/superuser/") ? " class=\"active\"".html_safe : "" %>><a href="<%= superuser_users_path %>"><span class="glyphicon glyphicon-king" aria-hidden="true"></span> Superuser</a></li>
+        <% end %>
         <% if @org && authed_administrator %>
         <li<%= request.path.starts_with?("/admin/") ? " class=\"active\"".html_safe : "" %>><a href="<%= admin_org_path(@org) %>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Administrate <%= @org.name %></a></li>
         <% end %>
+        <li<%= request.path.starts_with?("/account/") ? " class=\"active\"".html_safe : "" %>><a href="<%= account_reservations_path %>"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Account</a></li>
         <li class="profile dropdown">
           <a class="dropdown-toggle" type="button" id="profile-dropdown" data-toggle="dropdown" aria-expanded="false"><img src='<%= authed_user.picurl %>'> <%= authed_user.full_name %> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="profile-dropdown">

@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
 
+  namespace :superuser do
+    resources :users
+  end
+
+  namespace :account do
+    resources :reservations
+    resources :users
+  end
+
   namespace :admin do
     resources :orgs do
       resources :locations do
         resources :memberships
-        resources :spaces
+        resources :spaces do
+          resources :slides
+        end
       end
       resources :settings
       resources :memberships
