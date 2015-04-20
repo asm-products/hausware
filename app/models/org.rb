@@ -2,7 +2,7 @@ class Org < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
   has_many :locations, dependent: :destroy
   has_many :memberships, dependent: :destroy
-  has_one :setting
+  has_one :setting, dependent: :destroy
   
   before_validation :autofill_permalink_if_blank
   

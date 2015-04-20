@@ -1,18 +1,15 @@
 <% content_for :page_title do %>
-Edit Setting - 
+Edit Settings - 
 <% end %>
 <div class="container">
-<div class="page-header">
-<h1>Editing Setting</h1>
-</div>
+  <div class="page-header">
+    <h1>Editing Settings</h1>
+  </div>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<div class="clearfix"></div>
-<div class="pull-left">
-<%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, @setting, class: "btn btn-default" %>
-</div>
-<div class="pull-right">
-<%= link_to "<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> Delete setting...".html_safe, @setting, method: :delete, data: { confirm: "Are you sure you want to delete this setting?" }, class: "btn btn-danger" %>
-</div>
+  <div class="clearfix"></div>
+  <div class="pull-left">
+    <%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, [:admin, @setting.org, @setting], class: "btn btn-default" %>
+  </div>
 </div>

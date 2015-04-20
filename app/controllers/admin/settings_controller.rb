@@ -2,12 +2,15 @@ class Admin::SettingsController < ApplicationController
   before_action :set_org
   before_filter :enforce_auth
   before_filter :enforce_org_administrator
-  before_action :set_setting, only: [:show, :edit, :update, :destroy]
+  before_action :set_setting, only: [:show, :edit, :update]
 
   # GET /settings
   # GET /settings.json
   def index
-    @settings = [@org.setting]
+    if @org.setting.blank?
+      @org.create_setting!
+    end
+    redirect_to [:admin, @org, @org.setting]
   end
 
   # GET /settings/1
@@ -15,30 +18,11 @@ class Admin::SettingsController < ApplicationController
   def show
   end
 
-  # GET /settings/new
-  def new
-    @setting = @org.build_setting
-  end
 
   # GET /settings/1/edit
   def edit
   end
 
-  # POST /settings
-  # POST /settings.json
-  def create
-    @setting = @org.build_setting(setting_params)
-
-    respond_to do |format|
-      if @setting.save
-        format.html { redirect_to [:admin, @setting.org, @setting], notice: 'Setting was successfully created.' }
-        format.json { render :show, status: :created, location: [:admin, @setting.org, @setting] }
-      else
-        format.html { render :new }
-        format.json { render json: @setting.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # PATCH/PUT /settings/1
   # PATCH/PUT /settings/1.json
@@ -54,15 +38,6 @@ class Admin::SettingsController < ApplicationController
     end
   end
 
-  # DELETE /settings/1
-  # DELETE /settings/1.json
-  def destroy
-    @setting.destroy
-    respond_to do |format|
-      format.html { redirect_to [:admin, @setting.org], notice: 'Setting was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
 
