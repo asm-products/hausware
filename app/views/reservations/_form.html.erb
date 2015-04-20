@@ -4,7 +4,7 @@
 var ReservationSpace = <%= @reservation.space.to_json.html_safe %>;
 var ReservationLocation = <%= @reservation.space.location.to_json.html_safe %>;
 var ReservationValidationUrl = <%= validate_org_location_space_reservations_path(@reservation.space.location.org, @reservation.space.location, @reservation.space, format: 'json').to_json.html_safe %>;
-var StripeKey = <%= Rails.configuration.stripe[:publishable_key].to_json.html_safe %>;
+var StripeKey = <%= @reservation.space.location.org.setting ? @reservation.space.location.org.setting.stripe_publishable_key.to_json.html_safe : "''" %>;
 </script>
 
 <div class="container">

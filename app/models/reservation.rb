@@ -25,6 +25,8 @@ class Reservation < ActiveRecord::Base
   
   def charge_via_stripe
     begin
+      Stripe.api_key = self.space.location.org.setting ? self.space.location.org.setting.decrypted_stripe_secret_key : ''
+      
       customer = Stripe::Customer.create(
         email: self.email,
         card: self.stripe_token,
