@@ -8,7 +8,7 @@ Space reserved: <%= @reservation.space.name %>
 Begins: <%= @reservation.starts_at_in_zone.strftime('%D %I:%M %p') %>
 Ends: <%= @reservation.ends_at_in_zone.strftime('%D %I:%M %p') %>
 
-If you can no longer make your reservation, please cancel your reservation  to make room for others, by clicking here: <%= cancel_org_location_space_reservation_url(@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation) %>
+If you can no longer make your reservation, please cancel your reservation  to make room for others, by clicking here: <%= @url_base + cancel_org_location_space_reservation_path(@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation) %>
 
 We look forward to seeing you!
 The <%= @reservation.space.location.org.name %> Team

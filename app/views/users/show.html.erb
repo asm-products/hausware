@@ -5,7 +5,7 @@
   <div class="page-header">
     <h1>
       <div class="pull-left">
-        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, users_path, class: "btn btn-default", title: "Back to users" %>
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, root_url, class: "btn btn-default", title: "Home" %>
         &nbsp;
       </div>
       <% if @user.id.to_s == authed_user.id.to_s %>

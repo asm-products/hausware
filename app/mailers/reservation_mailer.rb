@@ -1,6 +1,7 @@
 class ReservationMailer < ApplicationMailer
-  def created_email(reservation)
+  def created_email(reservation, url_base)
     @reservation = reservation
+    @url_base = url_base
     mail(to: @reservation.email, subject: "Reservation at #{@reservation.space.location.org.name}, #{@reservation.space.location.name} on #{@reservation.starts_at_in_zone.strftime('%D %I:%M %p')}")
   end
   def canceled_email(reservation)

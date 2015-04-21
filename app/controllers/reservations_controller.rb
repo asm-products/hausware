@@ -63,7 +63,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
-        ReservationMailer.created_email(@reservation).deliver_later
+        ReservationMailer.created_email(@reservation, root_url.gsub(/\/$/, '')).deliver_later
         format.html { redirect_to [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully created.' }
         format.json { render :show, status: :created, location: [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation] }
       else

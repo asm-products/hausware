@@ -16,7 +16,7 @@
       Ends: <%= @reservation.ends_at_in_zone.strftime('%D %I:%M %p') %>
     </p>
     <p>
-      If you can no longer make your reservation, please <%= link_to 'cancel your reservation', cancel_org_location_space_reservation_url(@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation) %> to make room for others.
+      If you can no longer make your reservation, please <%= link_to 'cancel your reservation', @url_base + cancel_org_location_space_reservation_path(@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation) %> to make room for others.
     </p>
     <p>
       We look forward to seeing you!<br>
