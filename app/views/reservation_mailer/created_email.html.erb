@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Reservation confirmed at <%= @reservation.space.location.org.name %>, in <%= @reservation.space.location.name %></h1>
+    <p>
+      Hi <%= @reservation.name %>,<br>
+      Thanks for your reservation!  Below are the details:
+    </p>
+    <p>
+      Confirmation Code: <%= @reservation.confirmation %><br>
+      Space reserved: <%= @reservation.space.name %><br>
+      Begins: <%= @reservation.starts_at_in_zone.strftime('%D %I:%M %p') %><br>
+      Ends: <%= @reservation.ends_at_in_zone.strftime('%D %I:%M %p') %>
+    </p>
+    <p>
+      If you can no longer make your reservation, please <%= link_to 'cancel your reservation', cancel_org_location_space_reservation_url(@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation) %> to make room for others.
+    </p>
+    <p>
+      We look forward to seeing you!<br>
+      The 
+      <% unless @reservation.space.location.org.url.blank? %><a href="<%= @reservation.space.location.org.url %>"><% end %><%= @reservation.space.location.org.name %><% unless @reservation.space.location.org.url.blank? %></a><% end %>
+      Team
+    </p>
+  </body>
+</html>

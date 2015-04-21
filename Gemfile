@@ -42,6 +42,9 @@ gem 'rails_12factor', group: :production
 # Conveniences to get bootstrap view generators
 gem 'bootscaf', group: :development
 
+# Get more information about email sending
+gem 'mandrill-api'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

@@ -23,9 +23,32 @@ class Reservation < ActiveRecord::Base
     self.confirmation
   end
   
+  def cancelable?
+    Time.now.in_time_zone(self.timezone.blank? ? self.space.location.timezone : self.timezone) < self.starts_at_in_zone && self.checked_in_at.blank? && self.canceled_at.blank?
+  end
+  
+  def update_marked_as_canceled
+    if !self.checked_in_at.blank?
+      errors.add(:canceled_at, " - already checked in for this reservation") 
+      return false
+    end
+
+    if !self.canceled_at.blank?
+      errors.add(:canceled_at, " - reservation was already canceled") 
+      return false
+    end
+    
+    return update_attribute(:canceled_at, Time.now)
+  end
+  
   def update_marked_as_checkedin
     if !self.checked_in_at.blank?
       errors.add(:checked_in_at, " - already checked in for this reservation") 
+      return false
+    end
+
+    if !self.canceled_at.blank?
+      errors.add(:checked_in_at, " - reservation was canceled") 
       return false
     end
     

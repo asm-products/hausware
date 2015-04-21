@@ -1,0 +1,15 @@
+Reservation confirmed at <%= @reservation.space.location.org.name %>, in <%= @reservation.space.location.name %>.
+
+Hi <%= @reservation.name %>,
+Thanks for your reservation!  Below are the details:
+
+Confirmation Code: <%= @reservation.confirmation %>
+Space reserved: <%= @reservation.space.name %>
+Begins: <%= @reservation.starts_at_in_zone.strftime('%D %I:%M %p') %>
+Ends: <%= @reservation.ends_at_in_zone.strftime('%D %I:%M %p') %>
+
+If you can no longer make your reservation, please cancel your reservation  to make room for others, by clicking here: <%= cancel_org_location_space_reservation_url(@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation) %>
+
+We look forward to seeing you!
+The <%= @reservation.space.location.org.name %> Team
+<% unless @reservation.space.location.org.url.blank? %><%= @reservation.space.location.org.url %><% end %>

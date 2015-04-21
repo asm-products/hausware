@@ -43,6 +43,11 @@ Rails.application.routes.draw do
           collection do
             post :validate
           end
+          member do
+            get :cancel
+            put :canceled
+            patch :canceled
+          end
         end
         resources :slides
       end

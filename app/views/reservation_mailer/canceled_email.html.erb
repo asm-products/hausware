@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Reservation <strong>canceled</strong> at <%= @reservation.space.location.org.name %>, in <%= @reservation.space.location.name %></h1>
+    <p>
+      Hi <%= @reservation.name %>,<br>
+      Thank you for letting us know you couldn't make it. 
+    </p>
+    <p>
+      Confirmation Code: <%= @reservation.confirmation %><br>
+      Canceled at: <%= @reservation.canceled_at_in_zone.strftime('%D %I:%M %p') %>
+    </p>
+    <p>
+      We hope to see you again soon some other time.<br>
+      The 
+      <% unless @reservation.space.location.org.url.blank? %><a href="<%= @reservation.space.location.org.url %>"><% end %><%= @reservation.space.location.org.name %><% unless @reservation.space.location.org.url.blank? %></a><% end %>
+      Team
+    </p>
+  </body>
+</html>

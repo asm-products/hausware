@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :set_org
   before_action :set_location
   before_action :set_space
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :set_reservation, only: [:show, :cancel, :canceled, :edit, :update, :destroy]
 
 
   # GET /reservations/1
@@ -23,6 +23,11 @@ class ReservationsController < ApplicationController
     end
   end
 
+  # GET /reservations/1/cancel
+  # GET /reservations/1/cancel.json
+  def cancel
+  end
+  
   # POST /reservations/validate.json
   def validate
     @reservation = @space.reservations.build(reservation_params.merge(user: authed_user))
@@ -36,6 +41,21 @@ class ReservationsController < ApplicationController
     end
   end
   
+  # PATCH/PUT /reservations/1/canceled
+  # PATCH/PUT /reservations/1/canceled.json
+  def canceled
+    respond_to do |format|
+      if @reservation.update_marked_as_canceled
+        ReservationMailer.canceled_email(@reservation).deliver_later
+        format.html { redirect_to [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully canceled.' }
+        format.json { render :show, status: :created, location: [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation] }
+      else
+        format.html { render :cancel }
+        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   # POST /reservations
   # POST /reservations.json
   def create
@@ -43,6 +63,7 @@ class ReservationsController < ApplicationController
 
     respond_to do |format|
       if @reservation.save
+        ReservationMailer.created_email(@reservation).deliver_later
         format.html { redirect_to [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully created.' }
         format.json { render :show, status: :created, location: [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation] }
       else

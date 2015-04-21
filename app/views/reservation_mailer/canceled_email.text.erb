@@ -1,0 +1,11 @@
+Reservation *canceled* at <%= @reservation.space.location.org.name %>, in <%= @reservation.space.location.name %>.
+
+Hi <%= @reservation.name %>,
+Thank you for letting us know you couldn't make it. 
+
+Confirmation Code: <%= @reservation.confirmation %>
+Canceled at: <%= @reservation.canceled_at_in_zone.strftime('%D %I:%M %p') %>
+
+We hope to see you again soon some other time.
+The <%= @reservation.space.location.org.name %> Team
+<% unless @reservation.space.location.org.url.blank? %><%= @reservation.space.location.org.url %><% end %>

@@ -1,0 +1,82 @@
+<% content_for :page_title do %>
+Cancel Reservation... - <%= @reservation.confirmation %> - 
+<% end %>
+
+<div class="container">
+  
+  <div class="page-header">
+    <h1>
+      <div class="pull-left">
+        <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], class: "btn btn-default", title: "Back to reservation details" %>
+        &nbsp;
+      </div>
+
+      Cancel Reservation? 
+      <small>
+        <%= @reservation.confirmation %>
+      </small>
+    </h1>
+  </div>
+  
+  <% if @reservation.cancelable? %>
+  <%= form_for([:canceled, @reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation]) do |f| %>
+  <% if @reservation.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger" role="alert">
+    <strong><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being canceled:</strong>
+
+    <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+
+  
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Space</label>
+    <div class="col-sm-9"><%= @reservation.space.name %> at <%= @reservation.space.location.org.name %>, <%= @reservation.space.location.name %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Start at</label>
+    <div class="col-sm-9"><%= @reservation.starts_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Ends at</label>
+    <div class="col-sm-9"><%= @reservation.ends_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+  
+  <hr/>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted"></label>
+    <div class="col-sm-9">Are you sure you'd like to cancel this reservation?</div>
+  </div>
+
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted"></label>
+    <div class="col-sm-9">
+      <br>
+      <%= f.submit 'Cancel Reservation', class: "btn btn-lg btn-warning" %>
+    </div>
+  </div>
+
+  <% end %>
+  <% else %>
+  <p>
+    Sorry, this reservation is no longer able to be canceled.
+    <% if !@reservation.canceled_at.blank? %>
+    It was canceled <%= distance_of_time_in_words_to_now @reservation.canceled_at %> ago.
+    <% elsif !@reservation.checked_in_at.blank? %>
+    It seems like you might have already checked in!
+    <% end %>
+  </p>
+  <% end %>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Do not cancel - back to reservation".html_safe, [@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], class: "btn btn-default" %>
+</div>

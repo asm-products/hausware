@@ -4,6 +4,13 @@ Reservation `<%= @reservation.confirmation %>` Details -
 <div class="container">
   <div class="page-header">
     <h1>
+      
+      <% if @reservation.cancelable? %>
+      <div class="pull-right">
+        <%= link_to "<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> Cancel Reservation...".html_safe, cancel_org_location_space_reservation_path(@reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation), class: "btn btn-warning" %>
+      </div>
+      <% end %>
+      
       <small>Reservation:</small> <%= @reservation.confirmation %>
     </h1>
   </div>
