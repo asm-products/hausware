@@ -29,12 +29,12 @@ Users -
         <th><span>Last name</span></th>
         <th><span>Phone</span></th>
         <th><span>Zipcode</span></th>
+        <th><span>Angellist</span></th>
         <th><span>Facebookid</span></th>
         <th><span>Githubid</span></th>
         <th><span>Googleid</span></th>
         <th><span>Linkedinid</span></th>
         <th><span>Twitterid</span></th>
-        <th><span>Picurl</span></th>
         <th><span>Superuser</span></th>
       
       </tr>
@@ -56,14 +56,13 @@ Users -
         <td><%= link_to user.last_name, user %></td>
         <td><%= link_to user.phone, user %></td>
         <td><%= link_to user.zipcode, user %></td>
-        <td><%= link_to user.angellistid, user %></td>
-        <td><%= link_to user.facebookid, user %></td>
-        <td><%= link_to user.githubid, user %></td>
-        <td><%= link_to user.googleid, user %></td>
-        <td><%= link_to user.linkedinid, user %></td>
-        <td><%= link_to user.twitterid, user %></td>
-        <td><%= link_to user.picurl, user %></td>
-        <td><%= link_to user.superuser, user %></td>
+        <td><%= link_to user.angellistid ? user.angellistid : 'n/a', user %></td>
+        <td><%= link_to user.facebookid ? user.facebookid : 'n/a', user %></td>
+        <td><%= link_to user.githubid ? user.githubid : 'n/a', user %></td>
+        <td><%= link_to user.googleid ? user.googleid : 'n/a', user %></td>
+        <td><%= link_to user.linkedinid ? user.linkedinid : 'n/a', user %></td>
+        <td><%= link_to user.twitterid ? user.twitterid : 'n/a', user %></td>
+        <td><%= link_to user.superuser ? 'Yes' : 'no', user %></td>
         
         
         
