@@ -25,7 +25,11 @@ Rails.application.routes.draw do
   namespace :reception do
     resources :orgs do
       resources :locations do
-        resources :reservations
+        resources :reservations do
+          member do
+            put :checkedin
+          end
+        end
       end
     end 
   end

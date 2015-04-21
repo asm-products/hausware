@@ -8,10 +8,34 @@ Reservation `<%= @reservation.confirmation %>` Details -
         <%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, [:reception, @reservation.space.location.org, @reservation.space.location, :reservations], class: "btn btn-default", title: "Back to reservations" %>
         &nbsp;
       </div>
+      
+      <% if @reservation.checked_in_at.blank? %>
+      <div class="pull-right">
+        <a class="btn btn-info checkin-now-button" data-reservation-checkinnow-prompt="Really mark `<%= @reservation.name %>` as checked-in to `<%= @reservation.space.name %>` now?" data-reservation-checkinnow-path="<%= checkedin_reception_org_location_reservation_path(@reservation.space.location.org, @reservation.space.location, @reservation, format: 'json') %>">Checkin Now...</a>
+      </div>
+      <% end %>
+      
       <small>Reservation:</small> <%= @reservation.confirmation %>
     </h1>
   </div>
-
+  
+  <% if @reservation.checked_in_at %>
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Checked In At</label>
+    <div class="col-sm-9"><%= @reservation.checked_in_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+  
+  <hr/>
+  <% end %>
+  
+  <% if @reservation.canceled_at %>
+  <div class="row">
+    <label class="col-sm-3 text-right text-muted">Canceled At</label>
+    <div class="col-sm-9"><%= @reservation.canceled_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
+  </div>
+  
+  <hr/>
+  <% end %>
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Stripe Charge</label>
     <div class="col-sm-9">
@@ -21,19 +45,6 @@ Reservation `<%= @reservation.confirmation %>` Details -
   
   <hr/>
   
-  <% if @reservation.checked_in_at %>
-  <div class="row">
-    <label class="col-sm-3 text-right text-muted">Checked In At</label>
-    <div class="col-sm-9"><%= @reservation.checked_in_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
-  </div>
-  <% end %>
-  
-  <% if @reservation.canceled_at %>
-  <div class="row">
-    <label class="col-sm-3 text-right text-muted">Canceled At</label>
-    <div class="col-sm-9"><%= @reservation.canceled_at_in_zone.strftime('%I:%M%p (%Z), %m/%d/%y') %></div>
-  </div>
-  <% end %>
 
   <div class="row">
     <label class="col-sm-3 text-right text-muted">Space</label>

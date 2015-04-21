@@ -3,7 +3,7 @@ class Reception::ReservationsController < ApplicationController
   before_filter :enforce_auth
   before_filter :enforce_org_receptionist
   before_action :set_location
-  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :set_reservation, only: [:show, :edit, :checkedin, :update, :destroy]
   
   # GET /reservations
   # GET /reservations.json
@@ -26,8 +26,23 @@ class Reception::ReservationsController < ApplicationController
   def update
     respond_to do |format|
       if @reservation.update(reservation_params)
-        format.html { redirect_to [:reception, @reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation], notice: 'Reservation was successfully updated.' }
-        format.json { render :show, status: :ok, location: [:reception, @reservation.space.location.org, @reservation.space.location, @reservation.space, @reservation] }
+        format.html { redirect_to [:reception, @reservation.space.location.org, @reservation.space.location, @reservation], notice: 'Reservation was successfully updated.' }
+        format.json { render :show, status: :ok, location: [:reception, @reservation.space.location.org, @reservation.space.location, @reservation] }
+      else
+        format.html { render :edit }
+        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  # PATCH/PUT /reservations/1/checkedin
+  # PATCH/PUT /reservations/1/checkedin.json
+  def checkedin
+    respond_to do |format|
+      if @reservation.update_marked_as_checkedin
+        format.html { redirect_to [:reception, @reservation.space.location.org, @reservation.space.location, @reservation], notice: 'Reservation was successfully updated.' }
+        format.json { render :show, status: :ok, location: [:reception, @reservation.space.location.org, @reservation.space.location, @reservation] }
       else
         format.html { render :edit }
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
@@ -35,13 +50,12 @@ class Reception::ReservationsController < ApplicationController
     end
   end
   
-  
   # DELETE /reservations/1
   # DELETE /reservations/1.json
   def destroy
     @reservation.destroy
     respond_to do |format|
-      format.html { redirect_to reception_org_location_space_reservations_url(@reservation.space.location.org, @reservation.space.location, @reservation.space), notice: 'Reservation was successfully destroyed.' }
+      format.html { redirect_to reception_org_location_reservations_url(@reservation.space.location.org, @reservation.space.location), notice: 'Reservation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

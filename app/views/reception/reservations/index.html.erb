@@ -45,7 +45,13 @@
         <td><%= link_to reservation.space.name, [:reception, reservation.space.location.org, reservation.space.location, reservation] %></td>
         <td><%= link_to reservation.starts_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [:reception, reservation.space.location.org, reservation.space.location, reservation] %></td>
         <td><%= link_to reservation.ends_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [:reception, reservation.space.location.org, reservation.space.location, reservation] %></td>
-        <td><% unless reservation.checked_in_at.blank? %><%= link_to reservation.checked_in_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [:reception, reservation.space.location.org, reservation.space.location, reservation] %><% end %></td>
+        <td>
+          <% if reservation.checked_in_at.blank? %>
+          <a class="btn btn-xs btn-info checkin-now-button" data-reservation-checkinnow-prompt="Really mark `<%= reservation.name %>` as checked-in to `<%= reservation.space.name %>` now?" data-reservation-checkinnow-path="<%= checkedin_reception_org_location_reservation_path(reservation.space.location.org, reservation.space.location, reservation, format: 'json') %>">Checkin Now...</a>
+          <% else %>
+          <%= link_to reservation.checked_in_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [:reception, reservation.space.location.org, reservation.space.location, reservation] %>
+          <% end %>
+        </td>
         <td><% unless reservation.canceled_at.blank? %><%= link_to reservation.canceled_at.in_time_zone(reservation.space.location.timezone).strftime('%D %I:%M %p'), [:reception, reservation.space.location.org, reservation.space.location, reservation] %><% end %></td>
         <td><%= link_to reservation.confirmation, [:reception, reservation.space.location.org, reservation.space.location, reservation] %></td>
         <td>

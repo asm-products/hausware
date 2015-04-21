@@ -23,6 +23,15 @@ class Reservation < ActiveRecord::Base
     self.confirmation
   end
   
+  def update_marked_as_checkedin
+    if !self.checked_in_at.blank?
+      errors.add(:checked_in_at, " - already checked in for this reservation") 
+      return false
+    end
+    
+    return update_attribute(:checked_in_at, Time.now)
+  end
+  
   def charge_via_stripe
     begin
       Stripe.api_key = self.space.location.org.setting ? self.space.location.org.setting.decrypted_stripe_secret_key : ''
