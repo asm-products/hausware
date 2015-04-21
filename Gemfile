@@ -33,7 +33,7 @@ gem 'omniauth-twitter'
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 
 # Upload files / photos
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0' # this is currently the only one that works with paperclip 4/21/15
 gem 'paperclip'
 
 # Heroku to serve assets

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+  get 'slides/index'
+  end
+
   namespace :superuser do
     resources :users
   end

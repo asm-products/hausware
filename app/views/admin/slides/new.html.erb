@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+Create Slide - 
+<% end %>
+<div class="container">
+  <div class="page-header">
+    <h1>
+      New Slide
+      <small>
+        <%= @space.name %>, <%= @space.location.name %>
+      </small>
+    </h1>
+  </div>
+
+  <%= render 'form' %>
+
+  <div class="clearfix"></div>
+  <%= link_to "<span class=\"glyphicon glyphicon-ban-circle\" aria-hidden=\"true\"></span> Cancel".html_safe, admin_org_location_space_path(@space.location.org, @space.location, @space), class: "btn btn-default" %>
+</div>

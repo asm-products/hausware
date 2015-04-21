@@ -1,10 +1,13 @@
 class SlidesController < ApplicationController
-  before_action :set_slide, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_org
+  before_action :set_location
+  before_action :set_space
+  before_action :set_slide, only: [:show]
+  
   # GET /slides
   # GET /slides.json
   def index
-    @slides = Slide.all
+    @slides = @space.slides.all
   end
 
   # GET /slides/1
@@ -12,63 +15,28 @@ class SlidesController < ApplicationController
   def show
   end
 
-  # GET /slides/new
-  def new
-    @slide = Slide.new
-  end
-
-  # GET /slides/1/edit
-  def edit
-  end
-
-  # POST /slides
-  # POST /slides.json
-  def create
-    @slide = Slide.new(slide_params)
-
-    respond_to do |format|
-      if @slide.save
-        format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
-        format.json { render :show, status: :created, location: @slide }
-      else
-        format.html { render :new }
-        format.json { render json: @slide.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /slides/1
-  # PATCH/PUT /slides/1.json
-  def update
-    respond_to do |format|
-      if @slide.update(slide_params)
-        format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
-        format.json { render :show, status: :ok, location: @slide }
-      else
-        format.html { render :edit }
-        format.json { render json: @slide.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /slides/1
-  # DELETE /slides/1.json
-  def destroy
-    @slide.destroy
-    respond_to do |format|
-      format.html { redirect_to slides_url, notice: 'Slide was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_org
+      @org = Org.find_by_permalink(params[:org_id])
+      raise ActiveRecord::RecordNotFound unless @org
+    end
+  
+    # Use callbacks to share common setup or constraints between actions.
+    def set_location
+      @location = @org.locations.find_by_permalink(params[:location_id])
+      raise ActiveRecord::RecordNotFound unless @location
+    end
+  
+    # Use callbacks to share common setup or constraints between actions.
+    def set_space
+      @space = @location.spaces.find_by_permalink(params[:space_id])
+      raise ActiveRecord::RecordNotFound unless @space
+    end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_slide
-      @slide = Slide.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def slide_params
-      params.require(:slide).permit(:slideshowable_id, :picture, :order, :caption)
+      @slide = @space.slides.find(params[:id])
     end
 end

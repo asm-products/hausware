@@ -57,5 +57,53 @@ Space Details -
     <div class="col-sm-9"><%= @space.description %></div>
   </div>
 
+  <hr/>
+  
+  <h2>
+
+    <div class="pull-right">
+      <%= link_to "<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> Add Picture".html_safe, [:new, :admin, @space.location.org, @space.location, @space, :slide], class: "btn btn-success" %>
+    </div>
+    Slideshow
+  </h2>
+  
+  <% if @space.slides.empty? %>
+  <p class="text-center">No slides yet.  <%= link_to 'Add one!', [:new, :admin, @space.location.org, @space.location, @space, :slide] %></p> 
+  <% else %>
+
+  <% @space.slides.order(order: 'asc').all.in_groups_of(4) do |group| %>
+  <div class="row">
+    <% group.each do |slide| %>
+    <div class="col-xs-6 col-md-3">
+      <% unless slide.nil? %>
+      <a data-toggle="modal" data-target="#slide-<%= slide.id %>" class="thumbnail">
+        <%= image_tag slide.picture.url %>
+        <div class="caption">
+          <p><%= truncate slide.caption, separator: ' ', length: 80 %></p>
+        </div>
+      </a>
+
+      
+      <div class="modal fade" tabindex="-1" role="dialog" id="slide-<%= slide.id %>" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-body">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p class="text-center">
+                <%= image_tag slide.picture.url %>
+                <br/>
+                <%= slide.caption %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+  <% end %>
+
 </div>
 
