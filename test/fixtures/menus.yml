@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location_id: 
+  name: MyString
+  permalink: MyString
+  position: 1
+  sunday_starting: 1
+  sunday_ending: 1
+  monday_starting: 1
+  monday_ending: 1
+  tuesday_starting: 1
+  tuesday_ending: 1
+  wednesday_starting: 1
+  wednesday_ending: 1
+  thursday_starting: 1
+  thursday_ending: 1
+  friday_starting: 1
+  friday_ending: 1
+  saturday_starting: 1
+  saturday_ending: 1
+
+two:
+  location_id: 
+  name: MyString
+  permalink: MyString
+  position: 1
+  sunday_starting: 1
+  sunday_ending: 1
+  monday_starting: 1
+  monday_ending: 1
+  tuesday_starting: 1
+  tuesday_ending: 1
+  wednesday_starting: 1
+  wednesday_ending: 1
+  thursday_starting: 1
+  thursday_ending: 1
+  friday_starting: 1
+  friday_ending: 1
+  saturday_starting: 1
+  saturday_ending: 1

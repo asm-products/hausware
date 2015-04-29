@@ -1,0 +1,161 @@
+<%= form_for(@menu) do |f| %>
+  <% if @menu.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</strong>
+
+      <ul>
+      <% @menu.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:location_id].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :location_id, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :location_id, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:name].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :name, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :name, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:permalink].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :permalink, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :permalink, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:position].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :position, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :position, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:sunday_starting].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :sunday_starting, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :sunday_starting, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:sunday_ending].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :sunday_ending, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :sunday_ending, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:monday_starting].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :monday_starting, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :monday_starting, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:monday_ending].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :monday_ending, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :monday_ending, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:tuesday_starting].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :tuesday_starting, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :tuesday_starting, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:tuesday_ending].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :tuesday_ending, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :tuesday_ending, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:wednesday_starting].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :wednesday_starting, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :wednesday_starting, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:wednesday_ending].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :wednesday_ending, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :wednesday_ending, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:thursday_starting].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :thursday_starting, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :thursday_starting, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:thursday_ending].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :thursday_ending, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :thursday_ending, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:friday_starting].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :friday_starting, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :friday_starting, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:friday_ending].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :friday_ending, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :friday_ending, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:saturday_starting].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :saturday_starting, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :saturday_starting, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:saturday_ending].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :saturday_ending, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :saturday_ending, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="actions text-center">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>

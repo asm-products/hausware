@@ -1,0 +1,2 @@
+module Kitchen::OrdersHelper
+end

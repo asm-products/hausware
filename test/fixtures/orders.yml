@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  location_id: 
+  fulfilled_at: 2015-04-29 08:51:05
+  delivered_at: 2015-04-29 08:51:05
+  name: MyString
+  email: MyString
+  phone: MyString
+  zipcode: MyString
+  confirmation: MyString
+  subtotal_in_cents: 1
+  tax_in_cents: 1
+  total_in_cents: 1
+  chargeid: MyString
+  canceled_at: 2015-04-29 08:51:05
+
+two:
+  user_id: 
+  location_id: 
+  fulfilled_at: 2015-04-29 08:51:05
+  delivered_at: 2015-04-29 08:51:05
+  name: MyString
+  email: MyString
+  phone: MyString
+  zipcode: MyString
+  confirmation: MyString
+  subtotal_in_cents: 1
+  tax_in_cents: 1
+  total_in_cents: 1
+  chargeid: MyString
+  canceled_at: 2015-04-29 08:51:05

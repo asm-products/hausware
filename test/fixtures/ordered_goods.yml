@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_id: 
+  good_id: 
+  name: MyString
+  quantity: 1
+  subtotal_in_cents: 1
+  fulfilled_at: 2015-04-29 08:56:05
+  canceled_at: 2015-04-29 08:56:05
+
+two:
+  order_id: 
+  good_id: 
+  name: MyString
+  quantity: 1
+  subtotal_in_cents: 1
+  fulfilled_at: 2015-04-29 08:56:05
+  canceled_at: 2015-04-29 08:56:05

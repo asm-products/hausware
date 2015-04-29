@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :page_title do %>
+Orders - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+&nbsp;
+</div>
+
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Order".html_safe, [:new, :order], class: "btn btn-success" %>
+</div>
+Listing Orders
+</h1>
+</div>
+
+<table class="table table-striped table-hover tablesorter" id="Orders-table">
+
+
+  <thead>
+<tr>
+    
+      <th><span>User</span></th>
+      <th><span>Location</span></th>
+      <th><span>Fulfilled at</span></th>
+      <th><span>Delivered at</span></th>
+      <th><span>Name</span></th>
+      <th><span>Email</span></th>
+      <th><span>Phone</span></th>
+      <th><span>Zipcode</span></th>
+      <th><span>Confirmation</span></th>
+      <th><span>Subtotal in cents</span></th>
+      <th><span>Tax in cents</span></th>
+      <th><span>Total in cents</span></th>
+      <th><span>Chargeid</span></th>
+      <th><span>Canceled at</span></th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @orders.any? %>
+<tr id="empty-table">
+<td class="bg-warning" colspan="2">No orders created yet.</td>
+</tr>
+<% end %>
+<% @orders.each do |order| %>
+<tr class="linked-row" data-href="<%= order_path(order) %>">
+      
+        <td><%= link_to order.user, order %></td>
+        <td><%= link_to order.location, order %></td>
+        <td><%= link_to order.fulfilled_at, order %></td>
+        <td><%= link_to order.delivered_at, order %></td>
+        <td><%= link_to order.name, order %></td>
+        <td><%= link_to order.email, order %></td>
+        <td><%= link_to order.phone, order %></td>
+        <td><%= link_to order.zipcode, order %></td>
+        <td><%= link_to order.confirmation, order %></td>
+        <td><%= link_to order.subtotal_in_cents, order %></td>
+        <td><%= link_to order.tax_in_cents, order %></td>
+        <td><%= link_to order.total_in_cents, order %></td>
+        <td><%= link_to order.chargeid, order %></td>
+        <td><%= link_to order.canceled_at, order %></td>
+        
+        
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+
+

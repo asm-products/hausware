@@ -1,0 +1,87 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :page_title do %>
+Menus - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+&nbsp;
+</div>
+
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Menu".html_safe, [:new, :menu], class: "btn btn-success" %>
+</div>
+Listing Menus
+</h1>
+</div>
+
+<table class="table table-striped table-hover tablesorter" id="Menus-table">
+
+
+  <thead>
+<tr>
+    
+      <th><span>Location</span></th>
+      <th><span>Name</span></th>
+      <th><span>Permalink</span></th>
+      <th><span>Position</span></th>
+      <th><span>Sunday starting</span></th>
+      <th><span>Sunday ending</span></th>
+      <th><span>Monday starting</span></th>
+      <th><span>Monday ending</span></th>
+      <th><span>Tuesday starting</span></th>
+      <th><span>Tuesday ending</span></th>
+      <th><span>Wednesday starting</span></th>
+      <th><span>Wednesday ending</span></th>
+      <th><span>Thursday starting</span></th>
+      <th><span>Thursday ending</span></th>
+      <th><span>Friday starting</span></th>
+      <th><span>Friday ending</span></th>
+      <th><span>Saturday starting</span></th>
+      <th><span>Saturday ending</span></th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @menus.any? %>
+<tr id="empty-table">
+<td class="bg-warning" colspan="2">No menus created yet.</td>
+</tr>
+<% end %>
+<% @menus.each do |menu| %>
+<tr class="linked-row" data-href="<%= menu_path(menu) %>">
+      
+        <td><%= link_to menu.location, menu %></td>
+        <td><%= link_to menu.name, menu %></td>
+        <td><%= link_to menu.permalink, menu %></td>
+        <td><%= link_to menu.position, menu %></td>
+        <td><%= link_to menu.sunday_starting, menu %></td>
+        <td><%= link_to menu.sunday_ending, menu %></td>
+        <td><%= link_to menu.monday_starting, menu %></td>
+        <td><%= link_to menu.monday_ending, menu %></td>
+        <td><%= link_to menu.tuesday_starting, menu %></td>
+        <td><%= link_to menu.tuesday_ending, menu %></td>
+        <td><%= link_to menu.wednesday_starting, menu %></td>
+        <td><%= link_to menu.wednesday_ending, menu %></td>
+        <td><%= link_to menu.thursday_starting, menu %></td>
+        <td><%= link_to menu.thursday_ending, menu %></td>
+        <td><%= link_to menu.friday_starting, menu %></td>
+        <td><%= link_to menu.friday_ending, menu %></td>
+        <td><%= link_to menu.saturday_starting, menu %></td>
+        <td><%= link_to menu.saturday_ending, menu %></td>
+        
+        
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+
+

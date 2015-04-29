@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  menu_id: 
+  name: MyString
+  permalink: MyString
+  price_in_cents: 1
+  picurl: MyString
+  description: MyText
+
+two:
+  menu_id: 
+  name: MyString
+  permalink: MyString
+  price_in_cents: 1
+  picurl: MyString
+  description: MyText

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-  get 'slides/index'
+
+  namespace :kitchen do
+  get 'orders/index'
   end
 
   namespace :superuser do
@@ -19,6 +20,9 @@ Rails.application.routes.draw do
         resources :memberships
         resources :spaces do
           resources :slides
+        end
+        resources :menus do
+          resources :goods
         end
       end
       resources :settings
@@ -42,6 +46,12 @@ Rails.application.routes.draw do
     resources :memberships
     resources :locations do
       resources :memberships
+      resources :menus do
+        resources :goods
+      end
+      resources :orders do
+        resources :ordered_goods
+      end
       resources :spaces do
         resources :reservations do
           collection do

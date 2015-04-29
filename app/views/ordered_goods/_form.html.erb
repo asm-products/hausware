@@ -1,0 +1,73 @@
+<%= form_for(@ordered_good) do |f| %>
+  <% if @ordered_good.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <strong><%= pluralize(@ordered_good.errors.count, "error") %> prohibited this ordered_good from being saved:</strong>
+
+      <ul>
+      <% @ordered_good.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:order_id].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :order_id, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :order_id, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:good_id].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :good_id, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :good_id, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:name].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :name, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.text_field :name, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:quantity].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :quantity, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :quantity, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:subtotal_in_cents].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :subtotal_in_cents, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.number_field :subtotal_in_cents, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:fulfilled_at].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :fulfilled_at, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.datetime_select :fulfilled_at, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="row">
+    <div class="form-group<%= f.object.errors[:canceled_at].empty? ? "" : " has-error has-feedback" %>">
+<%= f.label :canceled_at, { class: "control-label col-sm-2" } %>
+<div class="col-sm-10">
+    <%= f.datetime_select :canceled_at, { class: "form-control" } %>
+</div>
+</div>
+  </div>
+  <div class="actions text-center">
+    <%= f.submit class: "btn btn-success" %>
+  </div>
+<% end %>

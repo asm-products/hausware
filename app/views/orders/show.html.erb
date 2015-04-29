@@ -1,0 +1,89 @@
+<% content_for :page_title do %>
+order Details - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, orders_path, class: "btn btn-default", title: "Back to orders" %>
+&nbsp;
+</div>
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> Edit".html_safe, edit_order_path(@order), class: "btn btn-warning" %>
+</div>
+order Details
+</h1>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">User</label>
+  <div class="col-sm-9"><%= @order.user %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Location</label>
+  <div class="col-sm-9"><%= @order.location %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Fulfilled at</label>
+  <div class="col-sm-9"><%= @order.fulfilled_at %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Delivered at</label>
+  <div class="col-sm-9"><%= @order.delivered_at %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Name</label>
+  <div class="col-sm-9"><%= @order.name %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Email</label>
+  <div class="col-sm-9"><%= @order.email %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Phone</label>
+  <div class="col-sm-9"><%= @order.phone %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Zipcode</label>
+  <div class="col-sm-9"><%= @order.zipcode %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Confirmation</label>
+  <div class="col-sm-9"><%= @order.confirmation %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Subtotal in cents</label>
+  <div class="col-sm-9"><%= @order.subtotal_in_cents %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Tax in cents</label>
+  <div class="col-sm-9"><%= @order.tax_in_cents %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Total in cents</label>
+  <div class="col-sm-9"><%= @order.total_in_cents %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Chargeid</label>
+  <div class="col-sm-9"><%= @order.chargeid %></div>
+</div>
+
+<div class="row">
+  <label class="col-sm-3 text-right text-muted">Canceled at</label>
+  <div class="col-sm-9"><%= @order.canceled_at %></div>
+</div>
+
+</div>
+

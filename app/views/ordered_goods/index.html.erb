@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :page_title do %>
+Ordered Goods - 
+<% end %>
+<div class="container">
+<div class="page-header">
+<h1>
+<div class="pull-left">
+<%= link_to "<span class=\"glyphicon glyphicon-step-backward\" aria-hidden=\"true\"></span>".html_safe, "/", class: "btn btn-default", title: "Back" %>
+&nbsp;
+</div>
+
+<div class="pull-right">
+<%= link_to "<span class=\"glyphicon glyphicon-plus-sign\" aria-hidden=\"true\"></span> New Ordered Good".html_safe, [:new, :ordered_good], class: "btn btn-success" %>
+</div>
+Listing Ordered Goods
+</h1>
+</div>
+
+<table class="table table-striped table-hover tablesorter" id="Ordered Goods-table">
+
+
+  <thead>
+<tr>
+    
+      <th><span>Order</span></th>
+      <th><span>Good</span></th>
+      <th><span>Name</span></th>
+      <th><span>Quantity</span></th>
+      <th><span>Subtotal in cents</span></th>
+      <th><span>Fulfilled at</span></th>
+      <th><span>Canceled at</span></th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% unless @ordered_goods.any? %>
+<tr id="empty-table">
+<td class="bg-warning" colspan="2">No ordered_goods created yet.</td>
+</tr>
+<% end %>
+<% @ordered_goods.each do |ordered_good| %>
+<tr class="linked-row" data-href="<%= ordered_good_path(ordered_good) %>">
+      
+        <td><%= link_to ordered_good.order, ordered_good %></td>
+        <td><%= link_to ordered_good.good, ordered_good %></td>
+        <td><%= link_to ordered_good.name, ordered_good %></td>
+        <td><%= link_to ordered_good.quantity, ordered_good %></td>
+        <td><%= link_to ordered_good.subtotal_in_cents, ordered_good %></td>
+        <td><%= link_to ordered_good.fulfilled_at, ordered_good %></td>
+        <td><%= link_to ordered_good.canceled_at, ordered_good %></td>
+        
+        
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+
+
